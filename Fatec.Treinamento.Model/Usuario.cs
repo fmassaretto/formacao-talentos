@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fatec.Treinamento.Model.Extensoes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -27,19 +28,19 @@ namespace Fatec.Treinamento.Model
         {
             get
             {
-                if(string.IsNullOrEmpty(Senha))
-                    throw new InvalidOperationException("A senha deve ser informada!");
-
-                var bytes = new UTF8Encoding().GetBytes(Senha);
-                var hashBytes = MD5.Create().ComputeHash(bytes);
-                return Convert.ToBase64String(hashBytes);
+                return Senha.GerarHash();
             }
         }
         
         /// <summary>
         /// Listagem de perfis que o usuario possui
         /// </summary>
-        IEnumerable<Perfil> Perfis { get; set; }
+        public IList<Perfil> Perfis { get; set; }
+
+        public Usuario()
+        {
+            Perfis = new List<Perfil>();
+        }
         
     }
 }
