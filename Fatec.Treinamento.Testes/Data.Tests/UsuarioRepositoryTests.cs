@@ -14,14 +14,23 @@ namespace Fatec.Treinamento.Testes.Data.Tests
         [TestMethod]
         public void TestarCrudUsuario()
         {
-            //var id = InserirUsuario();
-
-            int id = 1;
+            var id = InserirUsuario();
             var usuario = ObterUsuario(id);
-            //usuario = AtualizarUsuario(usuario);
-            //ObterPorNome(usuario.Nome.Substring(0, 3));
-            //FazerLogin(usuario.Email, "123456");
-            //Excluir(usuario);
+            usuario = AtualizarUsuario(usuario);
+            ObterPorNome(usuario.Nome.Substring(0, 3));
+            FazerLogin(usuario.Email, "123456");
+            Excluir(usuario);
+            Listar();
+
+        }
+
+        private void Listar()
+        {
+            using (UsuarioRepository repo = new UsuarioRepository())
+            {
+                var lista = repo.Listar();
+                Assert.IsTrue(lista.Count() > 1);
+            }
         }
 
         private void FazerLogin(string email, string senha)
@@ -42,7 +51,8 @@ namespace Fatec.Treinamento.Testes.Data.Tests
                     Nome = "Demo teste 1",
                     Email = "teste@teste.com",
                     Senha = "123456",
-                    Ativo = true
+                    Ativo = true,
+                    Perfil = new Perfil { Id = 2, Nome = "Usuário" }
                 };
 
                 int id = repo.Inserir(usuario).Id ;
@@ -60,6 +70,8 @@ namespace Fatec.Treinamento.Testes.Data.Tests
                 var usuario = repo.Obter(id);
                 
                 Assert.AreEqual("Demo teste 1", usuario.Nome);
+                Assert.IsTrue(usuario.Perfil != null);
+                Assert.AreEqual(2, usuario.Perfil.Id);
                 
                 return usuario;
 

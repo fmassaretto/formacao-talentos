@@ -13,18 +13,35 @@ namespace Fatec.Treinamento.Data.Repositories
 {
     public class UsuarioRepository: RepositoryBase, IUsuarioRepository
     {
+
+        private const string CONSULTA_COM_PERFIL = 
+                @"SELECT
+	                Usuario.Id,
+	                Usuario.Nome,
+	                Usuario.Email,
+	                Usuario.Ativo,
+	                Perfil.Id,
+	                Perfil.Nome
+                FROM
+	                Usuario 
+	                INNER JOIN Perfil on Usuario.IdPerfil = Perfil.Id ";
+
+
+
+
         public Usuario Inserir(Usuario usuario)
         {
             var id = Connection.ExecuteScalar<int>(
-               @"INSERT INTO Usuario (Nome, Email, Senha, Ativo) 
-                 VALUES (@Nome, @Email, @Senha, @Ativo); 
+               @"INSERT INTO Usuario (Nome, Email, Senha, Ativo, IdPerfil) 
+                 VALUES (@Nome, @Email, @Senha, @Ativo, @IdPerfil); 
                SELECT SCOPE_IDENTITY()",
                param: new
                {
                    usuario.Nome,
                    usuario.Email,
                    Senha = usuario.HashSenha,
-                   usuario.Ativo
+                   usuario.Ativo,
+                   IdPerfil = usuario.Perfil.Id
                }
            );
 
@@ -34,15 +51,29 @@ namespace Fatec.Treinamento.Data.Repositories
 
         public IEnumerable<Usuario> Listar()
         {
-            return Connection.Query<Usuario>(
-              "SELECT Id, Nome, Email, Senha, Ativo FROM Usuario"
+              return Connection.Query<Usuario, Perfil, Usuario>(
+              CONSULTA_COM_PERFIL,
+              (usuario, perfil) =>
+              {
+                  if (perfil != null)
+                      usuario.Perfil = perfil;
+
+                  return usuario;
+              }
             ).ToList();
         }
         
         public IEnumerable<Usuario> ListarPorNome(string nome)
         {
-            return Connection.Query<Usuario>(
-               "SELECT Id, Nome, Email, Senha, Ativo FROM Usuario WHERE Nome like @Nome",
+            return Connection.Query<Usuario, Perfil, Usuario>(
+               CONSULTA_COM_PERFIL + @"WHERE Usuario.Nome like @Nome",
+               (usuario, perfil) =>
+               {
+                   if (perfil != null)
+                       usuario.Perfil = perfil;
+
+                   return usuario;
+               },
                param: new { Nome = "%" + nome + "%" }
            ).ToList();
         }
@@ -52,23 +83,11 @@ namespace Fatec.Treinamento.Data.Repositories
 
             return Connection.Query<Usuario, Perfil, Usuario>
             (
-               @"SELECT
-	                Usuario.Id,
-	                Usuario.Nome,
-	                Usuario.Email,
-	                Usuario.Ativo,
-	                Perfil.Id,
-	                Perfil.Nome
-                FROM
-	                Usuario 
-	                LEFT JOIN Usuario_Perfil on Usuario.Id = Usuario_Perfil.IdUsuario
-	                LEFT JOIN Perfil on Usuario_Perfil.IdPerfil = Perfil.Id
-                WHERE 
-                    Usuario.Id = @Id",
+               CONSULTA_COM_PERFIL + @"WHERE Usuario.Id = @Id",
                (usuario, perfil) =>
                {
-                   if(perfil != null)
-                       usuario.Perfis.Add(perfil);
+                   if (perfil != null)
+                       usuario.Perfil = perfil;
 
                    return usuario;
                },
@@ -83,14 +102,16 @@ namespace Fatec.Treinamento.Data.Repositories
                @"UPDATE Usuario SET 
                     Nome = @Nome,
                     Email = @Email,
-                    Ativo = @Ativo
+                    Ativo = @Ativo,
+                    IdPerfil = @IdPerfil
                 WHERE Id = @Id",
                param: new
                {
                    usuario.Nome,
                    usuario.Email,
                    usuario.Ativo,
-                   usuario.Id
+                   usuario.Id,
+                   IdPerfil = usuario.Perfil.Id
                }
             );
 
@@ -126,9 +147,8 @@ namespace Fatec.Treinamento.Data.Repositories
             senha = senha.GerarHash();
 
             return Connection.Query<Usuario>(
-               @"SELECT Id, Nome, Email, Senha, Ativo 
-                 FROM Usuario 
-                 WHERE Email = @Email AND Senha = @Senha And Ativo = 1",
+               CONSULTA_COM_PERFIL + 
+                 @"WHERE Email = @Email AND Senha = @Senha And Ativo = 1",
                param: new
                {
                    Email = email,

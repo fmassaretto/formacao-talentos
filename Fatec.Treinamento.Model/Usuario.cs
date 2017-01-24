@@ -31,16 +31,8 @@ namespace Fatec.Treinamento.Model
                 return Senha.GerarHash();
             }
         }
-        
-        /// <summary>
-        /// Listagem de perfis que o usuario possui
-        /// </summary>
-        public IList<Perfil> Perfis { get; set; }
 
-        public Usuario()
-        {
-            Perfis = new List<Perfil>();
-        }
-        
+        public Perfil Perfil { get; set; }
+
     }
 }

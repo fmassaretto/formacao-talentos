@@ -75,7 +75,6 @@
     <Build Include="Tables\Trilha.sql" />
     <Build Include="Tables\Trilha_Curso.sql" />
     <Build Include="Tables\Usuario.sql" />
-    <Build Include="Tables\Usuario_Perfil.sql" />
     <Build Include="Tables\Video.sql" />
     <Build Include="Tables\Documento.sql" />
     <None Include="CargaInicial\Dados\Assunto.sql" />
@@ -89,7 +88,6 @@
     <None Include="CargaInicial\Dados\Trilha.sql" />
     <None Include="CargaInicial\Dados\Trilha_Curso.sql" />
     <None Include="CargaInicial\Dados\Usuario.sql" />
-    <None Include="CargaInicial\Dados\Usuario_Perfil.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="CargaInicial\Script.PostDeployment.sql" />
