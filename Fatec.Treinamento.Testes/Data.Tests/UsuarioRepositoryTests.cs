@@ -18,9 +18,19 @@ namespace Fatec.Treinamento.Testes.Data.Tests
             var usuario = ObterUsuario(id);
             usuario = AtualizarUsuario(usuario);
             ObterPorNome(usuario.Nome.Substring(0, 3));
-            Excluir(usuario.Id);
+            FazerLogin(usuario.Email, usuario.Senha);
+            Excluir(usuario);
         }
 
+        private void FazerLogin(string email, string senha)
+        {
+            using (UsuarioRepository repo = new UsuarioRepository())
+            {
+                var usuario = repo.Login(email, senha);
+                Assert.IsTrue(usuario != null);
+                Assert.AreEqual(email, usuario.Email);
+            }
+        }
         private int InserirUsuario()
         {
             using (UsuarioRepository repo = new UsuarioRepository())
@@ -84,13 +94,13 @@ namespace Fatec.Treinamento.Testes.Data.Tests
             }
         }
 
-        private void Excluir(int id)
+        private void Excluir(Usuario usuario)
         {
             using (UsuarioRepository repo = new UsuarioRepository())
             {
-                repo.Excluir(id);
-                var usuario = repo.Obter(id);
-                Assert.IsTrue(usuario == null);
+                repo.Excluir(usuario);
+                var usuarioRet = repo.Obter(usuario.Id);
+                Assert.IsTrue(usuarioRet == null);
             }
         }
     }

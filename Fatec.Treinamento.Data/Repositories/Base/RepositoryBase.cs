@@ -13,12 +13,15 @@ namespace Fatec.Treinamento.Data.Repositories.Base
     /// Repositório base para as classes de repositório.
     /// Já possui os objetos de conexão.
     /// </summary>
-    public abstract class RepositoryBase: IDisposable
+    public abstract class RepositoryBase : IDisposable
     {
         private bool _disposed;
 
         protected IDbConnection Connection { get; private set; }
 
+        /// <summary>
+        /// Construtor padrão. Inicializa e abre a conexao.
+        /// </summary>
         protected RepositoryBase()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["TreinamentoConnectionString"].ConnectionString;

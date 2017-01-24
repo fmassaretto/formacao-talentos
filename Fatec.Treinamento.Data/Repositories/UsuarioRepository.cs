@@ -34,14 +34,14 @@ namespace Fatec.Treinamento.Data.Repositories
         public IEnumerable<Usuario> Listar()
         {
             return Connection.Query<Usuario>(
-              "SELECT Nome, Email, Senha, Ativo FROM Usuario"
+              "SELECT Id, Nome, Email, Senha, Ativo FROM Usuario"
             ).ToList();
         }
         
         public IEnumerable<Usuario> ListarPorNome(string nome)
         {
             return Connection.Query<Usuario>(
-               "SELECT Nome, Email, Senha, Ativo FROM Usuario WHERE Nome like @Nome",
+               "SELECT Id, Nome, Email, Senha, Ativo FROM Usuario WHERE Nome like @Nome",
                param: new { Nome = "%" + nome + "%" }
            ).ToList();
         }
@@ -91,12 +91,26 @@ namespace Fatec.Treinamento.Data.Repositories
             return usuario;
         }
 
-        public void Excluir(int id)
+        public void Excluir(Usuario usuario)
         {
             Connection.Execute(
                 "DELETE FROM Usuario WHERE Id = @Id",
-                param: new { Id = id }
+                param: new { Id = usuario.Id }
             );
+        }
+
+        public Usuario Login(string email, string senha)
+        {
+            return Connection.Query<Usuario>(
+               @"SELECT Id, Nome, Email, Senha, Ativo 
+                 FROM Usuario 
+                 WHERE Email = @Email AND Senha = @Senha",
+               param: new
+               {
+                   Email = email,
+                   Senha = senha
+               }
+           ).FirstOrDefault();
         }
     }
 }

@@ -35,5 +35,11 @@ namespace Fatec.Treinamento.Model
                 return Convert.ToBase64String(hashBytes);
             }
         }
+        
+        /// <summary>
+        /// Listagem de perfis que o usuario possui
+        /// </summary>
+        IEnumerable<Perfil> Perfis { get; set; }
+        
     }
 }
