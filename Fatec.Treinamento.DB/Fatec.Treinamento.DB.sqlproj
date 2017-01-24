@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{03d978b8-aee1-4170-b040-e6fbafb0abfd}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -60,6 +60,8 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables\" />
+    <Folder Include="CargaInicial" />
+    <Folder Include="CargaInicial\Dados" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Assunto.sql" />
@@ -76,5 +78,23 @@
     <Build Include="Tables\Usuario_Perfil.sql" />
     <Build Include="Tables\Video.sql" />
     <Build Include="Tables\Documento.sql" />
+    <None Include="CargaInicial\Dados\Assunto.sql" />
+    <None Include="CargaInicial\Dados\Capitulo.sql" />
+    <None Include="CargaInicial\Dados\Curso.sql" />
+    <None Include="CargaInicial\Dados\Funcionalidade.sql" />
+    <None Include="CargaInicial\Dados\Perfil.sql" />
+    <None Include="CargaInicial\Dados\Permissao.sql" />
+    <None Include="CargaInicial\Dados\Treinamento.sql" />
+    <None Include="CargaInicial\Dados\Treinamento_Capitulo.sql" />
+    <None Include="CargaInicial\Dados\Trilha.sql" />
+    <None Include="CargaInicial\Dados\Trilha_Curso.sql" />
+    <None Include="CargaInicial\Dados\Usuario.sql" />
+    <None Include="CargaInicial\Dados\Usuario_Perfil.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="CargaInicial\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fatec.Treinamento.DB.publish.xml" />
   </ItemGroup>
 </Project>
