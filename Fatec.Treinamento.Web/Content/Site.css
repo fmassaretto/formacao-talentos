@@ -57,3 +57,12 @@ textarea {
     color:#fff;
 }
 
+
+.home-search-form {
+    margin-right: 50px;
+}
+
+.btn-search {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}

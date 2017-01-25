@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Fatec.Treinamento.Model;
 using Fatec.Treinamento.Data.Repositories.Base;
 using Dapper;
+using Fatec.Treinamento.Model.DTO;
 
 namespace Fatec.Treinamento.Data.Repositories
 {
@@ -31,10 +32,21 @@ namespace Fatec.Treinamento.Data.Repositories
         public IEnumerable<Assunto> Listar()
         {
             return Connection.Query<Assunto>(
-              "SELECT Id, Nome FROM Assunto"
+              @"SELECT Id, Nome FROM Assunto
+                ORDER BY Nome ASC"
             ).ToList();
         }
-        
+
+        public IEnumerable<CursosPorAssunto> ListarTotalCursosPorAssunto()
+        {
+            return Connection.Query<CursosPorAssunto>(
+              @"Select a.Id, a.Nome, Count(c.Id) as TotalCursos
+                FROM Assunto a INNER JOIN curso c on a.Id = c.IdAssunto
+                GROUP BY a.id, a.nome
+                ORDER BY a.Nome"
+            ).ToList();
+        }
+
         public Assunto Obter(int id)
         {
             return Connection.Query<Assunto>(

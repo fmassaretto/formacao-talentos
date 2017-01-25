@@ -15,7 +15,7 @@ namespace Fatec.Treinamento.Web.Controllers
             using(AssuntoRepository repo = new AssuntoRepository())
             {
                 // Obter a lista de assuntos
-                var model = repo.Listar();
+                var model = repo.ListarTotalCursosPorAssunto();
                 
                 return PartialView("~/Views/Shared/ItensMenuAssuntos.cshtml", model);
             }

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\CursosPorAssunto.cs" />
     <Compile Include="Funcionalidade.cs" />
     <Compile Include="Assunto.cs" />
     <Compile Include="Extensoes\StringExtensions.cs" />
