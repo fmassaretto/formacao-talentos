@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Fatec Treinamentos</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href='@Url.Action("Index","Home")'>
+                    
+                    <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                </a>
+                
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    
+                    <li>@Html.ActionLink("Populares", "Populares", "Cursos")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cursos <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @{
+                                Html.RenderAction("MenuAssuntos", "Home");
+                            }
+                        </ul>
+                    </li>                   
+                    <li>@Html.ActionLink("Trilhas", "Trilhas", "Cursos")</li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Entrar", "Login", "Usuario")</li>
+                    <li class="active">@Html.ActionLink("Registrar", "Registrar", "Usuario")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Fatec/Viceri</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="banner-inicio" class="jumbotron full-width-div">
+    <div class="container">
+        <h1>Fatec Treinamentos</h1>
+        <p class="lead">Aqui você pode realizar seus treinamentos, e ganhar pontos para sua avaliação de desempenho</p>
+    </div>
+</div>
+
+<div id="detalhes-incio" class="row">
+    <div class="col-md-4">
+        <h2>Nossas Trilhas</h2>
+        <p>
+            No sistema Fatec de treinamentos, você pode escolher a trilha de estudo designada pelo seu gestor para alavancar seus conhecimentos e
+            aprimorar seu trabalho.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Trilhas","Help")">Saiba mais &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Autores</h2>
+        <p>Veja quem são os autores dos cursos, tire dúvidas, contribua e torne-se também um dos autores do sistema de treinamentos e ajude seus colegas.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Autores","Help")">Saiba mais &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Atinja suas metas</h2>
+        <p>
+            A cada treinamento realizado, você acumula pontos que contribuem para os programas de avaliação de desempenho e busca do conhecimento. <br />
+            Você poderá obter bônus exclusivos desses programas.    
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Pontos","Help")">Saiba mais &raquo;</a></p>
+    </div>
+</div>
