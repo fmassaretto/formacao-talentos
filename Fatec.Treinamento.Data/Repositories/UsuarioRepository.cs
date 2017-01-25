@@ -26,9 +26,7 @@ namespace Fatec.Treinamento.Data.Repositories
 	                Usuario 
 	                INNER JOIN Perfil on Usuario.IdPerfil = Perfil.Id ";
 
-
-
-
+        
         public Usuario Inserir(Usuario usuario)
         {
             var id = Connection.ExecuteScalar<int>(
