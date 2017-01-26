@@ -144,9 +144,14 @@ namespace Fatec.Treinamento.Data.Repositories
         {
             senha = senha.GerarHash();
 
-            return Connection.Query<Usuario>(
+            return Connection.Query<Usuario, Perfil, Usuario>(
                CONSULTA_COM_PERFIL + 
                  @"WHERE Email = @Email AND Senha = @Senha And Ativo = 1",
+               (usuario, perfil) =>
+               {
+                   usuario.Perfil = perfil;
+                   return usuario;
+               },
                param: new
                {
                    Email = email,

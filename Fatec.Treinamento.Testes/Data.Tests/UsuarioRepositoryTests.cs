@@ -40,6 +40,7 @@ namespace Fatec.Treinamento.Testes.Data.Tests
                 var usuario = repo.Login(email, senha);
                 Assert.IsTrue(usuario != null);
                 Assert.AreEqual(email, usuario.Email);
+                Assert.IsTrue(usuario.Perfil != null);
             }
         }
         private int InserirUsuario()

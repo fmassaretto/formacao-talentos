@@ -146,3 +146,7 @@ textarea {
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
     color: #15a589;
 }
+
+.navbar-inverse .navbar-link:hover {
+    color: #15a589;
+}
