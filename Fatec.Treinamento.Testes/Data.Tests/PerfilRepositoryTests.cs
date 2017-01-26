@@ -52,6 +52,7 @@ namespace Fatec.Treinamento.Testes.Data.Tests
             {
                 var perfil = new Perfil
                 {
+                    Id=99,
                     Nome = "Demo teste 1"
                 };
 

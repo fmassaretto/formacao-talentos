@@ -14,17 +14,16 @@ namespace Fatec.Treinamento.Data.Repositories
     {
         public Perfil Inserir(Perfil perfil)
         {
-            var id = Connection.ExecuteScalar<int>(
-               @"INSERT INTO Perfil (Nome) 
-                 VALUES (@Nome); 
-               SELECT SCOPE_IDENTITY()",
+            Connection.Execute(
+               @"INSERT INTO Perfil (Id, Nome) 
+                 VALUES (@Id, @Nome);",
                param: new
                {
+                   perfil.Id,
                    perfil.Nome
                }
            );
 
-            perfil.Id = id;
             return perfil;
         }
 
