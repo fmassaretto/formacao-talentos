@@ -1,6 +1,13 @@
-﻿body {
+﻿html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  
     padding-top: 50px;
-    padding-bottom: 20px;
+    
     font-size: 15px;
 }
 
@@ -8,6 +15,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top:20px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -30,8 +38,8 @@ textarea {
     left: 0;
 }
 
-#detalhes-incio{
-    margin-top:410px;
+#detalhes-inicio{
+    margin-top:440px;
 }
 
 #banner-inicio{
@@ -39,7 +47,9 @@ textarea {
     color: #fff;
     height: 400px;
     text-align:center;
-    padding-top:120px;
+    padding-top:100px;
+    border-radius: 0;
+    margin-top: -25px;
 }
 
 #banner-inicio h1{
@@ -48,10 +58,20 @@ textarea {
 
 .navbar-brand{
     color:#fff;
-    font-size:32px;
-    margin-top:-4px;
-    margin-right: 40px;
+    font-size: 18px;
+    margin-top: -5px;
+    margin-right: 0;
+    line-height: 32px;
+    vertical-align:middle;
+    display:inline-block;
 }
+
+.navbar-brand .glyphicon{
+    font-size:32px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
 
 .navbar-inverse .navbar-brand {
     color:#fff;
@@ -59,10 +79,70 @@ textarea {
 
 
 .home-search-form {
-    margin-right: 50px;
+    margin-right: 10px;
 }
 
 .btn-search {
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+.navbar-inverse{
+    background-color:#23303a;
+}
+
+.navbar-nav > li > a {
+    font-size: 16px;
+}
+
+#txtPesquisaCurso{
+    background-color: rgba(255, 255, 255, 0.06);
+    color:#fff;
+    border: none;   
+}
+
+
+
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  padding-top: 20px;
+}
+
+
+#detalhes-inicio div{
+    text-align:center;
+}
+
+#detalhes-inicio div .glyphicon{
+    font-size: 50px;
+    color: #15a589;
+}
+
+.aoxo{
+    
+    font-family: verdana;
+}
+
+.aoxo .a{
+    color: #15a589;
+}
+
+.aoxo .o{
+    color:#d3532a;
+}
+.aoxo .x{
+    color: #748fbf;
+}
+.aoxo .q{
+    color: #ce88de;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #15a589;
 }
