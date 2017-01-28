@@ -11,6 +11,7 @@ namespace Fatec.Treinamento.Web.Controllers
     public class CursoController : Controller
     {
         // GET: Curso
+        [HttpPost]
         public ActionResult Pesquisar(string txtPesquisaCurso)
         {
             IEnumerable<DetalhesCurso> lista = new List<DetalhesCurso>();
