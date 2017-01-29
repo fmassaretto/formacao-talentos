@@ -20,7 +20,5 @@ namespace Fatec.Treinamento.Model.DTO
 
         public int Classificacao { get; set; }
 
-        //public string Descricao { get; set; }
-
     }
 }
