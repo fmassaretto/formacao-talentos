@@ -18,6 +18,45 @@ body {
     padding-top:20px;
 }
 
+#btn-comecar{
+    background-color:#15a589;
+    text-align: center;
+    color: white;
+}
+
+#btn-comecar:hover{
+    background-color:#306f69;
+    text-align: center;
+    color: white;
+}
+
+.img-div{
+    background-image: url('/Content/Img/Lighthouse.jpg');
+    background-repeat:no-repeat;
+    /*background-size:contain;*/
+    background-size: 100% 100%;
+}
+
+.detalhe-descricao{
+    margin-top: 40px;
+}
+
+@media screen AND (max-width: 992px) {
+    .detalhe-descricao{
+        margin-top: 300px;
+    }
+}
+
+#div-detalhe{
+    background-color: #222;
+    color: #fff;
+    height: 330px;
+    text-align:center;
+    padding-top:100px;
+    border-radius: 0;
+    margin-top: -35px;
+}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -39,7 +78,13 @@ textarea {
 }
 
 #detalhes-inicio{
-    margin-top:440px;
+    margin-top:300px;
+}
+
+.rowDetalhe {
+    margin-top: 270px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #banner-inicio{
