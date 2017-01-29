@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Detalhe.cs" />
     <Compile Include="DTO\CursosPorAssunto.cs" />
     <Compile Include="DTO\DetalhesCurso.cs" />
     <Compile Include="Enum\TipoPerfil.cs" />
