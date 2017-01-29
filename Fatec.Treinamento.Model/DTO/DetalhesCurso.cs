@@ -19,6 +19,8 @@ namespace Fatec.Treinamento.Model.DTO
         public DateTime DataCriacao { get; set; }
 
         public int Classificacao { get; set; }
-        
+
+        //public string Descricao { get; set; }
+
     }
 }
