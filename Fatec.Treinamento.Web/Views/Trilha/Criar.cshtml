@@ -4,7 +4,7 @@
     ViewBag.Title = "Criar";
 }
 
-<h2>Criar</h2>
+<h2>Criar - Trilha</h2>
 
 
 @using (Html.BeginForm()) 
@@ -24,16 +24,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ativa, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Ativa)
-                    @Html.ValidationMessageFor(model => model.Ativa, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -42,7 +32,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", "Index")
 </div>
 
 @section Scripts {
