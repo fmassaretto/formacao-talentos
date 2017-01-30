@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Fatec.Treinamento.Model.Assunto>
+﻿@*@model IEnumerable<Fatec.Treinamento.Model.Assunto>*@
+@model IEnumerable<Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario>
+@*@model IEnumerable<Fatec.Treinamento.Model.DTO.CursosPorAssunto>*@
 @{
     ViewBag.Title = "Assunto";
 }
@@ -8,44 +10,46 @@
 <p>
     @Html.ActionLink("Novo Assunto", "Criar")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Assunto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NomeAutor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataCriacao)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table table-hover">
+    <thead>
         <tr>
-            <td>
-                @Html.ActionLink(item.NomeCurso, "Detalhe", new { id = item.IdCurso })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Assunto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeAutor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCriacao)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Editar", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Exlcuir", new { id = item.Id })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeAssunto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeAutor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th></th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Nome, "Detalhe", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeAssunto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeAutor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Editar", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Exlcuir", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
