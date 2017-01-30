@@ -32,6 +32,68 @@ namespace Fatec.Treinamento.Data.Repositories
             ).ToList();
         }
 
+        //public DetalhesCurso Obter(int id)
+        //{
+        //    return Connection.Query<DetalhesCurso>(
+        //       @"SELECT c.Nome AS NomeCurso,
+        //       c.Classificacao,
+        //       u.Nome AS Autor,
+        //       a.Nome AS Assunto
+        //       FROM Curso c
+        //       INNER JOIN Usuario u ON c.IdAutor = u.Id
+        //       INNER JOIN Assunto a ON c.IdAssunto = a.Id
+        //       WHERE c.Id = @Id",
+        //       param: new { Id = id }
+        //   ).FirstOrDefault();
+        //}
+
+        public AssuntoCursoUsuario Obter(int id)
+        {
+            return Connection.Query<AssuntoCursoUsuario>(
+               @"SELECT c.Nome AS NomeCurso,
+               c.Classificacao,
+               u.Nome AS Autor,
+               a.Nome AS Assunto
+               FROM Curso c
+               INNER JOIN Usuario u ON c.IdAutor = u.Id
+               INNER JOIN Assunto a ON c.IdAssunto = a.Id
+               WHERE c.Id = @Id",
+               param: new { Id = id }
+           ).FirstOrDefault();
+        }
+
+        public AssuntoCursoUsuario Atualizar(AssuntoCursoUsuario acu)
+        {
+            Connection.Execute(
+               @"BEGIN TRANSACTION;
+
+                    UPDATE Curso SET Nome = @NomeCurso
+	                    FROM Curso c
+	                    WHERE c.Id = @IdCurso;
+
+                    UPDATE Usuario SET Nome = @NomeAutor
+	                    FROM Usuario u
+	                    WHERE u.Id = @IdAutor;
+
+                    UPDATE Assunto SET Nome = @NomeAssunto
+	                    FROM Assunto a
+	                    WHERE a.Id = @IdAssunto;
+
+                COMMIT;",
+               param: new
+               {
+                   acu.NomeCurso,
+                   acu.IdCurso,
+                   acu.NomeAutor,
+                   acu.IdAutor,
+                   acu.NomeAssunto,
+                   acu.IdAssunto
+               }
+            );
+
+            return acu;
+        }
+
         public IEnumerable<DetalhesCurso> ListarTodosCursos()
         {
             return Connection.Query<DetalhesCurso>(
@@ -49,7 +111,7 @@ namespace Fatec.Treinamento.Data.Repositories
             ).ToList();
         }
 
-        public IEnumerable<Detalhe> DetalheCurso(int id)
+        public IEnumerable<Detalhe> DetalheCurso(int? id)
         {
             return Connection.Query<Detalhe>(
               @"SELECT

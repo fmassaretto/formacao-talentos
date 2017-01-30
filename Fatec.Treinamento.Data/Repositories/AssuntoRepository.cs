@@ -79,5 +79,21 @@ namespace Fatec.Treinamento.Data.Repositories
                 param: new { Id = assunto.Id }
             );
         }
+
+        public IEnumerable<Assunto> ListarCursosPorAssuntos(int? id)
+        {
+            return Connection.Query<Assunto>(
+                @"SELECT c.Id AS IdCurso, 
+                    c.Nome AS NomeCurso, 
+                    u.Nome AS Autor,
+                    a.Nome AS Assunto, 
+                    c.DataCriacao FROM Curso c
+	                INNER JOIN Usuario u ON c.IdAutor = u.Id
+	                INNER JOIN Assunto a ON c.IdAssunto = a.Id
+	                WHERE a.Id = @Id
+                    ORDER BY a.Nome", 
+                param: new { Id = id }
+                ).ToList();
+        }
     }
 }
