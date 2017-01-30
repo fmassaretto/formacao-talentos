@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Fatec.Treinamento.Model.Assunto>
+@{
+    ViewBag.Title = "Assunto";
+}
+
+    <h2>Assunto - @TempData["NomeAssunto"]</h2>
+
+<p>
+    @Html.ActionLink("Novo Assunto", "Criar")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assunto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeAutor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.NomeCurso, "Detalhe", new { id = item.IdCurso })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Assunto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeAutor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Editar", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Exlcuir", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
