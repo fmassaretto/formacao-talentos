@@ -41,8 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Detalhe.cs" />
+    <Compile Include="DTO\AssuntoCursoUsuario.cs" />
     <Compile Include="DTO\CursosPorAssunto.cs" />
-    <Compile Include="DTO\DetalhesCurso.cs" />
+    <Compile Include="DTO\DetalhesCursoDeuRuim.cs" />
     <Compile Include="Enum\TipoPerfil.cs" />
     <Compile Include="Funcionalidade.cs" />
     <Compile Include="Assunto.cs" />
