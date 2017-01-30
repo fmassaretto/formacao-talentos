@@ -13,14 +13,16 @@ namespace Fatec.Treinamento.Data.Repositories
 {
     public class CursoRepository : RepositoryBase, ICursoRepository
     {
-        public IEnumerable<DetalhesCurso> ListarCursosPorNome(string nome)
+        public IEnumerable<AssuntoCursoUsuario> ListarCursosPorNome(string nome)
         {
-            return Connection.Query<DetalhesCurso>(
+            return Connection.Query<AssuntoCursoUsuario>(
               @"SELECT
 	                c.Id,
 	                c.Nome,
-	                a.Nome as Assunto,
-	                u.Nome as Autor,
+                    a.Id AS IdAssunto,
+                    u.Id AS IdAutor,
+	                a.Nome as NomeAssunto,
+	                u.Nome as NomeAutor,
 	                c.DataCriacao,
 	                c.Classificacao
                  FROM curso c
@@ -50,10 +52,12 @@ namespace Fatec.Treinamento.Data.Repositories
         public AssuntoCursoUsuario Obter(int id)
         {
             return Connection.Query<AssuntoCursoUsuario>(
-               @"SELECT c.Nome AS NomeCurso,
+               @"SELECT c.Nome AS Nome,
                c.Classificacao,
-               u.Nome AS Autor,
-               a.Nome AS Assunto
+               a.Id AS IdAssunto,
+               u.Id AS IdAutor,
+               u.Nome AS NomeAutor,
+               a.Nome AS NomeAssunto
                FROM Curso c
                INNER JOIN Usuario u ON c.IdAutor = u.Id
                INNER JOIN Assunto a ON c.IdAssunto = a.Id
@@ -67,25 +71,22 @@ namespace Fatec.Treinamento.Data.Repositories
             Connection.Execute(
                @"BEGIN TRANSACTION;
 
-                    UPDATE Curso SET Nome = @NomeCurso
-	                    FROM Curso c
-	                    WHERE c.Id = @IdCurso;
+                UPDATE Curso SET Curso.Nome = @Nome, Curso.Classificacao = @Classificacao
+	                FROM Curso c INNER JOIN Usuario u
+	                ON c.IdAutor = u.Id 
+	                And c.Id = @Id;
 
-                    UPDATE Usuario SET Nome = @NomeAutor
-	                    FROM Usuario u
-	                    WHERE u.Id = @IdAutor;
-
-                    UPDATE Assunto SET Nome = @NomeAssunto
-	                    FROM Assunto a
-	                    WHERE a.Id = @IdAssunto;
+                UPDATE Assunto SET Nome = @NomeAssunto
+	                FROM Assunto a INNER JOIN Curso c
+	                ON c.IdAssunto = a.Id
+	                AND a.Id = @IdAssunto;
 
                 COMMIT;",
                param: new
                {
-                   acu.NomeCurso,
-                   acu.IdCurso,
-                   acu.NomeAutor,
-                   acu.IdAutor,
+                   acu.Nome,
+                   acu.Classificacao,
+                   acu.Id,
                    acu.NomeAssunto,
                    acu.IdAssunto
                }
@@ -94,14 +95,16 @@ namespace Fatec.Treinamento.Data.Repositories
             return acu;
         }
 
-        public IEnumerable<DetalhesCurso> ListarTodosCursos()
+        public IEnumerable<AssuntoCursoUsuario> ListarTodosCursos()
         {
-            return Connection.Query<DetalhesCurso>(
+            return Connection.Query<AssuntoCursoUsuario>(
               @"SELECT
 	                c.Id,
 	                c.Nome,
-	                a.Nome as Assunto,
-	                u.Nome as Autor,
+                    a.Id AS IdAssunto,
+	                a.Nome AS NomeAssunto,
+                    u.Id AS IdAutor,
+	                u.Nome AS NomeAutor,
 	                c.DataCriacao,
 	                c.Classificacao
                  FROM curso c
@@ -117,8 +120,8 @@ namespace Fatec.Treinamento.Data.Repositories
               @"SELECT
 	                c.Id,
 	                c.Nome,
-	                a.Nome as Assunto,
-	                u.Nome as Autor,
+	                a.Nome as NomeAssunto,
+	                u.Nome as NomeAutor,
 	                c.DataCriacao,
 	                c.Classificacao,
                     cd.Descricao

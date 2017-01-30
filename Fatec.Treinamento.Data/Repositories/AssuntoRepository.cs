@@ -13,7 +13,7 @@ namespace Fatec.Treinamento.Data.Repositories
 {
     public class AssuntoRepository : RepositoryBase, IAssuntoRepository
     {
-        public Assunto Inserir(Assunto assunto)
+        public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario assunto)
         {
             var id = Connection.ExecuteScalar<int>(
                @"INSERT INTO Assunto (Nome) 
@@ -21,42 +21,42 @@ namespace Fatec.Treinamento.Data.Repositories
                SELECT SCOPE_IDENTITY()",
                param: new
                {
-                   assunto.Nome
+                   assunto.NomeAssunto
                }
            );
 
-            assunto.Id = id;
+            assunto.IdAssunto = id;
             return assunto;
         }
 
-        public IEnumerable<Assunto> Listar()
+        public IEnumerable<AssuntoCursoUsuario> Listar()
         {
-            return Connection.Query<Assunto>(
-              @"SELECT Id, Nome FROM Assunto
+            return Connection.Query<AssuntoCursoUsuario>(
+              @"SELECT Id AS IdAssunto, Nome AS NomeAssunto FROM Assunto
                 ORDER BY Nome ASC"
             ).ToList();
         }
 
-        public IEnumerable<CursosPorAssunto> ListarTotalCursosPorAssunto()
-        {
-            return Connection.Query<CursosPorAssunto>(
-              @"Select a.Id, a.Nome, Count(c.Id) as TotalCursos
-                FROM Assunto a INNER JOIN curso c on a.Id = c.IdAssunto
-                GROUP BY a.id, a.nome
-                ORDER BY a.Nome"
-            ).ToList();
-        }
+        //public IEnumerable<AssuntoCursoUsuario> ListarTotalCursosPorAssunto()
+        //{
+        //    return Connection.Query<AssuntoCursoUsuario>(
+        //      @"Select a.Id, a.Nome, Count(c.Id) as TotalCursos
+        //        FROM Assunto a INNER JOIN curso c on a.Id = c.IdAssunto
+        //        GROUP BY a.id, a.nome
+        //        ORDER BY a.Nome"
+        //    ).ToList();
+        //}
 
-        public Assunto Obter(int id)
+        public AssuntoCursoUsuario Obter(int id)
         {
-            return Connection.Query<Assunto>(
-               "SELECT Id, Nome FROM Assunto WHERE Id = @Id",
+            return Connection.Query<AssuntoCursoUsuario>(
+               "SELECT Id AS IdAssunto, Nome AS NomeAssunto FROM Assunto WHERE Id = @Id",
                param: new { Id = id }
            ).FirstOrDefault();
         }
 
 
-        public Assunto Atualizar(Assunto assunto)
+        public AssuntoCursoUsuario Atualizar(AssuntoCursoUsuario assunto)
         {
             Connection.Execute(
                @"UPDATE Assunto SET 
@@ -64,29 +64,31 @@ namespace Fatec.Treinamento.Data.Repositories
                 WHERE Id = @Id",
                param: new
                {
-                   assunto.Nome,
-                   assunto.Id
+                   assunto.NomeAssunto,
+                   assunto.IdAssunto
                }
             );
 
             return assunto;
         }
         
-        public void Excluir(Assunto assunto)
+        public void Excluir(AssuntoCursoUsuario assunto)
         {
             Connection.Execute(
                 "DELETE FROM Assunto WHERE Id = @Id",
-                param: new { Id = assunto.Id }
+                param: new { Id = assunto.IdAssunto }
             );
         }
 
-        public IEnumerable<Assunto> ListarCursosPorAssuntos(int? id)
+        public IEnumerable<AssuntoCursoUsuario> ListarCursosPorAssuntos(int? id)
         {
-            return Connection.Query<Assunto>(
-                @"SELECT c.Id AS IdCurso, 
-                    c.Nome AS NomeCurso, 
-                    u.Nome AS Autor,
-                    a.Nome AS Assunto, 
+            return Connection.Query<AssuntoCursoUsuario>(
+                @"SELECT c.Id, 
+                    c.Nome,
+                    a.Id AS IdAssunto,
+                    u.Id AS IdAutor, 
+                    u.Nome AS NomeAutor,
+                    a.Nome AS NomeAssunto, 
                     c.DataCriacao FROM Curso c
 	                INNER JOIN Usuario u ON c.IdAutor = u.Id
 	                INNER JOIN Assunto a ON c.IdAssunto = a.Id
@@ -94,6 +96,18 @@ namespace Fatec.Treinamento.Data.Repositories
                     ORDER BY a.Nome", 
                 param: new { Id = id }
                 ).ToList();
+        }
+
+        public IEnumerable<CursosPorAssunto> ListarTotalCursosPorAssunto()
+        {
+            return Connection.Query<CursosPorAssunto>(
+              @"Select a.Id, 
+                a.Nome AS NomeAssunto, 
+                Count(c.Id) as TotalCursos
+                FROM Assunto a INNER JOIN curso c on a.Id = c.IdAssunto
+                GROUP BY a.id, a.nome
+                ORDER BY a.Nome"
+            ).ToList();
         }
     }
 }

@@ -8,7 +8,7 @@ using Fatec.Treinamento.Model.DTO;
 
 namespace Fatec.Treinamento.Data.Repositories.Interfaces
 {
-    public interface IAssuntoRepository : ICrudRepository<Assunto>
+    public interface IAssuntoRepository : ICrudRepository<AssuntoCursoUsuario>
     {
         IEnumerable<CursosPorAssunto> ListarTotalCursosPorAssunto();
     }
