@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fatec.Treinamento.Model
 {
-    public class Assunto : AssuntoCursoUsuario
+    public class Assunto
     {
         public int Id { get; set; }
         public string Nome { get; set; }
