@@ -36,13 +36,40 @@ namespace Fatec.Treinamento.Web.Controllers
             return View(listaTodos);
         }
 
-        //public ActionResult Detalhe()
-        //{
-        //    return View();
-        //}
+        public ActionResult obter(int id)
+        {
+            using (var repo = new CursoRepository())
+            {
+                var curso = repo.Obter(id);
 
-        //[HttpPost]
-        public ActionResult Detalhe(int id)
+                return View(curso);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {
+            using (var repo = new CursoRepository())
+            {
+                var curso = repo.Obter(id);
+
+                return View(curso);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Editar(AssuntoCursoUsuario curso)
+        {
+            using (var repo = new CursoRepository())
+            {
+                curso = repo.Atualizar(curso);
+
+                return RedirectToAction("Index");
+            }
+        }
+
+        //[HttpGet]
+        public ActionResult Detalhe(int? id)
         {
             //int id = (int)Url.RequestContext.RouteData.Values["Id"];
             IEnumerable<Detalhe> listaDetalhe = new List<Detalhe>();
@@ -51,7 +78,47 @@ namespace Fatec.Treinamento.Web.Controllers
             {
                 listaDetalhe = repoDetalhe.DetalheCurso(id);
             }
+
+            if (listaDetalhe.Count() == 0)
+            {
+                return RedirectToAction("Index", "Curso");
+            }
             return View(listaDetalhe);
+        }
+
+        public ActionResult Assunto(int? id)
+        {
+            IEnumerable<Assunto> listaCursoAssunto = new List<Assunto>();
+
+            using (AssuntoRepository repoCursoAssunto = new AssuntoRepository())
+            {
+                listaCursoAssunto = repoCursoAssunto.ListarCursosPorAssuntos(id);
+            }
+
+            if (listaCursoAssunto.Count() == 0)
+            {
+                return RedirectToAction("Index", "Curso");
+            }
+
+            var x = 0;
+            foreach (var item in listaCursoAssunto)
+            {
+                /*  
+                    Loop DoWhile que passa apenas uma vez para não 
+                    declarar TempData["NomeAssunto"] varias vez 
+                    sem nexessidade
+                */
+                do
+                {                    
+                    TempData["NomeAssunto"] = item.Assunto;
+                    x++;
+                } while (x == 0 );
+                
+            }
+
+            
+
+            return View(listaCursoAssunto);
         }
     }
 }
