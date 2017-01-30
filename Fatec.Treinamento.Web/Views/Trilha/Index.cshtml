@@ -7,15 +7,12 @@
 <h2>Trilha</h2>
 
 <p>
-    @Html.ActionLink("Nova Trilha", "Criar")
+    @Html.ActionLink("Nova Trilha", "Criar", null, new { @class = "link-format"})
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ativa)
         </th>
         <th></th>
     </tr>
