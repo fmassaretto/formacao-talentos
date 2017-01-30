@@ -36,8 +36,18 @@ body {
     color: white;
 }
 
-#list-content {
+.link-format{
+    text-decoration: none;
+    text-decoration-style:none;
+    color:blue;
 }
+
+.link-format:hover{
+    text-decoration: none;
+    text-decoration-style:none;
+    color: red;
+}
+
 .spacer{
     display:block;
     width:100%;

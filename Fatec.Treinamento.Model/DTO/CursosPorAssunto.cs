@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fatec.Treinamento.Model.DTO
 {
-    public class CursosPorAssunto : Assunto
+    public class CursosPorAssunto : AssuntoCursoUsuario
     {
         public int TotalCursos { get; set; }
     }
