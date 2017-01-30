@@ -17,12 +17,11 @@ namespace Fatec.Treinamento.Data.Repositories
         {
             var id = Connection.ExecuteScalar<int>(
                @"INSERT INTO Trilha (Nome, Ativa) 
-                 VALUES (@Nome, @Ativa); 
+                 VALUES (@Nome, 1); 
                SELECT SCOPE_IDENTITY()",
                param: new
                {
                    trilha.Nome,
-                   trilha.Ativa
                }
            );
 
@@ -59,13 +58,14 @@ namespace Fatec.Treinamento.Data.Repositories
                param: new
                {
                    trilha.Nome,
+                   trilha.Ativa,
                    trilha.Id
                }
             );
 
             return trilha;
         }
-        
+
         public void Excluir(Trilha trilha)
         {
             Connection.Execute(
