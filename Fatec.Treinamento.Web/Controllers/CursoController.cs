@@ -15,7 +15,7 @@ namespace Fatec.Treinamento.Web.Controllers
         [HttpPost]
         public ActionResult Pesquisar(string txtPesquisaCurso)
         {
-            IEnumerable<DetalhesCurso> lista = new List<DetalhesCurso>();
+            IEnumerable<AssuntoCursoUsuario> lista = new List<AssuntoCursoUsuario>();
 
             using (CursoRepository repo = new CursoRepository())
             {
@@ -27,7 +27,7 @@ namespace Fatec.Treinamento.Web.Controllers
 
         public ActionResult Index()
         {
-            IEnumerable<DetalhesCurso> listaTodos = new List<DetalhesCurso>();
+            IEnumerable<AssuntoCursoUsuario> listaTodos = new List<AssuntoCursoUsuario>();
 
             using (CursoRepository repoTodos = new CursoRepository())
             {
@@ -88,7 +88,7 @@ namespace Fatec.Treinamento.Web.Controllers
 
         public ActionResult Assunto(int? id)
         {
-            IEnumerable<Assunto> listaCursoAssunto = new List<Assunto>();
+            IEnumerable<AssuntoCursoUsuario> listaCursoAssunto = new List<AssuntoCursoUsuario>();
 
             using (AssuntoRepository repoCursoAssunto = new AssuntoRepository())
             {
@@ -110,7 +110,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 */
                 do
                 {                    
-                    TempData["NomeAssunto"] = item.Assunto;
+                    TempData["NomeAssunto"] = item.NomeAssunto;
                     x++;
                 } while (x == 0 );
                 
