@@ -156,9 +156,11 @@
     <Compile Include="Controllers\TreinamentoController.cs" />
     <Compile Include="Controllers\TrilhaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VoltarController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssuntoViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegistroUsuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -227,9 +229,13 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Curso\Index.cshtml" />
     <Content Include="Views\Curso\Detalhe.cshtml" />
+    <Content Include="Views\Curso\Assunto.cshtml" />
+    <Content Include="Views\Trilha\Editar.cshtml" />
+    <Content Include="Views\Curso\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Voltar\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
