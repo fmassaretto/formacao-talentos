@@ -4,6 +4,7 @@ using System.Linq;
 using Fatec.Treinamento.Data.Repositories;
 using Fatec.Treinamento.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Fatec.Treinamento.Model.DTO;
 
 namespace Fatec.Treinamento.Testes.Data.Tests
 {
@@ -24,7 +25,7 @@ namespace Fatec.Treinamento.Testes.Data.Tests
         {
             using (AssuntoRepository repo = new AssuntoRepository())
             {
-                var assunto = new Assunto
+                var assunto = new AssuntoCursoUsuario
                 {
                     Nome = "Demo teste 1"
                 };
@@ -36,7 +37,7 @@ namespace Fatec.Treinamento.Testes.Data.Tests
             }
         }
         
-        public Assunto ObterAssunto(int id)
+        public AssuntoCursoUsuario ObterAssunto(int id)
         {
             using (AssuntoRepository repo = new AssuntoRepository())
             {
@@ -51,7 +52,7 @@ namespace Fatec.Treinamento.Testes.Data.Tests
         }
 
 
-        private Assunto AtualizarAssunto(Assunto assunto)
+        private AssuntoCursoUsuario AtualizarAssunto(AssuntoCursoUsuario assunto)
         {
             using (AssuntoRepository repo = new AssuntoRepository())
             {
@@ -59,20 +60,20 @@ namespace Fatec.Treinamento.Testes.Data.Tests
                 assunto.Nome = "Nome Atualizado";
                 repo.Atualizar(assunto);
 
-                var assuntoAtualizado = repo.Obter(assunto.Id);
+                var assuntoAtualizado = repo.Obter(assunto.IdAssunto);
 
-                Assert.AreEqual("Nome Atualizado", assuntoAtualizado.Nome);
+                Assert.AreEqual("Nome Atualizado", assuntoAtualizado.NomeAssunto);
                 
                 return assuntoAtualizado;
             }
         }
                 
-        private void Excluir(Assunto assunto)
+        private void Excluir(AssuntoCursoUsuario assunto)
         {
             using (AssuntoRepository repo = new AssuntoRepository())
             {
                 repo.Excluir(assunto);
-                var assuntoRet = repo.Obter(assunto.Id);
+                var assuntoRet = repo.Obter(assunto.IdAssunto);
                 Assert.IsTrue(assuntoRet == null);
             }
         }
