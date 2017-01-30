@@ -3,48 +3,53 @@
 @{
     ViewBag.Title = "Detalhe";
 }
-<div class="container-fluid">
-    <div id="div-detalhe" class="full-width-div img-div">
-        <div class="container">
-            <h1>@Html.DisplayNameFor(model => model.Nome)</h1>
-            <p class="lead">
-                Bem vindo ao <b>AOXO</b>. A plataforma de tecnologia de aprendizado on-demand para você se manter capacitado
-                e garantir a progressão da sua carreira.
-            </p>
-        </div>
-    </div>
-    <main>
-        <div class="rowDetalhe">
-            <div class="col-md-8">
-                <div class="detalhe-descricao">
-                    <h3>Descrição do Curso</h3>
-                    <p>asdasdasdasdfasfasfasfasfasfasfasfasfasfasf,as
-                    fasfasfasfaasfasfasfasa</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div id="menu-detalhe">
-                    <div class="list-group">
-                        @if (Request.IsAuthenticated)
-                        {
-                            <button type="button" id="btn-comecar" class="list-group-item">COMEÇAR CURSO</button>/**/
-                        }
-                        else
-                        {
-                            <button type="button" id="btn-comecar" class="list-group-item disabled">COMEÇAR CURSO</button>/**/
-                        }
 
-                        <text class="list-group-item">Numero de capítulos:</text>
-                        <text class="list-group-item">Pontos adquiridos nesse curso:</text>
-                        <text class="list-group-item">Porta ac consectetur ac</text>
-                        <text class="list-group-item">Vestibulum at eros</text>
+@foreach (var item in Model)
+{
+    <div class="container-fluid">
+        <div id="div-detalhe" class="full-width-div img-div">
+            <div class="container">
+            
+                    <h1>@item.Nome</h1>
+            
+            
+                <p class="lead">
+                    Bem vindo ao <b>AOXO</b>. A plataforma de tecnologia de aprendizado on-demand para você se manter capacitado
+                    e garantir a progressão da sua carreira.
+                </p>
+            </div>
+        </div>
+        <main>
+            <div class="rowDetalhe">
+                <div class="col-md-8">
+                    <div class="detalhe-descricao">
+                        <h3>Descrição do Curso</h3>
+                        <p>@item.Descricao</p>
                     </div>
-
+                </div>
+                <div class="col-md-4">
+                    <div id="menu-detalhe">
+                        <div class="list-group" id="list-content">
+                            @if (Request.IsAuthenticated)
+                            {
+                                <button type="button" id="btn-comecar" class="list-group-item">COMEÇAR CURSO</button>/**/
+                            }
+                            else
+                            {
+                                <button type="button" id="btn-comecar-invalido" class="list-group-item disabled">COMEÇAR CURSO</button>/**/
+                            }
+                            <text class="list-group-item">Numero de capítulos:</text>
+                            <text class="list-group-item">Pontos adquiridos nesse curso:</text>
+                            <div class="spacer"></div>
+                            @Html.ActionLink("Voltar aos Cursos", "Index", "CursoController", new { @class = "list-group-item"})
+                            @*<text class="list-group-item"><span class="glyphicon glyphicon-triangle-left"></span> Voltar aos Cursos</text>*@
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
     
-</div>
+    </div>
+}
 
 
