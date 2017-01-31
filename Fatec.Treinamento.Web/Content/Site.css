@@ -59,11 +59,30 @@ body {
 
 }
 
-.img-div{
-    background-image: url('/Content/Img/Lighthouse.jpg');
+/*.img-div:not(.container){
+    background-image: url('/Content/Img/e-learning1menor.jpg');
     background-repeat:no-repeat;
-    /*background-size:contain;*/
-    background-size: 100% 100%;
+    background-size:cover;
+   opacity: 0.1;
+    filter: alpha(opacity=10); 
+}*/
+
+
+.img-div{
+    background-image: url('/Content/Img/e-learning1menor.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    position: relative;
+}
+
+.img-div:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
 }
 
 .detalhe-descricao{
@@ -76,6 +95,28 @@ body {
     }
 }
 
+@media screen AND (max-width: 425px) {
+    #banner-inicio .container .lead{
+        font-size:1em;
+    }
+}
+
+@media screen AND (width: 768px) {
+    #detalhes-inicio .col-md-4{
+        margin-left:100px;
+        margin-right:100px;
+    }
+}
+
+td{
+    position:relative;
+    display:grid;
+}
+
+#gradient-bg{
+    background-color:aliceblue;
+}
+
 #div-detalhe{
     background-color: #222;
     color: #fff;
@@ -84,6 +125,36 @@ body {
     padding-top:100px;
     border-radius: 0;
     margin-top: -35px;
+}
+
+#div-detalhe h1{
+    color:#fff;
+    position: relative;
+}
+
+#div-detalhe p{
+    color:#fff;
+    position: relative;
+}
+
+#detalhes-inicio .col-md-4{
+    display:block;
+    position:relative;
+    padding-left:50px;
+    padding-right:50px;
+    height:320px;
+}
+
+
+#detalhes-inicio .col-md-4 p a {
+    position:absolute;
+    text-align:center;
+    bottom:0;
+}
+
+#detalhes-inicio .col-md-4 p{
+    display:grid;
+    text-align:justify;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
