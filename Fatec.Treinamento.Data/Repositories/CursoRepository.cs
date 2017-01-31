@@ -52,7 +52,7 @@ namespace Fatec.Treinamento.Data.Repositories
         public AssuntoCursoUsuario Obter(int id)
         {
             return Connection.Query<AssuntoCursoUsuario>(
-               @"SELECT c.Nome AS Nome,
+               @"SELECT c.Nome,
                c.Classificacao,
                a.Id AS IdAssunto,
                u.Id AS IdAutor,
@@ -120,11 +120,13 @@ namespace Fatec.Treinamento.Data.Repositories
               @"SELECT
 	                c.Id,
 	                c.Nome,
+                    a.Id AS IdAssunto,
 	                a.Nome as NomeAssunto,
+                    u.Id AS IdAutor,
 	                u.Nome as NomeAutor,
 	                c.DataCriacao,
 	                c.Classificacao,
-                    cd.Descricao
+                    cd.Descricao AS Descricao
                  FROM curso c
                  inner join assunto a on c.IdAssunto = a.id
                  inner join usuario u on c.IdAutor = u.Id

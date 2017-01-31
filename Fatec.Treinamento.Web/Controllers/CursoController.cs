@@ -68,7 +68,7 @@ namespace Fatec.Treinamento.Web.Controllers
             }
         }
 
-        //[HttpGet]
+        [HttpGet]
         public ActionResult Detalhe(int? id)
         {
             //int id = (int)Url.RequestContext.RouteData.Values["Id"];
@@ -106,7 +106,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 /*  
                     Loop DoWhile que passa apenas uma vez para não 
                     declarar TempData["NomeAssunto"] varias vez 
-                    sem nexessidade
+                    sem necessidade
                 */
                 do
                 {                    
@@ -115,9 +115,6 @@ namespace Fatec.Treinamento.Web.Controllers
                 } while (x == 0 );
                 
             }
-
-            
-
             return View(listaCursoAssunto);
         }
     }
