@@ -12,6 +12,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
@@ -20,9 +21,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NomeAutor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataCriacao)
             </th>
             <th></th>
         </tr>
@@ -33,17 +31,20 @@
         {
             <tr>
                 <td>
-                    @*@Html.DisplayFor(modelItem => item.Nome)*@
-                    @Html.ActionLink(item.Nome, "Detalhe", new { id = item.Id }, new { @class = "link-format" })
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" width="64" height="64" alt="">
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    @Html.ActionLink(item.Nome, "Detalhe", new { id = item.Id }, new { @class = "btn btn-link" })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeAssunto)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeAutor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataCriacao)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Editar", new { id = item.Id }) |
