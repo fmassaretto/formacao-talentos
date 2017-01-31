@@ -8,60 +8,21 @@ using System.Web.Mvc;
 
 namespace Fatec.Treinamento.Web.Controllers
 {
+    // Obs: Colocando o atributo [Authorize] no controller, garante que todas as actions so podem ser
+    // acessadas quando o usuário estiver autorizado a utilizar.
+    // Quando informo o parametro "Roles", indico que só quem tiver o perfil administrador poderá acessar.
+
+    [Authorize(Roles = "Administrador")]
     public class TrilhaController : Controller
     {
-        // GET: Trilha
+        [HttpGet]
         public ActionResult Index()
         {
             var repo = new TrilhaRepository();
+
             var lista = repo.Listar();
 
             return View(lista);
         }
-
-        public ActionResult Criar()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Criar(Trilha trilha)
-        {
-            using (var repo = new TrilhaRepository())
-            {
-                var inserido = repo.Inserir(trilha);
-
-                if (inserido.Id == 0)
-                {
-                    ModelState.AddModelError("", "Erro");
-                }
-            }
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public ActionResult Editar(int id)
-        {
-            using (var repo = new TrilhaRepository())
-            {
-                var trilha = repo.Obter(id);
-
-                return View(trilha);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Editar(Trilha trilha)
-        {
-            using (var repo = new TrilhaRepository())
-            {
-                trilha = repo.Atualizar(trilha);
-
-                return RedirectToAction("Index");
-            }
-        }
-
     }
-
-
 }

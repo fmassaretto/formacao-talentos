@@ -51,20 +51,45 @@
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Trilhas", "Index", "Trilha")</li>
+                    @*<li>@Html.ActionLink("Trilhas", "Trilhas", "Cursos")</li>*@
                     
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Meus Treinamentos", "Index", "Treinamento", null, new { @class = "navbar-link" })</li>
-                    }
-                </ul>
                 
                 @if (Request.IsAuthenticated)
                 {
-                    <p class="navbar-text navbar-right">
-                        <span class="glyphicon glyphicon-user"></span> &nbsp;&nbsp; 
-                        @User.Identity.GetUserName() 
-                        @Html.ActionLink("( Sair )", "LogOff", "Usuario", null, new {@class = "navbar-link"})
-                    </p>
+                    //Valida se o usuário é administrador e exibe o menu de administração.
+
+                    if (this.User.IsInRole("Administrador"))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Cursos", "Index", "AdminCursos", null, new { style = "text-decoration: line-through" })</li>
+                                <li>@Html.ActionLink("Trilhas", "Index", "AdminTrilhas")</li>
+                                <li>@Html.ActionLink("Assuntos", "Index", "AdminAssuntos", null, new { style = "text-decoration: line-through" })</li>
+                                <li>@Html.ActionLink("Usuários", "Index", "AdminUsuarios", null, new { style = "text-decoration: line-through" })</li>
+                            </ul>
+                        </li>
+                    }
+                }
+                </ul>
+
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user"></span> &nbsp;&nbsp; @User.Identity.GetUserName() <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Meus Treinamentos", "Index", "Treinamento", null, new { style = "text-decoration: line-through" })</li>
+                                <li>@Html.ActionLink("Meus Pontos", "MeusPontos", "Usuario", null, new { style = "text-decoration: line-through" })</li>
+                                <li role="separator" class="divider"></li>
+                                <li>@Html.ActionLink("Sair", "LogOff", "Usuario")</li>
+                            </ul>
+                        </li>
+                    </ul>
                 }
                 else
                 {
@@ -74,7 +99,7 @@
                     </ul>
                 }
 
-</div>
+            </div>
         </div>
     </div>
 

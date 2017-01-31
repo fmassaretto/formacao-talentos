@@ -3,32 +3,40 @@
 @{
     ViewBag.Title = "View";
 }
-<div id="gradient-bg">
-    <h2>Trilha</h2>
+
+<div class="container-fluid">
+    <div id="div-action-title" class="full-width-div">
+        <div class="container">
+            <h2>Trilha</h2>
+        </div>
+    </div>
 </div>
+<main>
 
+    <p>
+        @Html.ActionLink("Nova Trilha", "Criar", null, new { @class = "link-format" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Nova Trilha", "Criar", null, new { @class = "link-format"})
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Editar", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Exlcuir", new { id = item.Id }) |
+                    @Html.ActionLink("Cursos da Trilha", "VincularCursos", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Editar", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Exlcuir", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    </table>
+</main>

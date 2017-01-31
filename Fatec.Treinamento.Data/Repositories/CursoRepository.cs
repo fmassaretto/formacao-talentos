@@ -34,21 +34,6 @@ namespace Fatec.Treinamento.Data.Repositories
             ).ToList();
         }
 
-        //public DetalhesCurso Obter(int id)
-        //{
-        //    return Connection.Query<DetalhesCurso>(
-        //       @"SELECT c.Nome AS NomeCurso,
-        //       c.Classificacao,
-        //       u.Nome AS Autor,
-        //       a.Nome AS Assunto
-        //       FROM Curso c
-        //       INNER JOIN Usuario u ON c.IdAutor = u.Id
-        //       INNER JOIN Assunto a ON c.IdAssunto = a.Id
-        //       WHERE c.Id = @Id",
-        //       param: new { Id = id }
-        //   ).FirstOrDefault();
-        //}
-
         public AssuntoCursoUsuario Obter(int id)
         {
             return Connection.Query<AssuntoCursoUsuario>(
@@ -133,6 +118,23 @@ namespace Fatec.Treinamento.Data.Repositories
                  inner join curso_descricao cd on cd.IdCurso = c.Id
                  WHERE c.Id = @Id",
               param: new { Id = id }
+            ).ToList();
+        }
+
+        public IEnumerable<DetalhesCurso> ListarCursosDetalhes()
+        {
+            return Connection.Query<DetalhesCurso>(
+              @"SELECT
+	                c.Id,
+	                c.Nome,
+	                a.Nome as Assunto,
+	                u.Nome as Autor,
+	                c.DataCriacao,
+	                c.Classificacao
+                 FROM curso c
+                 inner join assunto a on c.IdAssunto = a.id
+                 inner join usuario u on c.IdAutor = u.Id
+                 ORDER BY c.Nome"
             ).ToList();
         }
     }

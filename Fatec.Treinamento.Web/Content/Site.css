@@ -157,6 +157,10 @@ td{
     text-align:justify;
 }
 
+.selecionar-curso {
+    height: 200px !important;
+}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

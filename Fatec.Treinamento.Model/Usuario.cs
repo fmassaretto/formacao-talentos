@@ -1,6 +1,7 @@
 ﻿using Fatec.Treinamento.Model.Extensoes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -32,6 +33,7 @@ namespace Fatec.Treinamento.Model
             }
         }
 
+        [DisplayName("Perfil")]
         public Perfil Perfil { get; set; }
 
     }

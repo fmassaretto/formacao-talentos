@@ -19,15 +19,30 @@ namespace Fatec.Treinamento.Web.Controllers
 {
     public class UsuarioController : Controller
     {
-        
+
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Registrar()
         {
-            return View();
+
+            RegistroUsuarioViewModel model = new RegistroUsuarioViewModel();
+
+            using (var repo = new PerfilRepository())
+            {
+                var lista = repo.Listar();
+                model.ListaPerfil = (from x in lista
+                                     select new SelectListItem
+                                     {
+                                         Text = x.Nome,
+                                         Value = x.Id.ToString()
+                                     });
+            }
+
+            return View(model);
+
         }
 
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -43,18 +58,18 @@ namespace Fatec.Treinamento.Web.Controllers
                     Ativo = true,
                     Perfil = new Perfil { Id = (int)TipoPerfil.Usuario } // Por padrão todos que se registram são usuarios.
                 };
-                
-                using(UsuarioRepository repo = new UsuarioRepository())
+
+                using (UsuarioRepository repo = new UsuarioRepository())
                 {
                     usuario = repo.Inserir(usuario);
                 }
-                    
+
                 if (usuario.Id > 0)
                 {
                     //TODO: logar o usuario
                     return RedirectToAction("Index", "Home");
                 }
-                
+
             }
 
             // Se chegou aqui, temos um problema. Devolvo o model para o form novamente.
@@ -111,7 +126,7 @@ namespace Fatec.Treinamento.Web.Controllers
                     DefaultAuthenticationTypes.ApplicationCookie);
 
                 HttpContext.GetOwinContext().Authentication.SignIn(
-                    new AuthenticationProperties {IsPersistent = false}, ident);
+                    new AuthenticationProperties { IsPersistent = false }, ident);
 
                 if (Url.IsLocalUrl(returnUrl))
                 {
@@ -125,7 +140,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 ModelState.AddModelError("", "Credenciais Inválidas.");
                 return View(model);
             }
-            
+
         }
 
         public ActionResult LogOff()
