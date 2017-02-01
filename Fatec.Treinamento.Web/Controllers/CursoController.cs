@@ -36,6 +36,11 @@ namespace Fatec.Treinamento.Web.Controllers
             return View(listaTodos);
         }
 
+        public ActionResult Populares()
+        {
+            return View();
+        }
+
         public ActionResult obter(int id)
         {
             using (var repo = new CursoRepository())

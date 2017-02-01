@@ -24,5 +24,19 @@ namespace Fatec.Treinamento.Web.Controllers
 
             return View(lista);
         }
+
+        [HttpPost]
+        public ActionResult Criar(Trilha trilha)
+        {
+            var repo = new TrilhaRepository();
+            var lista = repo.Inserir(trilha);
+
+            if (lista.Id == 0)
+            {
+                ModelState.AddModelError("", "Erro");
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
