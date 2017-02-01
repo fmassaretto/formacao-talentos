@@ -4,53 +4,61 @@
     ViewBag.Title = "Todos os Cursos";
 }
 
-<h2>Todos os Cursos</h2>
+<div class="container-fluid">
+    <div id="div-action-title" class="full-width-div">
+        <h2>Todos os Cursos</h2>
+    </div>
+</div>
+<main>
+    <div class="main-content">
 
-<p>
-    @Html.ActionLink("Novo Curso", "Criar")
-</p>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th></th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeAssunto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeAutor)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-   
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" width="64" height="64" alt="">
-                        </a>
-                    </div>
-                </td>
-                <td>
-                    @Html.ActionLink(item.Nome, "Detalhe", new { id = item.Id }, new { @class = "btn btn-link" })
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeAssunto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeAutor)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Editar", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Exlcuir", new { id = item.Id })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <p>
+            @Html.ActionLink("Novo Curso", "Criar")
+        </p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NomeAssunto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NomeAutor)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" width="64" height="64" alt="">
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Nome, "Detalhe", new { id = item.Id }, new { @class = "btn btn-link" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeAssunto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeAutor)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Editar", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Exlcuir", new { id = item.Id })
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>
