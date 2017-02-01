@@ -172,6 +172,10 @@ body {
     padding-top: 70px;
 }
 
+.modal-content{
+    text-align:center;
+}
+
 #login-content{
     position: absolute;
     display: block;
