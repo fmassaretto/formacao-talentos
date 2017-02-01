@@ -240,10 +240,11 @@
     <Content Include="Views\AdminTrilhas\Excluir.cshtml" />
     <Content Include="Views\AdminTrilhas\Editar.cshtml" />
     <Content Include="Views\AdminTrilhas\Criar.cshtml" />
+    <Content Include="Views\Curso\Populares.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Voltar\" />
+    <Folder Include="Views\Painel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
