@@ -18,6 +18,72 @@ body {
     padding-top:20px;
 }
 
+/* INICIO css dos cursos*/
+
+.search-content{
+    background-color:white;
+    left: 50%;
+  margin-left: -400px; /* A metade de sua largura. */
+  position: absolute;
+  width: 800px;
+}
+
+.search-results-rows{
+    margin-left:5%;
+    margin-right:5%;
+    background:#fff;
+    border-bottom:solid;
+    border-bottom-color:aquamarine;
+    border-bottom-width:2px;
+}
+
+.search-results-rows:hover{
+    background:#ebedee;
+}
+
+.search-result__title, .search-result__details {
+    padding-left:40px;
+}
+
+.search-result__title{
+    margin-top:5px;
+}
+
+.search-result__title a{
+    font-size:18px;
+    font-weight:400;
+    color:#000;
+    line-height:25px;
+}
+
+.search-result__details{
+    margin-top:5px;
+    margin-bottom:5px;
+    color:#888;
+    font-weight:200;
+    font-size:12px;
+}
+
+.search-result__details>div{
+    float:left;
+    font-size:12px;
+    font-weight:400;
+    margin-right:20px;
+}
+
+.search-result__details a{
+    color:#888;
+}
+
+.clearfix:before .clearfix:after{
+    content:" ";
+    display:table;
+}
+.clearfix:after{
+    clear:both;
+}
+/* FIM css dos cursos*/
+
 #btn-comecar{
     background-color:#15a589;
     text-align: center;
@@ -76,13 +142,13 @@ body {
 }
 
 .img-div:before{
+    background: rgba(0,0,0,0.6);
     content: '';
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.5);
 }
 
 .detalhe-descricao{
@@ -93,13 +159,27 @@ body {
     .detalhe-descricao{
         margin-top: 300px;
     }
+    #div-action-title {
+        width:100%;
+    }
 }
 
 @media screen AND (max-width: 425px) {
     #banner-inicio .container .lead{
         font-size:1em;
     }
+
+    #div-action-title {
+        width:100%;
+    }
 }
+
+@media screen AND (max-width: 320px) {
+    #div-action-title {
+        width:100%;
+    }
+}
+
 
 @media screen AND (width: 768px) {
     #detalhes-inicio .col-md-4{
@@ -168,6 +248,8 @@ body {
 }
 
 .main-content{
+    width: 100%;
+    position:relative;
     display:block;
     padding-top: 70px;
 }
