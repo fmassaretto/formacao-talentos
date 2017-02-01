@@ -56,7 +56,7 @@ namespace Fatec.Treinamento.Web.Controllers
                     Email = model.Email,
                     Senha = model.Senha,
                     Ativo = true,
-                    Perfil = new Perfil { Id = (int)TipoPerfil.Usuario } // Por padrão todos que se registram são usuarios.
+                    Perfil = new Perfil { Id = model.IdPerfil /*(int)TipoPerfil.Usuario*/ } // Por padrão todos que se registram são usuarios.
                 };
 
                 using (UsuarioRepository repo = new UsuarioRepository())
