@@ -247,6 +247,9 @@ th {
   }
   .navbar {
     display: none;
+    border: 1px solid;
+    border-bottom-color:#fff;
+    border-bottom-width: 2px;
   }
   .btn > .caret,
   .dropup > .btn > .caret {

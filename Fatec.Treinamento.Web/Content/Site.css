@@ -108,11 +108,6 @@ body {
     }
 }
 
-td{
-    position:relative;
-    display:grid;
-}
-
 #gradient-bg{
     background-color:aliceblue;
 }
@@ -157,9 +152,53 @@ td{
     text-align:justify;
 }
 
+#div-action-title{
+    top: 60px;
+    height:75px;
+    /*position:fixed;*/
+    background-color:#33444F;
+    background: linear-gradient(to top, rgba(51, 68, 79, 0.1) 20%, rgba(51,68,79,0.9) 7%);
+    transition: opacity 0.1s, transform 0.9s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+    transform: scale(1);
+}
+
+#div-action-title h2{
+    color:#fff;
+    padding-left:30px;
+}
+
+.main-content{
+    display:block;
+    padding-top: 70px;
+}
+
+#login-content{
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    margin-left: -15rem;
+    margin-top: -20.5rem;
+    width: 50rem;
+    height: 53rem;
+    overflow: hidden;
+}
+
+#login-content h2 h4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .selecionar-curso {
     height: 200px !important;
 }
+
+.checkbox span{
+    display:inline-block;
+    width:30px;
+} 
+    
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
