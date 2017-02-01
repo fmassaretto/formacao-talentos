@@ -36,6 +36,7 @@ namespace Fatec.Treinamento.Web.Models
 
         public IEnumerable<SelectListItem> ListaPerfil { get; set; }
 
+        [Display(Name = "Perfil")]
         public int IdPerfil { get; set; }
 
 
