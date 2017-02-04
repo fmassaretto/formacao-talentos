@@ -84,6 +84,178 @@ body {
 }
 /* FIM css dos cursos*/
 
+
+/* INICIO css dos carousel*/
+.carouse-div{
+    position:inherit;
+    width:100%;
+    height:100%;
+    max-height: 200px;
+
+    
+    left:0;
+    top:0;
+}
+
+.carouse-div > #carousel-index{
+    position:inherit;
+    width:100%;
+    
+    max-height: 200px;
+    margin:0;
+    padding:0;
+    
+    left:0;
+    top:0;
+}
+
+.carouse-div > .carousel > .carousel-inner > .item > img{
+    min-width: 100%;
+    height: 100%;
+    min-height:400px;
+    max-height: 400px;
+}
+/* FIM css do carousel*/
+
+/* INICIO css do Painel*/
+.painel-container{
+    position:relative;
+    display:block;
+    width: 100%;
+    height: 100%;
+}
+
+.painel-content{
+    background-color: #284960;
+}
+
+.painel-title{  
+    background-color: #313540;
+    width: 100%;
+    height: 90px;
+    border-radius: 5px;
+    padding-left: 20px;    
+}
+
+.painel-title h2, .painel-title h5{
+    color: white;
+}
+
+.painel-saudacao{
+    width: 85%;
+    float: left;
+}
+
+.painel-pontos{ 
+    display:block; 
+    background-color:#2c3e50;
+    border-left: 3px dashed;
+    border-left-color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 15%;  
+    height: 100%;
+    float: right;
+}
+
+.painel-pontos-inner, .painel-pontos-blw-text, .painel-pontos-abv-text{
+    display:block;
+    height:17px;
+    text-align:center;
+    color:white;
+}
+
+.painel-pontos-inner > h5{
+    font-size:30px;
+    font-weight:bolder;
+}
+
+.vSpacer{
+    display:block;
+    background-color:#252830;
+    width:100%;
+    height: 10px;
+}
+
+.painel-main{
+    background-color:#313540;
+    width:100%;
+    height:100%;
+}
+
+.painel-main h3{
+    color:#fff;
+}
+
+.bar{
+    margin-left: -15px;
+    margin-right:50%;
+    border-top: 1px solid #252830;
+}
+
+.item-container{
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.item-title{
+    padding-top:1px;
+    margin-left: 40px;
+}
+
+.item-content{
+    padding-top:20px;
+}
+
+.item-card{
+    padding:5px;
+    margin:5px;
+    width: 150px;
+    width: 100px;
+    background-color:#252830;
+    border: 2px solid;
+}
+
+.item-card:hover{
+    background-color:#313540;
+    border: 2px solid;
+}
+
+.item-card-text{
+    text-align:center;
+}
+
+#inline-itens-card > .item-card{
+    display:inline-block;
+}
+
+/*.menu-gerenciar-side, .menu-gerenciar-side ul{
+    display:block;
+    width:210px;
+    max-width:210px;
+}*/
+
+.menu-gerenciar-side{
+    flex: 0 0 65%;
+    width:30%;
+    max-width:30%;
+    height: auto;
+    float: left;
+}
+
+.gerenciar-container{
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.gerenciar-content{
+    flex: 1;   
+    width:70%;
+    height: 300px;
+}
+/* FIM css do painel*/
+
 #btn-comecar{
     background-color:#15a589;
     text-align: center;
@@ -214,10 +386,10 @@ body {
 
 #detalhes-inicio .col-md-4{
     display:block;
-    position:relative;
+    padding-top: 90PX;
     padding-left:50px;
     padding-right:50px;
-    height:320px;
+    height:430px;
 }
 
 
