@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,9 +11,12 @@ namespace Fatec.Treinamento.Model.DTO
     public class AssuntoCursoUsuario
     {
 
-        public int Id { get; set; }
+        public int IdCurso { get; set; } //editado ante era Id
         public int IdAutor { get; set; }
         public int IdAssunto { get; set; }
+        public int IdCursoDescricao { get; set; }
+
+        public Usuario usuario { get; set; }
 
         [DisplayName("Curso")]
         public string Nome { get; set; }
@@ -28,5 +32,12 @@ namespace Fatec.Treinamento.Model.DTO
 
         [DisplayName("Classificação")]
         public int Classificacao { get; set; }
+
+        [DisplayName("Descrição")]
+        public string Descricao { get; set; }
+
+        public List<Usuario> ListaUsuarios { get; set; }
+
+        public int UsuarioSelecionado { get; set; }
     }
 }

@@ -151,6 +151,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminCursosController.cs" />
     <Compile Include="Controllers\AdminTrilhasController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
@@ -261,10 +262,13 @@
     <Content Include="Views\Shared\_PainelUsuario.cshtml" />
     <Content Include="Views\Shared\_PainelAdmin.cshtml" />
     <Content Include="Views\Shared\_PainelInstrutor.cshtml" />
+    <Content Include="Views\AdminCursos\Index.cshtml" />
+    <Content Include="Views\AdminCursos\Editar.cshtml" />
+    <Content Include="Views\AdminCursos\Deletar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\AdminCursos\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

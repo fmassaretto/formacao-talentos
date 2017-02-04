@@ -11,6 +11,6 @@ namespace Fatec.Treinamento.Model
     {
         public int TotalCapitulos { get; set; }
         public int Pontos { get; set; }
-        public string Descricao { get; set; }
+        
     }
 }

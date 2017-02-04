@@ -40,12 +40,14 @@ namespace Fatec.Treinamento.Data.Repositories
                @"SELECT c.Nome,
                c.Classificacao,
                a.Id AS IdAssunto,
-               u.Id AS IdAutor,
+               u.Id AS IdAutor, 
                u.Nome AS NomeAutor,
-               a.Nome AS NomeAssunto
+               a.Nome AS NomeAssunto,
+               cd.Descricao
                FROM Curso c
                INNER JOIN Usuario u ON c.IdAutor = u.Id
                INNER JOIN Assunto a ON c.IdAssunto = a.Id
+               INNER JOIN Curso_Descricao cd ON cd.IdCurso = c.Id
                WHERE c.Id = @Id",
                param: new { Id = id }
            ).FirstOrDefault();
@@ -56,24 +58,28 @@ namespace Fatec.Treinamento.Data.Repositories
             Connection.Execute(
                @"BEGIN TRANSACTION;
 
-                UPDATE Curso SET Curso.Nome = @Nome, Curso.Classificacao = @Classificacao
-	                FROM Curso c INNER JOIN Usuario u
-	                ON c.IdAutor = u.Id 
-	                And c.Id = @Id;
+                UPDATE Curso SET Curso.Nome = @Nome, Curso.IdAutor = @IdAutor, Curso.Classificacao = @Classificacao
+	                WHERE Curso.Id = @IdCurso;
 
                 UPDATE Assunto SET Nome = @NomeAssunto
 	                FROM Assunto a INNER JOIN Curso c
 	                ON c.IdAssunto = a.Id
 	                AND a.Id = @IdAssunto;
 
+                UPDATE Curso_Descricao SET Descricao = @Descricao
+                    WHERE Curso_Descricao.Id = @IdCursoDescricao
+
                 COMMIT;",
                param: new
                {
                    acu.Nome,
                    acu.Classificacao,
-                   acu.Id,
+                   acu.UsuarioSelecionado.Id,
+                   acu.IdCurso,
                    acu.NomeAssunto,
-                   acu.IdAssunto
+                   acu.IdAssunto,
+                   acu.IdCursoDescricao,
+                   acu.Descricao
                }
             );
 

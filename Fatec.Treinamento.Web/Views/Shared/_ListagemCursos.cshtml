@@ -8,7 +8,7 @@
             <div class="search-results-rows clearfix">
                 <div class="search-result">
                     <div class="search-result__info">
-                        <div class="search-result__title"><a href="@Url.Action("Detalhe", new { id = item.Id })">@Html.DisplayFor(modelItem => item.Nome)</a></div>
+                        <div class="search-result__title"><a href="@Url.Action("Detalhe", new { id = item.IdCurso })">@Html.DisplayFor(modelItem => item.Nome)</a></div>
                         <div class="search-result__details clearfix">
                             <div class="search-result__author"><text>Por </text>@Html.DisplayFor(modelItem => item.NomeAutor)</div>
                             <div class="search-result__level">Beginner</div>
@@ -24,5 +24,4 @@
             </div>
         }
     </div>
-</div>
 </div>

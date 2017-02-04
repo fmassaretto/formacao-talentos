@@ -15,11 +15,11 @@
 
         <aside class="menu-gerenciar-side">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Usuários</a></li>
+                <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Usuarios" })">Gerenciar Usuários</a></li>
                 <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Curso</a></li>
                 <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Assuntos</a></li>
-                <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Trilhas</a></li>
-                <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Videos</a></li>
+                <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Trilhas" })">Gerenciar Trilhas</a></li>
+                <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Videos" })">Gerenciar Videos</a></li>
             </ul>            
         </aside>
             <section class="gerenciar-content">

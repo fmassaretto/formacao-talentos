@@ -1,4 +1,5 @@
 ﻿using Fatec.Treinamento.Data.Repositories;
+using Fatec.Treinamento.Model.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,50 @@ namespace Fatec.Treinamento.Web.Controllers
             return View();
         }
 
-       
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {
+            using (var repo = new CursoRepository())
+            {
+                var curso = repo.Obter(id);
+
+                return View(curso);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Editar(AssuntoCursoUsuario acu)
+        {
+            using (var repo = new CursoRepository())
+            {
+                var curso = repo.Atualizar(acu);
+
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult ListarUsuarios(int id)
+        {
+            var model = new AssuntoCursoUsuario();
+
+            using (var repo = new CursoRepository())
+            {
+                var curso = repo.Obter(id);
+            }
+
+            
+
+            using (var repo = new UsuarioRepository())
+            {
+                model.ListaUsuarios = repo.Listar();
+
+
+                
+            }
+
+            return View(model);
+        }
+
     }
 }
