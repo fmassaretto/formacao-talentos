@@ -113,9 +113,9 @@ namespace Fatec.Treinamento.Data.Repositories
 	                c.Classificacao,
                     cd.Descricao AS Descricao
                  FROM curso c
-                 inner join assunto a on c.IdAssunto = a.id
-                 inner join usuario u on c.IdAutor = u.Id
-                 inner join curso_descricao cd on cd.IdCurso = c.Id
+                 inner join Assunto a on c.IdAssunto = a.id
+                 inner join Usuario u on c.IdAutor = u.Id
+                 inner join Curso_Descricao cd on cd.IdCurso = c.Id
                  WHERE c.Id = @Id",
               param: new { Id = id }
             ).ToList();
@@ -136,6 +136,21 @@ namespace Fatec.Treinamento.Data.Repositories
                  inner join usuario u on c.IdAutor = u.Id
                  ORDER BY c.Nome"
             ).ToList();
+        }
+
+        public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario entidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<AssuntoCursoUsuario> Listar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Excluir(AssuntoCursoUsuario entidade)
+        {
+            throw new NotImplementedException();
         }
     }
 }
