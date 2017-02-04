@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeAssunto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeAutor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Classificacao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeAssunto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeAutor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataCriacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Classificacao)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.IdCurso }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdCurso }) |
+            @Html.ActionLink("Deletar", "Deletar", new { id=item.IdCurso })
+        </td>
+    </tr>
+}
+
+</table>
