@@ -1,0 +1,30 @@
+﻿
+<div class="painel-container">    
+
+    @if (this.User.IsInRole("Administrador"))
+    {
+
+        @Html.Partial("_PainelAdmin")
+    }
+    else if (this.User.IsInRole("Instrutor"))
+    {
+
+        @Html.Partial("_PainelInstrutor")
+    }
+    else if (this.User.IsInRole("Usuario"))
+    {
+
+        @Html.Partial("_PainelUsuario")
+    }
+
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('body').css("background-color", "#252830");
+        });
+
+    </script>
+}

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario>
+
+<div class="main-content">
+
+    <div id="tab-courses" class="clearfix search-content">
+        @foreach (var item in Model)
+            {
+            <div class="search-results-rows clearfix">
+                <div class="search-result">
+                    <div class="search-result__info">
+                        <div class="search-result__title"><a href="@Url.Action("Detalhe", new { id = item.Id })">@Html.DisplayFor(modelItem => item.Nome)</a></div>
+                        <div class="search-result__details clearfix">
+                            <div class="search-result__author"><text>Por </text>@Html.DisplayFor(modelItem => item.NomeAutor)</div>
+                            <div class="search-result__level">Beginner</div>
+                            <div class="search-result__date">@item.DataCriacao.ToString("dd/MM/yyyy")</div>
+                            <div class="search-result__duration show-for-medium-up">5h 26m</div>
+                            <div class="search-result__rating show-for-large-up">
+                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                                <span>(525)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</div>

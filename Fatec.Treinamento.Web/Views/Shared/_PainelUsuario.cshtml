@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario>
+
+@{
+    ViewBag.Title = "Painel do Usuário";
+}
+
+<div class="painel-title">
+    <div class="painel-saudacao">
+        <h2>Seja bem vindo ao seu painel, @this.User.Identity.Name!</h2>
+    </div>
+    <div class="painel-pontos">
+        <div class="painel-pontos-abv-text">
+            <h5>Você tem:</h5>
+        </div>
+        <div class="painel-pontos-inner">
+            <h5>1</h5>
+        </div>
+        <div class="painel-pontos-blw-text">
+            <h5>Pontos</h5>
+        </div>        
+    </div>    
+</div>
+<div class="painel-body">
+    <div class="vSpacer"></div>
+    <div class="painel-main">
+        <div class="item-container">
+            <div class="item-title">
+                <h3>Cursos em andamento <span class="glyphicon glyphicon-hourglass"></span></h3>
+                <div class="bar"></div>
+            </div>
+            <div class="item-content">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xs-6 col-md-3">
+                                <a href="@Url.Action("Index", new { id = item.Id })" class="thumbnail">@Html.DisplayFor(modelItem => item.Nome)</a>
+                        </div>
+                    }                  
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item-title">
+                <h3>Cursos completados <span class="glyphicon glyphicon-ok"></span></h3>
+                <div class="bar"></div>
+            </div>
+            <div class="item-content">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xs-6 col-md-3">
+                            <a href="@Url.Action("Index", new { id = item.Id })" class="thumbnail">@Html.DisplayFor(modelItem => item.Nome)</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item-title">
+                <h3>Você tem interesse nos seguintes cursos <span class="glyphicon glyphicon-star"></span></h3>
+                <div class="bar"></div>
+            </div>
+            <div class="item-content">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xs-6 col-md-3">
+                            <a href="@Url.Action("Index", new { id = item.Id })" class="thumbnail">@Html.DisplayFor(modelItem => item.Nome)</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

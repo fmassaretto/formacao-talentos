@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Painel do Administrador";
+}
+
+<div class="painel-title">
+    <div class="painel-saudacao">
+        <h2>Seja bem vindo ao seu painel, @this.User.Identity.Name!</h2>
+    </div>
+</div>
+<div class="painel-body">
+    <div class="vSpacer"></div>
+    <div class="painel-main">
+        <div class="gerenciar-container">
+
+        <aside class="menu-gerenciar-side">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Usuários</a></li>
+                <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Curso</a></li>
+                <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Assuntos</a></li>
+                <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Trilhas</a></li>
+                <li role="presentation"><a href="@Url.Action("Index"@*, new { id = item.Id }*@)">Gerenciar Videos</a></li>
+            </ul>            
+        </aside>
+            <section class="gerenciar-content">
+                <div>
+                    <h3>asdasdasdasfdasfasfasfasfasfasf</h3>
+                </div>    
+            </section>
+        </div>
+
+    </div>
+
+</div>
+
+
+
