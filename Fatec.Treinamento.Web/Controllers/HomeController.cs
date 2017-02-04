@@ -20,5 +20,10 @@ namespace Fatec.Treinamento.Web.Controllers
                 return PartialView("~/Views/Shared/ItensMenuAssuntos.cshtml", model);
             }
         }
+
+        public ActionResult Carousel()
+        {
+            return PartialView("~/Views/Shared/_Carousel.cshtml");
+        }
     }
 }
