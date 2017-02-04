@@ -3,13 +3,15 @@
 }
 
 <div id="banner-inicio" class="jumbotron full-width-div">
-    <div class="container">
-        <h1>Domine sua carreira</h1>
-        <p class="lead">
-            Bem vindo ao <b>AOXO</b>. A plataforma de tecnologia de aprendizado on-demand para você se manter capacitado
-            e garantir a progressão da sua carreira.
-        </p>
-    </div>
+    @*<div class="container">*@
+        <div class="carouse-div">
+            @Html.Partial("_Carousel")
+            @*<h1>Domine sua carreira</h1>
+            <p class="lead">
+                Bem vindo ao <b>AOXO</b>. A plataforma de tecnologia de aprendizado on-demand para você se manter capacitado
+                e garantir a progressão da sua carreira.
+            </p>*@
+        </div>
 </div>
 
 <div id="detalhes-inicio" class="row">
