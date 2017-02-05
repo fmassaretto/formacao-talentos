@@ -4,10 +4,12 @@
 }
 <div class="container-fluid">
     <div id="div-action-title" class="full-width-div">
-        <h2>Todos os Cursos</h2>
+        <h2>Todos os Cursos (@Model.Count() Cursos)</h2>
     </div>
 
-    <div class="main-content">
+    @Html.Partial("_ListagemCursos")
+
+    @*<div class="main-content">
         
         <div id="tab-courses" class="clearfix search-content">
             @foreach (var item in Model)
@@ -32,4 +34,4 @@
             }
         </div>
     </div>
-</div>
+</div>*@

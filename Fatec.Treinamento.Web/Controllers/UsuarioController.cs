@@ -132,7 +132,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 {
                     return Redirect(returnUrl);
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Painel");
 
             }
             else

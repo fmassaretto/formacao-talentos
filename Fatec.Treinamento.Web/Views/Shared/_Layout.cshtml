@@ -85,15 +85,15 @@
                             <ul class="dropdown-menu">
                                 @if (this.User.IsInRole("Administrador"))
                                 {
-                                    <li>@Html.ActionLink("Meu Painel(Admin)", "Admin", "Painel", null, new { style = "text-decoration: line-through" })</li>
+                                    <li>@Html.ActionLink("Meu Painel(Admin)", "Index", "Painel", null, new { style = "text-decoration: line-through" })</li>
                                 }
                                 else if (this.User.IsInRole("Instrutor"))
                                 {
-                                    <li>@Html.ActionLink("Meu Painel(Instrutor)", "Instrutor", "Painel", null, new { style = "text-decoration: line-through" })</li>/**/
+                                    <li>@Html.ActionLink("Meu Painel(Instrutor)", "Index", "Painel", null, new { style = "text-decoration: line-through" })</li>/**/
                                 }
                                 else if (this.User.IsInRole("Usuario"))
                                 {
-                                    <li>@Html.ActionLink("Meu Painel(Usuario)", "Usuario", "Painel", null, new { style = "text-decoration: line-through" })</li>
+                                    <li>@Html.ActionLink("Meu Painel(Usuario)", "Index", "Painel", null, new { style = "text-decoration: line-through" })</li>
                                 }
                                 <li>@Html.ActionLink("Meus Treinamentos", "Index", "Treinamento", null, new { style = "text-decoration: line-through" })</li>
                                 <li>@Html.ActionLink("Meus Pontos", "MeusPontos", "Usuario", null, new { style = "text-decoration: line-through" })</li>

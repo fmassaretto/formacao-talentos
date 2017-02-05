@@ -247,9 +247,6 @@ th {
   }
   .navbar {
     display: none;
-    border: 1px solid;
-    border-bottom-color:#fff;
-    border-bottom-width: 2px;
   }
   .btn > .caret,
   .dropup > .btn > .caret {
@@ -1599,8 +1596,6 @@ pre code {
     width: 750px;
   }
 }
-
-
 @media (min-width: 992px) {
   .container {
     width: 970px;

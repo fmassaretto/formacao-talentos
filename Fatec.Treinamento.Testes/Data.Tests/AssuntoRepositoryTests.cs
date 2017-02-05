@@ -30,7 +30,7 @@ namespace Fatec.Treinamento.Testes.Data.Tests
                     Nome = "Demo teste 1"
                 };
 
-                int id = repo.Inserir(assunto).Id ;
+                int id = repo.Inserir(assunto).IdCurso ;
 
                 Assert.IsTrue(id > 0);
                 return id;
