@@ -147,14 +147,15 @@ namespace Fatec.Treinamento.Data.Repositories
 		public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario acu)
 		{
             var id = Connection.ExecuteScalar<int>(
-               @"INSERT INTO Curso (Nome, IdAutor, IdAssunto, Classificacao, DataCriacao) 
-                 VALUES (@Nome, @IdAutor, @IdAssunto, null, GETDATE()); 
+               @"INSERT INTO Curso (Nome, IdAutor, IdAssunto, Classificacao, DataCriacao, Nivel) 
+                 VALUES (@Nome, @IdAutor, @IdAssunto, null, GETDATE(), @Nivel); 
                SELECT SCOPE_IDENTITY()",
                param: new
                {
                    Nome = acu.Nome,
                    IdAutor = acu.UsuarioSelecionado,
-                   IdAssunto = acu.AssuntoSelecionado
+                   IdAssunto = acu.AssuntoSelecionado,
+                   Nivel = acu.Nivel
                }
            );
 
