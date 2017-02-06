@@ -36,7 +36,7 @@ namespace Fatec.Treinamento.Model.DTO
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
-        public List<Usuario> ListaUsuarios { get; set; }
+        public IList<Usuario> ListaUsuarios { get; set; }
 
         public int UsuarioSelecionado { get; set; }
     }
