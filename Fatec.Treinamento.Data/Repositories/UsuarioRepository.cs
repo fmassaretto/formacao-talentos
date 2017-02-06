@@ -159,5 +159,10 @@ namespace Fatec.Treinamento.Data.Repositories
                }
            ).FirstOrDefault();
         }
+
+        IEnumerable<Usuario> ICrudRepository<Usuario>.Listar()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

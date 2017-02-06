@@ -77,7 +77,7 @@ namespace Fatec.Treinamento.Web.Controllers
         public ActionResult Detalhe(int? id)
         {
             //int id = (int)Url.RequestContext.RouteData.Values["Id"];
-            IEnumerable<Detalhe> listaDetalhe = new List<Detalhe>();
+            IEnumerable<AssuntoCursoUsuario> listaDetalhe = new List<AssuntoCursoUsuario>();
 
             using (CursoRepository repoDetalhe = new CursoRepository())
             {

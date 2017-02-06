@@ -74,7 +74,7 @@ namespace Fatec.Treinamento.Data.Repositories
 			   {
 				   acu.Nome,
 				   acu.Classificacao,
-				   acu.UsuarioSelecionado,
+				   acu.IdAutor,
 				   acu.IdCurso,
 				   acu.NomeAssunto,
 				   acu.IdAssunto,
@@ -143,11 +143,36 @@ namespace Fatec.Treinamento.Data.Repositories
 				 ORDER BY c.Nome"
 			).ToList();
 		}
-
-		public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario entidade)
+        
+		public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario acu)
 		{
-			throw new NotImplementedException();
-		}
+            var id = Connection.ExecuteScalar<int>(
+               @"INSERT INTO Curso (Nome, IdAutor, IdAssunto, Classificacao, DataCriacao) 
+                 VALUES (@Nome, @IdAutor, @IdAssunto, null, GETDATE()); 
+               SELECT SCOPE_IDENTITY()",
+               param: new
+               {
+                   Nome = acu.Nome,
+                   IdAutor = acu.UsuarioSelecionado,
+                   IdAssunto = acu.AssuntoSelecionado
+               }
+           );
+
+            acu.IdCurso = id;
+
+            Connection.Execute(
+               @"INSERT INTO Curso_Descricao (Descricao, IdCurso) 
+                 VALUES (@Descricao, @IdCurso); 
+               SELECT SCOPE_IDENTITY()",
+               param: new
+               {
+                   Descricao = acu.Descricao,
+                   IdCurso = id
+               }
+           );
+
+            return acu;
+        }
 
 		public IEnumerable<AssuntoCursoUsuario> Listar()
 		{

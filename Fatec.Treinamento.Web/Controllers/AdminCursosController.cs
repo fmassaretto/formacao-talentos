@@ -1,5 +1,6 @@
 ﻿using Fatec.Treinamento.Data.Repositories;
 using Fatec.Treinamento.Model.DTO;
+using Fatec.Treinamento.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,55 @@ namespace Fatec.Treinamento.Web.Controllers
         [HttpGet]
         public ActionResult Criar()
         {
-            return View();
+            var model = new CursoAssuntoUsuarioViewModel();
+
+            using (var repo = new UsuarioRepository())
+            {
+                var lista = repo.Listar();
+                foreach (var user in lista)
+                {
+                    var item = new SelectListItem
+                    {
+                        Text = user.Nome,
+                        Value = user.Id.ToString()
+                    };
+                    model.ListaUsuarios.Add(item);
+                }
+            }
+
+            using (var repo = new AssuntoRepository())
+            {
+                var lista = repo.Listar();
+                foreach (var assunto in lista)
+                {
+                    var item = new SelectListItem
+                    {
+                        Text = assunto.NomeAssunto,
+                        Value = assunto.IdAssunto.ToString()
+                    };
+                    model.ListaAssuntos.Add(item);
+                }
+            }
+
+
+            return View(model);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult Criar(CursoAssuntoUsuarioViewModel acu)
+        {
+            using (var repo = new CursoRepository())
+            {
+                var inserido = repo.Inserir(acu.Curso);
+
+                if (inserido.IdCurso == 0)
+                {
+                    ModelState.AddModelError("", "Erro");
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -59,28 +108,11 @@ namespace Fatec.Treinamento.Web.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult ListarUsuarios(int id)
-        {
-            var model = new AssuntoCursoUsuario();
-
-            using (var repo = new CursoRepository())
-            {
-                var curso = repo.Obter(id);
-            }
-
+        //[HttpGet]
+        //public ActionResult ListarUsuariosAssuntos()
+        //{
             
-
-            using (var repo = new UsuarioRepository())
-            {
-                model.ListaUsuarios = repo.Listar();
-
-
-                
-            }
-
-            return View(model);
-        }
+        //}
 
     }
 }

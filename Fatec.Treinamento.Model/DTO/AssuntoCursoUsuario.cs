@@ -18,6 +18,9 @@ namespace Fatec.Treinamento.Model.DTO
 
         public Usuario usuario { get; set; }
 
+        public int UsuarioSelecionado { get; set; }
+        public int AssuntoSelecionado { get; set; }
+
         [DisplayName("Curso")]
         public string Nome { get; set; }
 
@@ -36,8 +39,5 @@ namespace Fatec.Treinamento.Model.DTO
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
-        public IList<Usuario> ListaUsuarios { get; set; }
-
-        public int UsuarioSelecionado { get; set; }
     }
 }
