@@ -83,7 +83,7 @@ namespace Fatec.Treinamento.Data.Repositories
         public IEnumerable<AssuntoCursoUsuario> ListarCursosPorAssuntos(int? id)
         {
             return Connection.Query<AssuntoCursoUsuario>(
-                @"SELECT c.Id, 
+                @"SELECT c.Id AS IdCurso, 
                     c.Nome,
                     a.Id AS IdAssunto,
                     u.Id AS IdAutor, 
@@ -101,7 +101,7 @@ namespace Fatec.Treinamento.Data.Repositories
         public IEnumerable<CursosPorAssunto> ListarTotalCursosPorAssunto()
         {
             return Connection.Query<CursosPorAssunto>(
-              @"Select a.Id, 
+              @"Select a.Id AS IdCurso, 
                 a.Nome AS NomeAssunto, 
                 Count(c.Id) as TotalCursos
                 FROM Assunto a INNER JOIN curso c on a.Id = c.IdAssunto

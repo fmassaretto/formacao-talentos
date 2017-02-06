@@ -5,6 +5,6 @@
 <li class="dropdown-header">ASSUNTOS</li>
 @foreach (var item in Model)
 {
-    <li>@Html.ActionLink(item.NomeAssunto + " (" + item.TotalCursos + ")", "Assunto", "Curso", new { Id = item.Id }, null) </li>
+    <li>@Html.ActionLink(item.NomeAssunto + " (" + item.TotalCursos + ")", "Assunto", "Curso", new { Id = item.IdCurso }, null) </li>
 }
 
