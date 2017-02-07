@@ -39,5 +39,39 @@ namespace Fatec.Treinamento.Model.DTO
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
+        public string Nivel { get; set; }
+
+        public IList<Capitulo> Pontos { get; set; }
+
+        public int TotalPontos {
+            get
+            {
+                int somaPontos = 0;
+                somaPontos = Pontos.Sum(ponto => ponto.Pontos);
+                return somaPontos;
+            }
+        }
+
+        public IList<Capitulo> Capitulos { get; set; }
+
+        public int TotalCapitulos
+        {
+            get
+            {
+                int somaCap = 0;
+                if (Capitulos != null)
+                {
+                    somaCap = Capitulos.Sum(x => x.QtdeCapitulos);
+                }
+                return somaCap;
+            }
+        }
+
+        public AssuntoCursoUsuario()
+        {
+            Capitulos = new List<Capitulo>();
+            Pontos = new List<Capitulo>();
+        }
+
     }
 }
