@@ -1,21 +1,21 @@
-﻿@model IEnumerable <Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario>
+﻿@model Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario
 @*@model IEnumerable<Fatec.Treinamento.Model.Detalhe>*@
 
 @{
     ViewBag.Title = "Detalhe";
 }
 
-@foreach (var item in Model)
-{
+@*@foreach (var item in Model)
+{*@
     <div class="container-fluid">
         <div id="div-detalhe" class="full-width-div img-div">
             <div class="container">
             
-                    <h1>@item.Nome</h1>
+                    <h1>@Model.Nome</h1>
             
             
                 <p class="lead">
-                    Por: @item.NomeAutor
+                    Por: @Model.NomeAutor
                 </p>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="col-md-8">
                     <div class="detalhe-descricao">
                         <h3>Descrição do Curso</h3>
-                        <p>@item.Descricao</p>
+                        <p>@Model.Descricao</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -38,8 +38,9 @@
                             {
                                 <button type="button" data-toggle="modal" data-target="#openModal" id="btn-comecar" class="list-group-item">COMEÇAR CURSO</button>/**/
                             }
-                            <text class="list-group-item">Numero de capítulos: <span class="badge">X</span></text>
-                            <text class="list-group-item">Pontos adquiridos nesse curso: <span class="badge">X</span></text>
+                            <text class="list-group-item">Numero de capítulos: <span class="badge">@Model.Capitulos.Count</span></text>
+                            <text class="list-group-item">Pontos adquiridos nesse curso: <span class="badge">@Model.TotalPontos</span></text>
+                            <text class="list-group-item">Tempo total do curso: <span class="badge">@Model.Capitulos</span></text>
                             <div class="spacer"></div>
                             @Html.ActionLink("Voltar aos Cursos", "Index", "CursoController", new { @class = "list-group-item"})
                             @*<text class="list-group-item"><span class="glyphicon glyphicon-triangle-left"></span> Voltar aos Cursos</text>*@
@@ -49,7 +50,7 @@
             </div>
         </main>   
     </div>
-}
+@*}*@
 <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

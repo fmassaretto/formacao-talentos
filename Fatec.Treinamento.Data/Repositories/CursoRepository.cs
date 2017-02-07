@@ -105,7 +105,7 @@ namespace Fatec.Treinamento.Data.Repositories
 			).ToList();
 		}
 
-		public IEnumerable<AssuntoCursoUsuario> DetalheCurso(int? id)
+		public AssuntoCursoUsuario DetalheCurso(int? id)
 		{
 			var curso = Connection.Query<AssuntoCursoUsuario>(
 			  @"SELECT
@@ -128,15 +128,28 @@ namespace Fatec.Treinamento.Data.Repositories
 
             if (curso == null)
             {
-                yield return curso;
+                return curso;
             }
 
             var capitulos = Connection.Query<Capitulo>(
                     @"SELECT Id, Nome, Pontos 
-                    FROM Capitulo WHERE IdCurso = @ IdCurso",
+                    FROM Capitulo WHERE IdCurso = @IdCurso",
                     new {IdCurso = id}
             ).ToList();
 
+            foreach (var capitulo in capitulos)
+            {
+                var videos = Connection.Query(
+                    @"SELECT Id, Nome, Duracao, CodigoVideo
+                    FROM Video WHERE IdCapitulo = @IdCapitulo",
+                    new { IdCapitulo = capitulo.Id}   
+                ).ToList();
+            }
+
+            curso.Pontos = capitulos;
+            curso.Capitulos = capitulos;
+
+            return curso;
 		}
 
 		public IEnumerable<DetalhesCurso> ListarCursosDetalhes()

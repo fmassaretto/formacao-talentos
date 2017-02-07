@@ -54,19 +54,6 @@ namespace Fatec.Treinamento.Model.DTO
 
         public IList<Capitulo> Capitulos { get; set; }
 
-        public int TotalCapitulos
-        {
-            get
-            {
-                int somaCap = 0;
-                if (Capitulos != null)
-                {
-                    somaCap = Capitulos.Sum(x => x.QtdeCapitulos);
-                }
-                return somaCap;
-            }
-        }
-
         public AssuntoCursoUsuario()
         {
             Capitulos = new List<Capitulo>();

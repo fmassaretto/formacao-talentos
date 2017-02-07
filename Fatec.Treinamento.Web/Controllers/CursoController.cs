@@ -77,14 +77,14 @@ namespace Fatec.Treinamento.Web.Controllers
         public ActionResult Detalhe(int? id)
         {
             //int id = (int)Url.RequestContext.RouteData.Values["Id"];
-            IEnumerable<AssuntoCursoUsuario> listaDetalhe = new List<AssuntoCursoUsuario>();
+            AssuntoCursoUsuario listaDetalhe = new AssuntoCursoUsuario();
 
             using (CursoRepository repoDetalhe = new CursoRepository())
             {
                 listaDetalhe = repoDetalhe.DetalheCurso(id);
             }
 
-            if (listaDetalhe.Count() == 0)
+            if (listaDetalhe.IdCurso == 0)
             {
                 return RedirectToAction("Index", "Curso");
             }
