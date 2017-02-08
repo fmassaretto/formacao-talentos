@@ -430,6 +430,10 @@ body {
     display:block;
 }
 
+.assistir-curso-titulo{
+    color: #c8cbad;
+}
+
 .curso-side-title{
     width:100%;
     height:40px;
@@ -453,11 +457,48 @@ body {
     padding-bottom:5px;
 }
 
-.nome-video{
-    text-align:justify;
+
+.capitulos-player .video a{
+    color: #c8cbad;
+    text-decoration:none; !important;
+}
+
+.capitulos-player .video a:hover{
+    color: #fff;
+    text-decoration:none; !important;
 }
 
 
+
+.video-hide{
+    display:none;
+}
+
+.video-show{
+    
+}
+
+.video-link {
+    display:inline-block;
+}
+
+
+.video .selecionado{
+    color: #ff2f00;
+    border-left: 2px solid #ff2f00;
+}
+
+.video .selecionado a{
+    color: #ff2f00; !important;
+}
+
+.video .selecionado a:hover{
+    color: #ff2f00; !important;
+}
+
+.capitulos-player .video:hover{
+    background-color: #2f3238;
+}
 
 .modal-content{
     text-align:center;
