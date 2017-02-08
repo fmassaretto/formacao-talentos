@@ -139,13 +139,16 @@ namespace Fatec.Treinamento.Data.Repositories
 
             foreach (var capitulo in capitulos)
             {
-                var videos = Connection.Query(
+                var videos = Connection.Query<Video>(
                     @"SELECT Id, Nome, Duracao, CodigoVideo
                     FROM Video WHERE IdCapitulo = @IdCapitulo",
                     new { IdCapitulo = capitulo.Id}   
                 ).ToList();
+
+                capitulo.Videos = videos;
             }
 
+            curso.TotalDuracaoCurso = capitulos;
             curso.Pontos = capitulos;
             curso.Capitulos = capitulos;
 

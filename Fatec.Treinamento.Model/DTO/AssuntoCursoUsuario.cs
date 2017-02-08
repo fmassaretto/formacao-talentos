@@ -41,6 +41,10 @@ namespace Fatec.Treinamento.Model.DTO
 
         public string Nivel { get; set; }
 
+        public IList<Capitulo> Capitulos { get; set; }
+
+        public IList<Capitulo> TotalDuracaoCurso { get; set; }
+
         public IList<Capitulo> Pontos { get; set; }
 
         public int TotalPontos {
@@ -52,12 +56,12 @@ namespace Fatec.Treinamento.Model.DTO
             }
         }
 
-        public IList<Capitulo> Capitulos { get; set; }
 
         public AssuntoCursoUsuario()
         {
             Capitulos = new List<Capitulo>();
             Pontos = new List<Capitulo>();
+            TotalDuracaoCurso = new List<Capitulo>();
         }
 
     }

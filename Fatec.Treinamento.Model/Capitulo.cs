@@ -15,8 +15,6 @@ namespace Fatec.Treinamento.Model
 
         public int Pontos { get; set; }
 
-        public int QtdeCapitulos { get; set; }
-
         public IEnumerable<Video> Videos { get; set; }
 
         public string TempoTotal {
@@ -32,5 +30,6 @@ namespace Fatec.Treinamento.Model
                 return time.ToString(@"hh\:mm\:ss");
             }
         }
+
     }
 }

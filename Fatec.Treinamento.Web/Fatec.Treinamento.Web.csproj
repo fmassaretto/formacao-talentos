@@ -272,6 +272,7 @@
     <Content Include="Views\AdminCursos\Editar.cshtml" />
     <Content Include="Views\AdminCursos\Deletar.cshtml" />
     <Content Include="Views\AdminCursos\Criar.cshtml" />
+    <Content Include="Views\Curso\Assistir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

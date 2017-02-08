@@ -81,13 +81,22 @@ namespace Fatec.Treinamento.Web.Controllers
 
             using (CursoRepository repoDetalhe = new CursoRepository())
             {
+                try
+                {
                 listaDetalhe = repoDetalhe.DetalheCurso(id);
+
+                }
+                catch (Exception)
+                {
+
+                    return RedirectToAction("Index", "Curso");
+                    throw;
+                }
             }
 
-            if (listaDetalhe.IdCurso == 0)
-            {
-                return RedirectToAction("Index", "Curso");
-            }
+            //if (listaDetalhe.IdCurso == null)
+            //{
+            //}
             return View(listaDetalhe);
         }
 
@@ -122,5 +131,54 @@ namespace Fatec.Treinamento.Web.Controllers
             }
             return View(listaCursoAssunto);
         }
+
+
+
+        [HttpGet]
+        public ActionResult Assistir(int idCurso)
+        {
+            using (CursoRepository repo = new CursoRepository())
+            {
+                var curso = repo.DetalheCurso(idCurso);
+
+                ViewBag.ShowHideVideo = "video-hide";
+
+                return View(curso);
+            }
+        }
+
+
+
+        [HttpGet]
+        [Route("Curso/{IdCurso}/Assistir/Capitulo/{IdCapitulo}/Video/{IdVideo}", Name = "RotaAssistirVideo")]
+        public ActionResult Assistir(int idCurso, int idCapitulo, int idVideo)
+        {
+            using (CursoRepository repo = new CursoRepository())
+            {
+                var curso = repo.DetalheCurso(idCurso);
+
+                ViewBag.IdCapitulo = idCapitulo;
+                ViewBag.IdVideo = idVideo;
+
+                var capitulo = curso.Capitulos.FirstOrDefault(cap => cap.Id == idCapitulo);
+
+                if (capitulo != null)
+                {
+                    var video = capitulo.Videos.FirstOrDefault(vid => vid.Id == idVideo);
+
+                    if (video != null)
+                    {
+                        ViewBag.CodigoVideo = video.CodigoVideo;
+                    }
+                }
+
+                ViewBag.ShowHideVideo = "video-show";
+
+                return View(curso);
+            }
+        }
+
+
+
     }
 }

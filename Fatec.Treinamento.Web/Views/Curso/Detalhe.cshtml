@@ -22,17 +22,54 @@
         <main>
             <div class="rowDetalhe">
                 <div class="col-md-8">
-                    <div class="detalhe-descricao">
+                    @*<div class="detalhe-descricao">
                         <h3>Descrição do Curso</h3>
                         <p>@Model.Descricao</p>
+                    </div>*@
+                    <div class="panel panel-default" id="painel-info">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Descrição do Curso</div>
+                        <div class="panel-body">
+                            <div class="word-wrap">
+
+                                <p>@Model.Descricao</p>
+                            </div>
+                        </div>
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Capítulos do Curso</div>
+                        <div class="panel-body">                            
+                        <!-- List group -->
+                        <ul class="list-group">
+                            @foreach (var capitulo in Model.Capitulos)
+                            {
+                                <li class="list-group-item active">@capitulo.Nome</li>
+                                foreach (var video in capitulo.Videos)
+                                {
+                                    <li class="list-group-item">@video.Nome</li>
+                                }
+                            }
+                        </ul>
+                        </div>
                     </div>
-                </div>
+                        @*<div class="detalhe-capitulos">
+                            <h3>Capítulos do Curso</h3>
+                            <ul class="list-group active">
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>*@
+                    </div>
                 <div class="col-md-4">
                     <div id="menu-detalhe">
                         <div class="list-group" id="list-content">
                             @if (Request.IsAuthenticated)
                             {
-                                <button type="button" id="btn-comecar" class="list-group-item">COMEÇAR CURSO</button>/**/
+                                @*<button type="button" id="btn-comecar" class="list-group-item">COMEÇAR CURSO</button>*@
+                                @*<a href="@Url.Action("Assistir", new RouteValueDictionary() { { "IdCurso", Model.IdCurso } })" class="btn btn-primary">COMEÇAR CURSO</a>*@
+                                <a href="@Url.Action("Assistir", new { IdCurso = Model.IdCurso } )" class="btn btn-primary">COMEÇAR CURSO</a>
                             }
                             else
                             {
@@ -40,7 +77,7 @@
                             }
                             <text class="list-group-item">Numero de capítulos: <span class="badge">@Model.Capitulos.Count</span></text>
                             <text class="list-group-item">Pontos adquiridos nesse curso: <span class="badge">@Model.TotalPontos</span></text>
-                            <text class="list-group-item">Tempo total do curso: <span class="badge">@Model.Capitulos</span></text>
+                            <text class="list-group-item">Tempo total do curso: <span class="badge"></span></text>
                             <div class="spacer"></div>
                             @Html.ActionLink("Voltar aos Cursos", "Index", "CursoController", new { @class = "list-group-item"})
                             @*<text class="list-group-item"><span class="glyphicon glyphicon-triangle-left"></span> Voltar aos Cursos</text>*@
@@ -56,12 +93,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">Você precisa entrar para ver ese curso</h4>
+                <h4 class="modal-title" id="gridSystemModalLabel">Você precisa entrar para ver esse curso</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <p>Se você já é cadastrado, é só clicar no botão ENTRAR.</p>
-                    <p> Se ainda não é registrado é só clicar no botão Registrar.</p>
+                    <p> Se ainda não é registrado é só clicar no botão REGISTRAR.</p>
                 </div>
             </div>
             <div class="modal-footer">
