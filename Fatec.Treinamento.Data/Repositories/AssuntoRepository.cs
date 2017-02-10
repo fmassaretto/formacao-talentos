@@ -89,7 +89,9 @@ namespace Fatec.Treinamento.Data.Repositories
                     u.Id AS IdAutor, 
                     u.Nome AS NomeAutor,
                     a.Nome AS NomeAssunto, 
-                    c.DataCriacao FROM Curso c
+                    c.DataCriacao, 
+                    c.Classificacao
+                    FROM Curso c
 	                INNER JOIN Usuario u ON c.IdAutor = u.Id
 	                INNER JOIN Assunto a ON c.IdAssunto = a.Id
 	                WHERE a.Id = @Id

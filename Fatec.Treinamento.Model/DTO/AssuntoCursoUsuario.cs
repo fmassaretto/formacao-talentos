@@ -43,9 +43,27 @@ namespace Fatec.Treinamento.Model.DTO
 
         public IList<Capitulo> Capitulos { get; set; }
 
-        public IList<Capitulo> TotalDuracaoCurso { get; set; }
-
         public IList<Capitulo> Pontos { get; set; }
+
+        public IList<int> QtdUsuariosVotosCurso { get; set; }
+
+        public int TotalDuracaoCurso { get; set; }
+
+        public string TotalDuracaoCursoFormatado
+        {
+            get
+            {
+                //int somaTotalDuracao = 0;
+
+                //foreach (var item in TotalDuracaoCurso)
+                //{
+                //    somaTotalDuracao += item;
+                //}
+                TimeSpan time = TimeSpan.FromSeconds(TotalDuracaoCurso);
+                return time.ToString(@"hh\:mm\:ss");
+            }
+        }
+
 
         public int TotalPontos {
             get
@@ -61,7 +79,8 @@ namespace Fatec.Treinamento.Model.DTO
         {
             Capitulos = new List<Capitulo>();
             Pontos = new List<Capitulo>();
-            TotalDuracaoCurso = new List<Capitulo>();
+            QtdUsuariosVotosCurso = new List<int>();
+            //TotalDuracaoCurso = new List<int>();
         }
 
     }

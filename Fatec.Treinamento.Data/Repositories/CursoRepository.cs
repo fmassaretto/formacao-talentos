@@ -16,7 +16,7 @@ namespace Fatec.Treinamento.Data.Repositories
 		public IEnumerable<AssuntoCursoUsuario> ListarCursosPorNome(string nome)
 		{
 			return Connection.Query<AssuntoCursoUsuario>(
-			  @"SELECT
+              @"SELECT
 					c.Id,
 					c.Nome,
 					a.Id AS IdAssunto,
@@ -24,7 +24,8 @@ namespace Fatec.Treinamento.Data.Repositories
 					a.Nome as NomeAssunto,
 					u.Nome as NomeAutor,
 					c.DataCriacao,
-					c.Classificacao
+					c.Classificacao,
+                    c.Nivel
 				 FROM curso c
 				 inner join assunto a on c.IdAssunto = a.id
 				 inner join usuario u on c.IdAutor = u.Id
@@ -37,13 +38,14 @@ namespace Fatec.Treinamento.Data.Repositories
 		public AssuntoCursoUsuario Obter(int id)
 		{
 			return Connection.Query<AssuntoCursoUsuario>(
-			   @"SELECT c.Nome,
-			   c.Classificacao,
-			   a.Id AS IdAssunto,
-			   u.Id AS IdAutor, 
-			   u.Nome AS NomeAutor,
-			   a.Nome AS NomeAssunto,
-			   cd.Descricao
+               @"SELECT c.Nome,
+			       c.Classificacao,
+			       a.Id AS IdAssunto,
+			       u.Id AS IdAutor, 
+			       u.Nome AS NomeAutor,
+			       a.Nome AS NomeAssunto,
+			       cd.Descricao,
+                   c.Nivel
 			   FROM Curso c
 			   INNER JOIN Usuario u ON c.IdAutor = u.Id
 			   INNER JOIN Assunto a ON c.IdAssunto = a.Id
@@ -58,7 +60,7 @@ namespace Fatec.Treinamento.Data.Repositories
 			Connection.Execute(
 			   @"BEGIN TRANSACTION;
 
-				UPDATE Curso SET Curso.Nome = @Nome, Curso.IdAutor = @IdAutor, Curso.Classificacao = @Classificacao
+				UPDATE Curso SET Curso.Nome = @Nome, Curso.IdAutor = @IdAutor
 					WHERE Curso.Id = @IdCurso;
 
 				UPDATE Assunto SET Nome = @NomeAssunto
@@ -73,7 +75,6 @@ namespace Fatec.Treinamento.Data.Repositories
 			   param: new
 			   {
 				   acu.Nome,
-				   acu.Classificacao,
 				   acu.IdAutor,
 				   acu.IdCurso,
 				   acu.NomeAssunto,
@@ -89,7 +90,7 @@ namespace Fatec.Treinamento.Data.Repositories
 		public IEnumerable<AssuntoCursoUsuario> ListarTodosCursos()
 		{
 			return Connection.Query<AssuntoCursoUsuario>(
-			  @"SELECT
+              @"SELECT
 					c.Id AS IdCurso,
 					c.Nome,
 					a.Id AS IdAssunto,
@@ -97,18 +98,19 @@ namespace Fatec.Treinamento.Data.Repositories
 					u.Id AS IdAutor,
 					u.Nome AS NomeAutor,
 					c.DataCriacao,
-					c.Classificacao
+					c.Classificacao,
+                    c.Nivel
 				 FROM curso c
 				 inner join assunto a on c.IdAssunto = a.id
 				 inner join usuario u on c.IdAutor = u.Id
 				 ORDER BY c.Nome"
-			).ToList();
+            ).ToList();
 		}
 
 		public AssuntoCursoUsuario DetalheCurso(int? id)
 		{
 			var curso = Connection.Query<AssuntoCursoUsuario>(
-			  @"SELECT
+              @"SELECT
 					c.Id AS IdCurso,
 					c.Nome,
 					a.Id AS IdAssunto,
@@ -117,7 +119,8 @@ namespace Fatec.Treinamento.Data.Repositories
 					u.Nome as NomeAutor,
 					c.DataCriacao,
 					c.Classificacao,
-					cd.Descricao AS Descricao
+					cd.Descricao AS Descricao,
+                    c.Nivel
 				 FROM curso c
 				 inner join Assunto a on c.IdAssunto = a.id
 				 inner join Usuario u on c.IdAutor = u.Id
@@ -148,7 +151,6 @@ namespace Fatec.Treinamento.Data.Repositories
                 capitulo.Videos = videos;
             }
 
-            curso.TotalDuracaoCurso = capitulos;
             curso.Pontos = capitulos;
             curso.Capitulos = capitulos;
 
@@ -158,18 +160,19 @@ namespace Fatec.Treinamento.Data.Repositories
 		public IEnumerable<DetalhesCurso> ListarCursosDetalhes()
 		{
 			return Connection.Query<DetalhesCurso>(
-			  @"SELECT
+              @"SELECT
 					c.Id AS IdCurso,
 					c.Nome,
 					a.Nome as Assunto,
 					u.Nome as Autor,
 					c.DataCriacao,
-					c.Classificacao
+					c.Classificacao,
+                    c.Nivel
 				 FROM curso c
 				 inner join assunto a on c.IdAssunto = a.id
 				 inner join usuario u on c.IdAutor = u.Id
 				 ORDER BY c.Nome"
-			).ToList();
+            ).ToList();
 		}
         
 		public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario acu)
@@ -203,7 +206,63 @@ namespace Fatec.Treinamento.Data.Repositories
             return acu;
         }
 
-		public IEnumerable<AssuntoCursoUsuario> Listar()
+        public void AtualizaClassificacao(int id)
+        {
+            Connection.Execute(
+               @"UPDATE Curso 
+                    SET Classificacao = (SELECT (T.Nota/T.QtdUsuarios) AS Media 
+                                            FROM (SELECT COUNT(cc.IdUsuario) As QtdUsuarios, SUM(cc.Nota) AS Nota 
+                                            FROM Curso_Classificacao cc WHERE IdCurso = @IdCurso) T) 
+                                            WHERE Id = @IdCurso",
+               param: new
+               {
+                   IdCurso = id
+               }
+           );
+        }
+
+        public IList<int> ObterQtdVotos(int id)
+        {
+            return Connection.Query<int>(
+               @"Select COUNT(IdUsuario) AS QtdUsuario 
+                    FROM Curso_Classificacao 
+                    WHERE IdCurso = @IdCurso",
+               new { IdCurso = id }
+               ).ToList();
+        }
+
+        public int SomarDuracaoCurso(int id)
+        {
+            //var capitulo = Connection.Query<AssuntoCursoUsuario>(
+            //   @"Select Id 
+            //        FROM Capitulo 
+            //        WHERE IdCurso = @IdCurso",
+            //   new { IdCurso = id }
+            //   ).FirstOrDefault();
+
+            //if (capitulo == null)
+            //{
+
+            //    return (int)0;
+
+            //}
+            return Connection.ExecuteScalar<int>(
+                @"Select SUM(v.Duracao) AS QtdTotalCurso 
+                    FROM Video v 
+                    INNER JOIN Capitulo cap 
+                    ON cap.Id = v.IdCapitulo 
+                    WHERE cap.IdCurso = @IdCurso",
+                new { IdCurso = id }
+                );
+
+        
+
+            //duracaoTotal.TotalDuracaoCurso = duracaoTotal;
+            //capitulo.TotalDuracaoCurso = duracaoTotal;
+        }
+
+
+        public IEnumerable<AssuntoCursoUsuario> Listar()
 		{
 			throw new NotImplementedException();
 		}

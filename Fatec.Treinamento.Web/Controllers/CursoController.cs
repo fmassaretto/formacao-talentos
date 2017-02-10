@@ -1,6 +1,7 @@
 ﻿using Fatec.Treinamento.Data.Repositories;
 using Fatec.Treinamento.Model;
 using Fatec.Treinamento.Model.DTO;
+using Fatec.Treinamento.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,24 +16,38 @@ namespace Fatec.Treinamento.Web.Controllers
         [HttpPost]
         public ActionResult Pesquisar(string txtPesquisaCurso)
         {
-            IEnumerable<AssuntoCursoUsuario> lista = new List<AssuntoCursoUsuario>();
+            IEnumerable<AssuntoCursoUsuario> listaPesquisa = new List<AssuntoCursoUsuario>();
 
             using (CursoRepository repo = new CursoRepository())
             {
-                lista = repo.ListarCursosPorNome(txtPesquisaCurso);
+                listaPesquisa = repo.ListarCursosPorNome(txtPesquisaCurso);
+                foreach (var lista in listaPesquisa)
+                {
+                    //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
+                    lista.QtdUsuariosVotosCurso = repo.ObterQtdVotos(lista.IdCurso);
+                }
             }
-
-            return View(lista);
+            
+            return View(listaPesquisa);
         }
 
         public ActionResult Index()
         {
             IEnumerable<AssuntoCursoUsuario> listaTodos = new List<AssuntoCursoUsuario>();
+            //IEnumerable<Capitulo> capitulos = new List<Capitulo>();
 
             using (CursoRepository repoTodos = new CursoRepository())
             {
                 listaTodos = repoTodos.ListarTodosCursos();
+                foreach (var listaTodo in listaTodos)
+                {
+                    //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
+                    listaTodo.QtdUsuariosVotosCurso = repoTodos.ObterQtdVotos(listaTodo.IdCurso);
+                    listaTodo.TotalDuracaoCurso = repoTodos.SomarDuracaoCurso(listaTodo.IdCurso);
+                }
+
             }
+            
             return View(listaTodos);
         }
 
@@ -106,7 +121,16 @@ namespace Fatec.Treinamento.Web.Controllers
 
             using (AssuntoRepository repoCursoAssunto = new AssuntoRepository())
             {
-                listaCursoAssunto = repoCursoAssunto.ListarCursosPorAssuntos(id);
+                listaCursoAssunto = repoCursoAssunto.ListarCursosPorAssuntos(id);                
+            }
+
+            using (CursoRepository repoCurso = new CursoRepository())
+            {
+                foreach (var lista in listaCursoAssunto)
+                {
+                    //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
+                    lista.QtdUsuariosVotosCurso = repoCurso.ObterQtdVotos(lista.IdCurso);
+                }
             }
 
             if (listaCursoAssunto.Count() == 0)
