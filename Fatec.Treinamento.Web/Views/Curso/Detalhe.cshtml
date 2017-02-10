@@ -1,5 +1,6 @@
 ﻿@model Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario
 @*@model IEnumerable<Fatec.Treinamento.Model.Detalhe>*@
+@*@model IEnumerable<Fatec.Treinamento.Web.Models.CursoCapVideoViewModel>*@
 
 @{
     ViewBag.Title = "Detalhe";
@@ -77,7 +78,7 @@
                             }
                             <text class="list-group-item">Numero de capítulos: <span class="badge">@Model.Capitulos.Count</span></text>
                             <text class="list-group-item">Pontos adquiridos nesse curso: <span class="badge">@Model.TotalPontos</span></text>
-                            <text class="list-group-item">Tempo total do curso: <span class="badge"></span></text>
+                            <text class="list-group-item">Tempo total do curso: <span class="badge">@Html.DisplayFor(Model => Model.TotalDuracaoCursoFormatado)</span></text>
                             <div class="spacer"></div>
                             @Html.ActionLink("Voltar aos Cursos", "Index", "CursoController", new { @class = "list-group-item"})
                             @*<text class="list-group-item"><span class="glyphicon glyphicon-triangle-left"></span> Voltar aos Cursos</text>*@

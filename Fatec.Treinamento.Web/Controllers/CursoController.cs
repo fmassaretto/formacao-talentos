@@ -13,7 +13,7 @@ namespace Fatec.Treinamento.Web.Controllers
     public class CursoController : Controller
     {
         // GET: Curso
-        [HttpPost]
+        
         public ActionResult Pesquisar(string txtPesquisaCurso)
         {
             IEnumerable<AssuntoCursoUsuario> listaPesquisa = new List<AssuntoCursoUsuario>();
@@ -25,6 +25,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 {
                     //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
                     lista.QtdUsuariosVotosCurso = repo.ObterQtdVotos(lista.IdCurso);
+                    lista.TotalDuracaoCurso = repo.SomarDuracaoCurso(lista.IdCurso);
                 }
             }
             
@@ -53,7 +54,21 @@ namespace Fatec.Treinamento.Web.Controllers
 
         public ActionResult Populares()
         {
-            return View();
+            Console.WriteLine("Passou aqui1");
+            IEnumerable<AssuntoCursoUsuario> listaPop = new List<AssuntoCursoUsuario>();
+            using (CursoRepository repo = new CursoRepository())
+            {
+                listaPop = repo.ListarTodosCursos();
+                foreach (var lista in listaPop)
+                {
+                    lista.QtdUsuariosVotosCurso = repo.ObterQtdVotos(lista.IdCurso);
+                    lista.TotalDuracaoCurso = repo.SomarDuracaoCurso(lista.IdCurso);
+                    Console.WriteLine("Passou aqui2");
+                }
+
+                var model = repo.ListarPopulares();
+                return View(model);
+            }
         }
 
         public ActionResult obter(int id)
@@ -130,6 +145,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 {
                     //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
                     lista.QtdUsuariosVotosCurso = repoCurso.ObterQtdVotos(lista.IdCurso);
+                    lista.TotalDuracaoCurso = repoCurso.SomarDuracaoCurso(lista.IdCurso);
                 }
             }
 

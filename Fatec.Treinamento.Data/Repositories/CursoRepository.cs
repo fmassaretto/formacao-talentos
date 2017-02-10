@@ -17,7 +17,7 @@ namespace Fatec.Treinamento.Data.Repositories
 		{
 			return Connection.Query<AssuntoCursoUsuario>(
               @"SELECT
-					c.Id,
+					c.Id AS IdCurso,
 					c.Nome,
 					a.Id AS IdAssunto,
 					u.Id AS IdAutor,
@@ -33,7 +33,7 @@ namespace Fatec.Treinamento.Data.Repositories
 				 ORDER BY c.Nome",
 			  param: new { Nome = "%" + nome + "%" }
 			).ToList();
-		}
+        }
 
 		public AssuntoCursoUsuario Obter(int id)
 		{
@@ -157,26 +157,47 @@ namespace Fatec.Treinamento.Data.Repositories
             return curso;
 		}
 
-		public IEnumerable<DetalhesCurso> ListarCursosDetalhes()
-		{
-			return Connection.Query<DetalhesCurso>(
-              @"SELECT
-					c.Id AS IdCurso,
-					c.Nome,
-					a.Nome as Assunto,
-					u.Nome as Autor,
-					c.DataCriacao,
-					c.Classificacao,
+        public IEnumerable<DetalhesCurso> ListarCursosDetalhes()
+        {
+            return Connection.Query<DetalhesCurso>(
+                    @"SELECT
+        			c.Id AS IdCurso,
+        			c.Nome,
+        			a.Nome as Assunto,
+        			u.Nome as Autor,
+        			c.DataCriacao,
+        			c.Classificacao,
                     c.Nivel
-				 FROM curso c
-				 inner join assunto a on c.IdAssunto = a.id
-				 inner join usuario u on c.IdAutor = u.Id
-				 ORDER BY c.Nome"
-            ).ToList();
-		}
-        
-		public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario acu)
-		{
+        		 FROM curso c
+        		 inner join assunto a on c.IdAssunto = a.id
+        		 inner join usuario u on c.IdAutor = u.Id
+        		 ORDER BY c.Nome"
+                  ).ToList();
+        }
+
+        public IEnumerable<AssuntoCursoUsuario> ListarPopulares() {
+            return Connection.Query<AssuntoCursoUsuario>(
+                    @"SELECT
+					c.Id AS IdCurso,
+					    c.Nome,
+					    a.Id AS IdAssunto,
+					    a.Nome AS NomeAssunto,
+					    u.Id AS IdAutor,
+					    u.Nome AS NomeAutor,
+					    c.DataCriacao,
+                        cd.Descricao,
+					    c.Classificacao,
+                        c.Nivel
+				    FROM curso c
+				    INNER JOIN assunto a ON c.IdAssunto = a.id
+				    INNER JOIN usuario u ON c.IdAutor = u.Id
+                    INNER JOIN Curso_Descricao cd ON cd.IdCurso = c.Id
+                    ORDER BY Classificacao DESC"
+                  ).ToList();
+        }
+
+        public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario acu)
+        {
             var id = Connection.ExecuteScalar<int>(
                @"INSERT INTO Curso (Nome, IdAutor, IdAssunto, Classificacao, DataCriacao, Nivel) 
                  VALUES (@Nome, @IdAutor, @IdAssunto, null, GETDATE(), @Nivel); 
@@ -233,19 +254,6 @@ namespace Fatec.Treinamento.Data.Repositories
 
         public int SomarDuracaoCurso(int id)
         {
-            //var capitulo = Connection.Query<AssuntoCursoUsuario>(
-            //   @"Select Id 
-            //        FROM Capitulo 
-            //        WHERE IdCurso = @IdCurso",
-            //   new { IdCurso = id }
-            //   ).FirstOrDefault();
-
-            //if (capitulo == null)
-            //{
-
-            //    return (int)0;
-
-            //}
             return Connection.ExecuteScalar<int>(
                 @"Select SUM(v.Duracao) AS QtdTotalCurso 
                     FROM Video v 
@@ -254,11 +262,6 @@ namespace Fatec.Treinamento.Data.Repositories
                     WHERE cap.IdCurso = @IdCurso",
                 new { IdCurso = id }
                 );
-
-        
-
-            //duracaoTotal.TotalDuracaoCurso = duracaoTotal;
-            //capitulo.TotalDuracaoCurso = duracaoTotal;
         }
 
 
@@ -271,5 +274,7 @@ namespace Fatec.Treinamento.Data.Repositories
 		{
 			throw new NotImplementedException();
 		}
-	}
+
+        
+    }
 }
