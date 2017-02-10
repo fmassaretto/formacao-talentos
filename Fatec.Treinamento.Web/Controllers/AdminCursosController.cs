@@ -107,12 +107,5 @@ namespace Fatec.Treinamento.Web.Controllers
                 return RedirectToAction("Index");
             }
         }
-
-        //[HttpGet]
-        //public ActionResult ListarUsuariosAssuntos()
-        //{
-            
-        //}
-
     }
 }
