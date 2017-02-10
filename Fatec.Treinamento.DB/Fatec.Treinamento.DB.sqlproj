@@ -89,6 +89,7 @@
     <None Include="CargaInicial\Dados\Trilha_Curso.sql" />
     <None Include="CargaInicial\Dados\Usuario.sql" />
     <Build Include="Tables\Curso_Descricao.sql" />
+    <Build Include="Tables\Curso_Classificacao.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="CargaInicial\Script.PostDeployment.sql" />
