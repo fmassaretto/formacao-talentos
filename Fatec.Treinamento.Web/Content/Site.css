@@ -23,9 +23,10 @@ body {
 .search-content{
     background-color:white;
     left: 50%;
-  margin-left: -400px; /* A metade de sua largura. */
-  position: absolute;
-  width: 800px;
+    margin-left: -500px; /* A metade de sua largura. */
+    padding-bottom:70px;
+    position: relative;
+    width: 1000px;
 }
 
 .search-results-rows{
@@ -229,30 +230,22 @@ body {
     display:inline-block;
 }
 
-/*.menu-gerenciar-side, .menu-gerenciar-side ul{
-    display:block;
-    width:210px;
-    max-width:210px;
-}*/
 
-.menu-gerenciar-side{
-    flex: 0 0 65%;
-    width:30%;
-    max-width:30%;
-    height: auto;
-    float: left;
+.painel-content-title{
+    position: absolute;
+    margin-left:60px;
+    margin-right:60px;
 }
 
-.gerenciar-container{
-    display: flex;
-    width: 100%;
-    height: auto;
+.gerenciar-content-title > h3{
+    color:#fff;
 }
 
-.gerenciar-content{
-    flex: 1;   
-    width:70%;
-    height: 300px;
+.gerenciar-content-body{
+
+    background-color:red;
+    width:100%;
+    height:200px;
 }
 /* FIM css do painel*/
 
@@ -325,6 +318,11 @@ body {
 
 .detalhe-descricao{
     margin-top: 40px;
+    word-wrap: break-word;
+}
+
+.word-wrap{
+    word-wrap: break-word;
 }
 
 @media screen AND (max-width: 992px) {
@@ -424,6 +422,82 @@ body {
     position:relative;
     display:block;
     padding-top: 70px;
+}
+
+.main-video-content{
+    width: 100%;
+    position:relative;
+    display:block;
+}
+
+.assistir-curso-titulo{
+    color: #c8cbad;
+}
+
+.curso-side-title{
+    width:100%;
+    height:40px;
+    display:block;
+    background-color: red;
+    color:#fff;
+}
+
+.capitulo{
+    background-color:#c8cbad;
+}
+
+.capitulos-player{
+    margin-top: 0px;
+}
+
+.capitulos-player .video{
+    color: #fff;
+    padding-left:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+
+.capitulos-player .video a{
+    color: #c8cbad;
+    text-decoration:none; !important;
+}
+
+.capitulos-player .video a:hover{
+    color: #fff;
+    text-decoration:none; !important;
+}
+
+
+
+.video-hide{
+    display:none;
+}
+
+.video-show{
+    
+}
+
+.video-link {
+    display:inline-block;
+}
+
+
+.video .selecionado{
+    color: #ff2f00;
+    border-left: 2px solid #ff2f00;
+}
+
+.video .selecionado a{
+    color: #ff2f00; !important;
+}
+
+.video .selecionado a:hover{
+    color: #ff2f00; !important;
+}
+
+.capitulos-player .video:hover{
+    background-color: #2f3238;
 }
 
 .modal-content{
@@ -546,9 +620,6 @@ textarea {
     color:#fff;
     border: none;   
 }
-
-
-
 
 .footer {
   position: absolute;

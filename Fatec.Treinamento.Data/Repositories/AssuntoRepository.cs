@@ -89,11 +89,14 @@ namespace Fatec.Treinamento.Data.Repositories
                     u.Id AS IdAutor, 
                     u.Nome AS NomeAutor,
                     a.Nome AS NomeAssunto, 
-                    c.DataCriacao FROM Curso c
-	                INNER JOIN Usuario u ON c.IdAutor = u.Id
-	                INNER JOIN Assunto a ON c.IdAssunto = a.Id
-	                WHERE a.Id = @Id
-                    ORDER BY a.Nome", 
+                    c.DataCriacao, 
+                    c.Classificacao,
+                    c.Nivel
+                FROM Curso c
+	            INNER JOIN Usuario u ON c.IdAutor = u.Id
+	            INNER JOIN Assunto a ON c.IdAssunto = a.Id
+	            WHERE a.Id = @Id
+                ORDER BY a.Nome", 
                 param: new { Id = id }
                 ).ToList();
         }
@@ -102,8 +105,8 @@ namespace Fatec.Treinamento.Data.Repositories
         {
             return Connection.Query<CursosPorAssunto>(
               @"Select a.Id AS IdCurso, 
-                a.Nome AS NomeAssunto, 
-                Count(c.Id) as TotalCursos
+                    a.Nome AS NomeAssunto, 
+                    Count(c.Id) as TotalCursos
                 FROM Assunto a INNER JOIN curso c on a.Id = c.IdAssunto
                 GROUP BY a.id, a.nome
                 ORDER BY a.Nome"

@@ -9,14 +9,31 @@
                 <div class="search-result">
                     <div class="search-result__info">
                         <div class="search-result__title"><a href="@Url.Action("Detalhe", new { id = item.IdCurso })">@Html.DisplayFor(modelItem => item.Nome)</a></div>
-                        <div class="search-result__details clearfix">
-                            <div class="search-result__author"><text>Por </text>@Html.DisplayFor(modelItem => item.NomeAutor)</div>
-                            <div class="search-result__level">Beginner</div>
-                            <div class="search-result__date">@item.DataCriacao.ToString("dd/MM/yyyy")</div>
-                            <div class="search-result__duration show-for-medium-up">5h 26m</div>
-                            <div class="search-result__rating show-for-large-up">
-                                <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                <span>(525)</span>
+                        <div class="row search-result__details clearfix">
+                            <div class="col-sm-3 search-result__author"><text>Por </text>@Html.DisplayFor(modelItem => item.NomeAutor)</div>
+                            <div class="col-md-1 search-result__level">@item.Nivel</div>
+                            <div class="col-sm-2 search-result__date">@item.DataCriacao.ToString("dd/MM/yyyy")</div>
+                            <div class="col-sm-2 search-result__duration show-for-medium-up">@item.TotalDuracaoCursoFormatado</div>
+                            <div class="col-sm-2 search-result__rating show-for-large-up">
+                                @if (item.Classificacao != 0)
+                                {
+                                    for (int i = 0; i < item.Classificacao; i++)
+                                    {
+                                        <span class="glyphicon glyphicon-star estrela-dourada"></span>
+                                    }
+                                    for (int i = 0; i < (5-item.Classificacao); i++)
+                                    {
+                                        <span class="glyphicon glyphicon-star-empty estrela-dourada"></span>
+                                    }
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < 5; i++)
+                                    {
+                                        <span class="glyphicon glyphicon-star-empty "></span>
+                                    }
+                                }
+                                <span>(@Html.DisplayFor(Model => item.QtdUsuariosVotosCurso))</span>
                             </div>
                         </div>
                     </div>

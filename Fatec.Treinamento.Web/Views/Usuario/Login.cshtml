@@ -6,7 +6,7 @@
 
 <div class="row" id="login-content">
     <div class="col-md-8">
-        <section id="loginForm"  class="row">
+        <section class="row" id="loginForm">
             @using (Html.BeginForm("Login", "Usuario", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()

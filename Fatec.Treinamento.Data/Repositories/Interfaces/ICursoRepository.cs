@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fatec.Treinamento.Data.Repositories.Interfaces
 {
-    public interface ICursoRepository  : ICrudRepository<AssuntoCursoUsuario>
+    public interface ICursoRepository
     {
         IEnumerable<AssuntoCursoUsuario> ListarCursosPorNome(string nome);
 

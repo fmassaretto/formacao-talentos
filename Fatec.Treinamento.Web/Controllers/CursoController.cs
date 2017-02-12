@@ -1,6 +1,7 @@
 ﻿using Fatec.Treinamento.Data.Repositories;
 using Fatec.Treinamento.Model;
 using Fatec.Treinamento.Model.DTO;
+using Fatec.Treinamento.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,33 +13,62 @@ namespace Fatec.Treinamento.Web.Controllers
     public class CursoController : Controller
     {
         // GET: Curso
-        [HttpPost]
+        
         public ActionResult Pesquisar(string txtPesquisaCurso)
         {
-            IEnumerable<AssuntoCursoUsuario> lista = new List<AssuntoCursoUsuario>();
+            IEnumerable<AssuntoCursoUsuario> listaPesquisa = new List<AssuntoCursoUsuario>();
 
             using (CursoRepository repo = new CursoRepository())
             {
-                lista = repo.ListarCursosPorNome(txtPesquisaCurso);
+                listaPesquisa = repo.ListarCursosPorNome(txtPesquisaCurso);
+                foreach (var lista in listaPesquisa)
+                {
+                    //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
+                    lista.QtdUsuariosVotosCurso = repo.ObterQtdVotos(lista.IdCurso);
+                    lista.TotalDuracaoCurso = repo.SomarDuracaoCurso(lista.IdCurso);
+                }
             }
-
-            return View(lista);
+            
+            return View(listaPesquisa);
         }
 
         public ActionResult Index()
         {
             IEnumerable<AssuntoCursoUsuario> listaTodos = new List<AssuntoCursoUsuario>();
+            //IEnumerable<Capitulo> capitulos = new List<Capitulo>();
 
             using (CursoRepository repoTodos = new CursoRepository())
             {
                 listaTodos = repoTodos.ListarTodosCursos();
+                foreach (var listaTodo in listaTodos)
+                {
+                    //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
+                    listaTodo.QtdUsuariosVotosCurso = repoTodos.ObterQtdVotos(listaTodo.IdCurso);
+                    listaTodo.TotalDuracaoCurso = repoTodos.SomarDuracaoCurso(listaTodo.IdCurso);
+                }
+
             }
+            
             return View(listaTodos);
         }
 
         public ActionResult Populares()
         {
-            return View();
+            Console.WriteLine("Passou aqui1");
+            IEnumerable<AssuntoCursoUsuario> listaPop = new List<AssuntoCursoUsuario>();
+            using (CursoRepository repo = new CursoRepository())
+            {
+                listaPop = repo.ListarTodosCursos();
+                foreach (var lista in listaPop)
+                {
+                    lista.QtdUsuariosVotosCurso = repo.ObterQtdVotos(lista.IdCurso);
+                    lista.TotalDuracaoCurso = repo.SomarDuracaoCurso(lista.IdCurso);
+                    Console.WriteLine("Passou aqui2");
+                }
+
+                var model = repo.ListarPopulares();
+                return View(model);
+            }
         }
 
         public ActionResult obter(int id)
@@ -77,17 +107,26 @@ namespace Fatec.Treinamento.Web.Controllers
         public ActionResult Detalhe(int? id)
         {
             //int id = (int)Url.RequestContext.RouteData.Values["Id"];
-            IEnumerable<Detalhe> listaDetalhe = new List<Detalhe>();
+            AssuntoCursoUsuario listaDetalhe = new AssuntoCursoUsuario();
 
             using (CursoRepository repoDetalhe = new CursoRepository())
             {
+                try
+                {
                 listaDetalhe = repoDetalhe.DetalheCurso(id);
+
+                }
+                catch (Exception)
+                {
+
+                    return RedirectToAction("Index", "Curso");
+                    throw;
+                }
             }
 
-            if (listaDetalhe.Count() == 0)
-            {
-                return RedirectToAction("Index", "Curso");
-            }
+            //if (listaDetalhe.IdCurso == null)
+            //{
+            //}
             return View(listaDetalhe);
         }
 
@@ -97,7 +136,17 @@ namespace Fatec.Treinamento.Web.Controllers
 
             using (AssuntoRepository repoCursoAssunto = new AssuntoRepository())
             {
-                listaCursoAssunto = repoCursoAssunto.ListarCursosPorAssuntos(id);
+                listaCursoAssunto = repoCursoAssunto.ListarCursosPorAssuntos(id);                
+            }
+
+            using (CursoRepository repoCurso = new CursoRepository())
+            {
+                foreach (var lista in listaCursoAssunto)
+                {
+                    //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
+                    lista.QtdUsuariosVotosCurso = repoCurso.ObterQtdVotos(lista.IdCurso);
+                    lista.TotalDuracaoCurso = repoCurso.SomarDuracaoCurso(lista.IdCurso);
+                }
             }
 
             if (listaCursoAssunto.Count() == 0)
@@ -122,5 +171,54 @@ namespace Fatec.Treinamento.Web.Controllers
             }
             return View(listaCursoAssunto);
         }
+
+
+
+        [HttpGet]
+        public ActionResult Assistir(int idCurso)
+        {
+            using (CursoRepository repo = new CursoRepository())
+            {
+                var curso = repo.DetalheCurso(idCurso);
+
+                ViewBag.ShowHideVideo = "video-hide";
+
+                return View(curso);
+            }
+        }
+
+
+
+        [HttpGet]
+        [Route("Curso/{IdCurso}/Assistir/Capitulo/{IdCapitulo}/Video/{IdVideo}", Name = "RotaAssistirVideo")]
+        public ActionResult Assistir(int idCurso, int idCapitulo, int idVideo)
+        {
+            using (CursoRepository repo = new CursoRepository())
+            {
+                var curso = repo.DetalheCurso(idCurso);
+
+                ViewBag.IdCapitulo = idCapitulo;
+                ViewBag.IdVideo = idVideo;
+
+                var capitulo = curso.Capitulos.FirstOrDefault(cap => cap.Id == idCapitulo);
+
+                if (capitulo != null)
+                {
+                    var video = capitulo.Videos.FirstOrDefault(vid => vid.Id == idVideo);
+
+                    if (video != null)
+                    {
+                        ViewBag.CodigoVideo = video.CodigoVideo;
+                    }
+                }
+
+                ViewBag.ShowHideVideo = "video-show";
+
+                return View(curso);
+            }
+        }
+
+
+
     }
 }

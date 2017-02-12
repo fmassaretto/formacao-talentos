@@ -5,6 +5,7 @@
     [IdAssunto]     INT           NOT NULL,
     [Classificacao] INT           NULL,
     [DataCriacao]   DATETIME      CONSTRAINT [DF_Curso_DataCriacao] DEFAULT (getdate()) NOT NULL,
+    [Nivel] VARCHAR(50) NOT NULL, 
     CONSTRAINT [PK_Curso] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Curso_Assunto] FOREIGN KEY ([IdAssunto]) REFERENCES [dbo].[Assunto] ([Id]),
     CONSTRAINT [FK_Curso_Usuario] FOREIGN KEY ([IdAutor]) REFERENCES [dbo].[Usuario] ([Id])
