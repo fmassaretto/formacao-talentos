@@ -2,21 +2,27 @@
 using System.Web;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security;
+using Fatec.Treinamento.Model.Extensoes;
+using Fatec.Treinamento.Model.Enum;
 
 namespace Fatec.Treinamento.Model.DTO
 {
-    public class AssuntoCursoUsuario
+    public class AssuntoCursoUsuario 
     {
 
-        public int IdCurso { get; set; } //editado ante era Id
+        public int IdCurso { get; set; } //editado antes era Id
         public int IdAutor { get; set; }
         public int IdAssunto { get; set; }
         public int IdCursoDescricao { get; set; }
 
-        public Usuario usuario { get; set; }
+        public IList<Usuario> Usuario { get; set; }
+
+        public int IdUsuario { get; set; }
 
         public int UsuarioSelecionado { get; set; }
         public int AssuntoSelecionado { get; set; }
@@ -41,7 +47,13 @@ namespace Fatec.Treinamento.Model.DTO
 
         public string Nivel { get; set; }
 
+        public string SelectedNota { get; set; }
+
+        public string Img { get; set; }
+
         public IList<Capitulo> Capitulos { get; set; }
+
+        public IEnumerable<int> PontosUsuario { get; set; }
 
         public IList<Capitulo> Pontos { get; set; }
 
@@ -80,6 +92,7 @@ namespace Fatec.Treinamento.Model.DTO
             Capitulos = new List<Capitulo>();
             Pontos = new List<Capitulo>();
             QtdUsuariosVotosCurso = new List<int>();
+            Usuario = new List<Usuario>();
             //TotalDuracaoCurso = new List<int>();
         }
 
