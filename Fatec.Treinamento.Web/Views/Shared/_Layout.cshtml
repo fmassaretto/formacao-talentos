@@ -85,7 +85,7 @@
                             <ul class="dropdown-menu">
                                 @if (this.User.IsInRole("Administrador"))
                                 {
-                                    <li>@Html.ActionLink("Meu Painel(Admin)", "Index", "Painel", null, new { style = "text-decoration: line-through" })</li>
+                                    <li>@Html.ActionLink("Meu Painel(Admin)", "Index", "Painel", null)</li>
                                 }
                                 else if (this.User.IsInRole("Instrutor"))
                                 {
@@ -93,7 +93,7 @@
                                 }
                                 else if (this.User.IsInRole("Usuario"))
                                 {
-                                    <li>@Html.ActionLink("Meu Painel(Usuario)", "Index", "Painel", null, new { style = "text-decoration: line-through" })</li>
+                                    <li>@Html.ActionLink("Meu Painel(Usuario)", "Index", "Painel", null)</li>
                                 }
                                 <li>@Html.ActionLink("Meus Treinamentos", "Index", "Treinamento", null, new { style = "text-decoration: line-through" })</li>
                                 <li>@Html.ActionLink("Meus Pontos", "MeusPontos", "Usuario", null, new { style = "text-decoration: line-through" })</li>

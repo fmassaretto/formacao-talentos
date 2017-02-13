@@ -56,7 +56,28 @@ namespace Fatec.Treinamento.Data.Repositories
 		   ).FirstOrDefault();
 		}
 
-		public AssuntoCursoUsuario Atualizar(AssuntoCursoUsuario acu)
+        public IEnumerable<AssuntoCursoUsuario> ObterLista(int idCurso)
+        {
+            return Connection.Query<AssuntoCursoUsuario>(
+               @"SELECT c.Nome,
+			       c.Classificacao,
+                   c.Id AS IdCurso,
+			       a.Id AS IdAssunto,
+			       u.Id AS IdAutor, 
+			       u.Nome AS NomeAutor,
+			       a.Nome AS NomeAssunto,
+			       cd.Descricao,
+                   c.Nivel
+			   FROM Curso c
+			   INNER JOIN Usuario u ON c.IdAutor = u.Id
+			   INNER JOIN Assunto a ON c.IdAssunto = a.Id
+			   INNER JOIN Curso_Descricao cd ON cd.IdCurso = c.Id
+			   WHERE c.Id = @Id",
+               new { Id = idCurso }
+           ).ToList();
+        }
+
+        public AssuntoCursoUsuario Atualizar(AssuntoCursoUsuario acu)
 		{
 			Connection.Execute(
 			   @"BEGIN TRANSACTION;

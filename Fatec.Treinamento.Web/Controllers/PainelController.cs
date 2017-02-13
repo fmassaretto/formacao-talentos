@@ -30,7 +30,9 @@ namespace Fatec.Treinamento.Web.Controllers
                 }
             }
 
-            using (CursoRepository repoTodos = new CursoRepository())
+            CursoRepository repoTodos;
+
+            using (repoTodos = new CursoRepository())
             {
                 listar.Acu = repoTodos.ListarTodosCursos();
             }
@@ -47,8 +49,47 @@ namespace Fatec.Treinamento.Web.Controllers
                     listar.PontosUsuario = 0;
                    
                 }
+
+                var treinamento = repoTrein.ListarTodosTreinamentos(idUsuario);
+
+                foreach (var item in treinamento)
+                {
+                    if (treinamento != null)
+                    {
+                        /* 
+                         * Se DataInicio for não nulo e DataConclusao for nulo então 
+                         * o curso está em andamento, se os dois forem não nulo então
+                         * o curso está concluido
+                         */
+                        if (item.DataInicio.ToString() != "01/01/0001 00:00:00" & 
+                            item.DataConclusao.ToString() == "01/01/0001 00:00:00")
+                        {
+                            foreach (var curso in listar.Acu)
+                            {
+                                if (item.IdCurso == curso.IdCurso)
+                                {
+                                    listar.CursosAndamento.Add(curso.IdCurso);
+                                }                            
+                            }
+                        }
+                        else if (item.DataInicio.ToString() != "01/01/0001 00:00:00" &
+                            item.DataConclusao.ToString() != "01/01/0001 00:00:00")
+                        {
+                            foreach (var curso in listar.Acu)
+                            {
+                                if (item.IdCurso == curso.IdCurso)
+                                {
+                                    listar.CursosFinalizado.Add(curso.IdCurso);
+                                }
+                            }
+                        }
+                    }
+
+                }
      
             }
+
+
 
             return View(listar);
         }
