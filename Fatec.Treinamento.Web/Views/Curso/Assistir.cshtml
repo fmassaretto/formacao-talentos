@@ -46,6 +46,10 @@
                             </div>
                         }
                     }
+                    <div class="row btn-prova">
+                        @*<a href="@Html.ActionLink("Prova", "Curso")" class="btn btn-primary">Prova do Curso</a>*@
+                        @Html.ActionLink("Prova do Curso", "Prova", new { id = Model.IdCurso })
+                    </div>
                 </div>
             </div>
         
