@@ -152,6 +152,7 @@ namespace Fatec.Treinamento.Web.Controllers
         {
             var authenticationManager = HttpContext.GetOwinContext().Authentication;
             authenticationManager.SignOut();
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
     }

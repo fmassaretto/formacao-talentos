@@ -47,6 +47,7 @@ namespace Fatec.Treinamento.Web.Controllers
             return View(listaTodos);
         }
 
+        [HttpGet]
         public ActionResult Populares()
         {
 
@@ -60,9 +61,9 @@ namespace Fatec.Treinamento.Web.Controllers
                     lista.TotalDuracaoCurso = repo.SomarDuracaoCurso(lista.IdCurso);
                 }
 
-                var model = repo.ListarPopulares();
+                listaPop = repo.ListarPopulares();
 
-                return View(model);
+                return View(listaPop);
             }
         }
 

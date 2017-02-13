@@ -279,14 +279,14 @@ namespace Fatec.Treinamento.Data.Repositories
            );
         }
 
-        public IList<int> ObterQtdVotos(int? id)
+        public int ObterQtdVotos(int? id)
         {
             return Connection.Query<int>(
                @"Select COUNT(IdUsuario) AS QtdUsuario 
                     FROM Curso_Classificacao 
                     WHERE IdCurso = @IdCurso",
                new { IdCurso = id }
-               ).ToList();
+               ).FirstOrDefault();
         }
 
         public int SomarDuracaoCurso(int? id)

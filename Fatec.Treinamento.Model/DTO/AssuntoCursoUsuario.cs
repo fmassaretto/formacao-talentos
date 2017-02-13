@@ -56,7 +56,8 @@ namespace Fatec.Treinamento.Model.DTO
 
         public IList<Capitulo> Pontos { get; set; }
 
-        public IList<int> QtdUsuariosVotosCurso { get; set; }
+        //public IList<int> QtdUsuariosVotosCurso { get; set; }
+        public int QtdUsuariosVotosCurso { get; set; }
 
         public int TotalDuracaoCurso { get; set; }
 
@@ -82,7 +83,7 @@ namespace Fatec.Treinamento.Model.DTO
         {
             Capitulos = new List<Capitulo>();
             Pontos = new List<Capitulo>();
-            QtdUsuariosVotosCurso = new List<int>();
+            //QtdUsuariosVotosCurso = new List<int>();
             Usuario = new List<Usuario>();
         }
 
