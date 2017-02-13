@@ -21,5 +21,7 @@ namespace Fatec.Treinamento.Model
         }
 
         public string CodigoVideo { get; set; }
+
+        public string ThumbNail { get; set; }
     }
 }
