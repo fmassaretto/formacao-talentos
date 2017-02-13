@@ -68,9 +68,11 @@
                         <div class="list-group" id="list-content">
                             @if (Request.IsAuthenticated)
                             {
+                                //var idUsuario = Membership.GetUser().ProviderUserKey;
                                 @*<button type="button" id="btn-comecar" class="list-group-item">COMEÇAR CURSO</button>*@
                                 @*<a href="@Url.Action("Assistir", new RouteValueDictionary() { { "IdCurso", Model.IdCurso } })" class="btn btn-primary">COMEÇAR CURSO</a>*@
-                                <a href="@Url.Action("Assistir", new { IdCurso = Model.IdCurso } )" id="btn-comecar" class="btn btn-primary list-group-item">COMEÇAR CURSO</a>
+                                <a href="@Url.Action("Assistir", new { idCurso = Model.IdCurso } )" id="btn-comecar" class="btn btn-primary list-group-item">COMEÇAR CURSO</a>
+                                @*@Html.RouteLink("Começar Curso", "RotaComecarCurso", new RouteValueDictionary() { { "IdCurso", Model.IdCurso }, { "IdUsuario", Model.Usuario.Id } })*@
                             }
                             else
                             {
