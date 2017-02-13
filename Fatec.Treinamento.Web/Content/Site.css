@@ -90,8 +90,6 @@ body {
     width:100%;
     height:100%;
     max-height: 200px;
-
-
     left:0;
     top:0;
 }
@@ -99,11 +97,9 @@ body {
 .carouse-div > #carousel-index{
     position:inherit;
     width:100%;
-
     max-height: 200px;
     margin:0;
     padding:0;
-
     left:0;
     top:0;
 }
@@ -315,14 +311,17 @@ body {
 
 #lbl-nota{
   display: flex;
+  width: 600px;
+  flex-direction: row;
+  padding: 10px;
 }
 
-.nota-select{
-
+.nota-item{
+    flex-basis: 300px;
 }
 
-.nota-select:nth-child(1){
-  margin-left: 50px;
+.nota-item:nth-child(1){
+  flex-grow: 1;
 }
 
 .link-format{
@@ -347,15 +346,6 @@ body {
     border-color: #ecf0f1;
 
 }
-
-/*.img-div:not(.container){
-    background-image: url('/Content/Img/e-learning1menor.jpg');
-    background-repeat:no-repeat;
-    background-size:cover;
-   opacity: 0.1;
-    filter: alpha(opacity=10);
-}*/
-
 
 .img-div{
     background-image: url('/Content/Img/e-learning1menor.jpg');
@@ -408,7 +398,6 @@ body {
     }
 }
 
-
 @media screen AND (width: 768px) {
     #detalhes-inicio .col-md-4{
         margin-left:100px;
@@ -447,7 +436,6 @@ body {
     padding-right:50px;
     height:430px;
 }
-
 
 #detalhes-inicio .col-md-4 p a {
     position:absolute;
@@ -515,7 +503,6 @@ body {
     padding-bottom:5px;
 }
 
-
 .capitulos-player .video a{
     color: #c8cbad;
     text-decoration: none;  /*!important;*/
@@ -525,8 +512,6 @@ body {
     color: #fff;
     text-decoration:none; /*!important;*/
 }
-
-
 
 .video-hide{
     display:none;
