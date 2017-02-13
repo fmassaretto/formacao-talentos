@@ -1,0 +1,51 @@
+﻿@model Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario
+
+@{
+    ViewBag.Title = "Prova";
+}
+
+<h2>Prova do Curso - @Html.DisplayFor(Model => Model.Nome)</h2>
+@using (Html.BeginForm("Prova", "Curso", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.IdCurso)
+    @Html.HiddenFor(model => model.IdUsuario)
+<div class="full-width-div">
+    <div id="content-prova">
+        <div class="content-prova-filho">
+            <h2>Parabéns! Você concluiu o curso.</h2>
+            <div class="nota-curso">
+                
+                <div class="row" id="lbl-nota">
+                    <div class="nota-select">
+                    <p>Qual sua nota para o curso: </p>@*<input type="range" name="Nota" id="nota" min="1" max="5" maxlength="1" step="1" onchange="atualizaLblNota()" /></div><div class="nota-select"><b>3</b>*@
+                    </div>
+                </div>
+                
+                @*<a href="@Url.Action("FinalizarCurso", new { IdCurso = Model.IdCurso } )" class="btn btn-primary">Finalizar Curso</a>*@
+                @Html.DropDownListFor(c => c.SelectedNota, new[] {
+                                            new SelectListItem { Text = "1", Value = "1" },
+                                            new SelectListItem { Text = "2", Value = "2" },
+                                            new SelectListItem { Text = "3", Value = "3" },
+                                            new SelectListItem { Text = "4", Value = "4" },
+                                            new SelectListItem { Text = "5", Value = "5" }
+                                            }, "Nota do Curso"
+                                    )
+                    @*<a href="@Html.Action("FinalizarCurso", "Curso", new { id = Model.IdCurso })">Finalizar Curso</a>*@
+                @*@Html.ActionLink("Finalizar Curso", "FinalizarCurso", new { id = Model.IdCurso })*@
+                <input type="submit" name="btnFinalizar" value="Finalizar Curso"  class="btn btn-primary"/>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        function atualizaLblNota() {
+            var value = $("#nota").val();
+            $('b').html(value);
+        }
+    </script>
+}

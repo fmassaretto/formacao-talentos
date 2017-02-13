@@ -58,6 +58,7 @@
     <Compile Include="Repositories\Interfaces\IPerfilRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUsuarioRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
+    <Compile Include="TreinamentoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fatec.Treinamento.Model\Fatec.Treinamento.Model.csproj">

@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,15 +46,19 @@
     <Compile Include="DTO\AssuntoCursoUsuario.cs" />
     <Compile Include="DTO\CursosPorAssunto.cs" />
     <Compile Include="DTO\DetalhesCursoDeuRuim.cs" />
+    <Compile Include="Extensoes\Nota.cs" />
     <Compile Include="Enum\TipoPerfil.cs" />
+    <Compile Include="Extensoes\Youtube.cs" />
     <Compile Include="Funcionalidade.cs" />
     <Compile Include="Assunto.cs" />
     <Compile Include="Extensoes\StringExtensions.cs" />
     <Compile Include="Perfil.cs" />
+    <Compile Include="TreinamentoCurso.cs" />
     <Compile Include="Trilha.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Video.cs" />
+    <Compile Include="YouTubeModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
