@@ -8,7 +8,7 @@
             <div class="search-results-rows clearfix">
                 <div class="search-result">
                     <div class="search-result__info">
-                        <div class="search-result__title"><a href="@Url.Action("Detalhe", new { id = item.IdCurso })">@Html.DisplayFor(modelItem => item.Nome)</a></div>
+                        <div class="search-result__title">@*@Html.RouteLink("Começar Curso", "RotaComecarCurso", new RouteValueDictionary() { { "IdUsuario", item.Usuario.Id }, { "IdCurso", item.IdCurso } })*@ <a href="@Url.Action("Detalhe", new { id = item.IdCurso })">@Html.DisplayFor(modelItem => item.Nome)</a></div>
                         <div class="row search-result__details clearfix">
                             <div class="col-sm-3 search-result__author"><text>Por </text>@Html.DisplayFor(modelItem => item.NomeAutor)</div>
                             <div class="col-md-1 search-result__level">@item.Nivel</div>
