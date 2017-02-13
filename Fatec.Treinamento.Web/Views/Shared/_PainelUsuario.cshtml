@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario>
+﻿@*@model IEnumerable<Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario>*@
+@model Fatec.Treinamento.Web.Models.UsuarioPainelViewModel
 
 @{
     ViewBag.Title = "Painel do Usuário";
@@ -13,7 +14,7 @@
             <h5>Você tem:</h5>
         </div>
         <div class="painel-pontos-inner">
-            <h5>1</h5>
+            <h5>@Model.PontosUsuario</h5>
         </div>
         <div class="painel-pontos-blw-text">
             <h5>Pontos</h5>
@@ -30,12 +31,12 @@
             </div>
             <div class="item-content">
                 <div class="row">
-                    @foreach (var item in Model)
-                    {
+                    @*@foreach (var item in Model)
+                    {*@
                         <div class="col-xs-6 col-md-3">
                                 @*<a href="@Url.Action("Index", new { id = item.IdCurso })" class="thumbnail">@Html.DisplayFor(modelItem => item.Nome)</a>*@
                         </div>
-                    }                  
+                    @* } *@                  
                 </div>
             </div>
         </div>
@@ -46,12 +47,12 @@
             </div>
             <div class="item-content">
                 <div class="row">
-                    @foreach (var item in Model)
-                    {
-                        <div class="col-xs-6 col-md-3">
+                    @*@foreach (var item in Model)
+                    {*@
+                        @*<div class="col-xs-6 col-md-3">
                             <a href="@Url.Action("Index", new { id = item.IdCurso })" class="thumbnail">@Html.DisplayFor(modelItem => item.Nome)</a>
-                        </div>
-                    }
+                        </div>*@
+                    @*}*@
                 </div>
             </div>
         </div>
@@ -62,12 +63,12 @@
             </div>
             <div class="item-content">
                 <div class="row">
-                    @foreach (var item in Model)
-                    {
-                        <div class="col-xs-6 col-md-3">
+                    @*@foreach (var item in Model)
+                    {*@
+                        @*<div class="col-xs-6 col-md-3">
                             <a href="@Url.Action("Index", new { id = item.IdCurso })" class="thumbnail">@Html.DisplayFor(modelItem => item.Nome)</a>
-                        </div>
-                    }
+                        </div>*@
+                    @*}*@
                 </div>
             </div>
         </div>
