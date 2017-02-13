@@ -40,6 +40,7 @@ namespace Fatec.Treinamento.Data.Repositories
 			return Connection.Query<AssuntoCursoUsuario>(
                @"SELECT c.Nome,
 			       c.Classificacao,
+                   c.Id AS IdCurso,
 			       a.Id AS IdAssunto,
 			       u.Id AS IdAutor, 
 			       u.Nome AS NomeAutor,
@@ -187,7 +188,8 @@ namespace Fatec.Treinamento.Data.Repositories
 					    c.DataCriacao,
                         cd.Descricao,
 					    c.Classificacao,
-                        c.Nivel
+                        c.Nivel,
+                        c.Img
 				    FROM curso c
 				    INNER JOIN assunto a ON c.IdAssunto = a.id
 				    INNER JOIN usuario u ON c.IdAutor = u.Id
@@ -242,7 +244,21 @@ namespace Fatec.Treinamento.Data.Repositories
            );
         }
 
-        public IList<int> ObterQtdVotos(int id)
+        public void InserirNota(int idCurso, int idUsuario, int nota)
+        {
+            Connection.Execute(
+               @"INSERT INTO Curso_Classificacao (IdCurso, IdUsuario, Nota) 
+                    VALUES (@IdCurso, @IdUsuario, @Nota)",
+               param: new
+               {
+                   IdCurso = idCurso,
+                   IdUsuario = idUsuario,
+                   Nota = nota
+               }
+           );
+        }
+
+        public IList<int> ObterQtdVotos(int? id)
         {
             return Connection.Query<int>(
                @"Select COUNT(IdUsuario) AS QtdUsuario 
@@ -252,7 +268,7 @@ namespace Fatec.Treinamento.Data.Repositories
                ).ToList();
         }
 
-        public int SomarDuracaoCurso(int id)
+        public int SomarDuracaoCurso(int? id)
         {
             return Connection.ExecuteScalar<int>(
                 @"Select SUM(v.Duracao) AS QtdTotalCurso 
@@ -264,6 +280,7 @@ namespace Fatec.Treinamento.Data.Repositories
                 );
         }
 
+        
 
         public IEnumerable<AssuntoCursoUsuario> Listar()
 		{
