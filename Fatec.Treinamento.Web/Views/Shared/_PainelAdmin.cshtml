@@ -12,23 +12,84 @@
     <div class="vSpacer"></div>
     <div class="painel-main">
         <div id="gerenciar-container">
-
-        <div class="gerenciar-container-item">
-            <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Usuarios" })" class="menu-item">Gerenciar Usuários</a></li>
-                <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Cursos" })" class="menu-item">Gerenciar Curso</a></li>
-                <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Assuntos" })" class="menu-item">Gerenciar Assuntos</a></li>
-                <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Trilhas" })" class="menu-item">Gerenciar Trilhas</a></li>
-                <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Videos" })" class="menu-item">Gerenciar Videos</a></li>
-            </ul>            
-        </div>
+            <div class="gerenciar-container-item">
+                <ul class="nav nav-pills nav-stacked">
+                    <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Usuarios" })" class="menu-item">Gerenciar Usuários</a></li>
+                    <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Cursos" })" class="menu-item">Gerenciar Curso</a></li>
+                    <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Assuntos" })" class="menu-item">Gerenciar Assuntos</a></li>
+                    <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Trilhas" })" class="menu-item">Gerenciar Trilhas</a></li>
+                    <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Capitulos" })" class="menu-item">Gerenciar Capitulos</a></li>
+                    <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Videos" })" class="menu-item">Gerenciar Videos</a></li>
+                </ul>            
+            </div>
             <div class="gerenciar-container-item">
                 <div class="gerenciar-content-title">
                     <h3>Visão Geral</h3>
                     <hr />
                 </div> 
                 <div class="painel-content-body">
-
+                    <div id="admin-box">
+                        <div class="item-admin-box">
+                            <h3>Usuarios</h3>
+                            <hr/>
+                            <p>O sistema tem:</p>
+                            <div class="item-admin-content">
+                                <h6>Número de Usuários Ativos: 4</h6>
+                                <h6>Número de Usuários Inativos: 1</h6>
+                                <h6>Total de Usuários: 5</h6>
+                            </div>
+                        </div>
+                        <div class="item-admin-box">
+                            <h3>Cursos</h3>
+                            <hr />
+                            <p>O sistema tem:</p>
+                            <div class="item-admin-content">
+                                <h6>Total de Cursos: 10</h6>
+                                <h6></h6>
+                                <h6></h6>
+                            </div>
+                        </div>
+                        <div class="item-admin-box">
+                            <h3>Assuntos</h3>
+                            <hr />
+                            <p>O sistema tem:</p>
+                            <div class="item-admin-content">
+                                <h6>Total de Assuntos: 5</h6>
+                                <h6></h6>
+                                <h6></h6>
+                            </div>
+                        </div>
+                        <div class="item-admin-box">
+                            <h3>Trilhas</h3>
+                            <hr />
+                            <p>O sistema tem:</p>
+                            <div class="item-admin-content">
+                                <h6>Total de Trilhas: 14</h6>
+                                <h6></h6>
+                                <h6></h6>
+                            </div>
+                        </div>
+                        <div class="item-admin-box">
+                            <h3>Capítulos</h3>
+                            <hr />
+                            <p>O sistema tem:</p>
+                            <div class="item-admin-content">
+                                <h6>Total de Capítulos: 23</h6>
+                                <h6></h6>
+                                <h6></h6>
+                            </div>
+                        </div>
+                        <div class="item-admin-box">
+                            <h3>Videos</h3>
+                            <hr />
+                            <p>O sistema tem:</p>
+                            <div class="item-admin-content">
+                                <h6>Total de Videos: 20</h6>
+                                <h6></h6>
+                                <h6></h6>
+                            </div>
+                        </div>
+                    </div>
                 </div>   
             </div>
         </div>
