@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
 using Microsoft.Owin.Host.SystemWeb;
+using Fatec.Treinamento.Model.DTO;
 
 namespace Fatec.Treinamento.Web.Controllers
 {
@@ -103,6 +104,7 @@ namespace Fatec.Treinamento.Web.Controllers
             // Login com sucesso
             if (usuario != null)
             {
+
                 var ident = new ClaimsIdentity(
                     new[]
                     {
@@ -127,6 +129,12 @@ namespace Fatec.Treinamento.Web.Controllers
 
                 HttpContext.GetOwinContext().Authentication.SignIn(
                     new AuthenticationProperties { IsPersistent = false }, ident);
+
+                AssuntoCursoUsuario acu = new AssuntoCursoUsuario();
+                int user = usuario.Id;
+                acu.IdUsuario = usuario.Id;
+                //ViewData["IdUsuario"] = Int32.Parse(User.Identity.GetUserId());
+                ViewData["IdUsuario"] = user;
 
                 if (Url.IsLocalUrl(returnUrl))
                 {
