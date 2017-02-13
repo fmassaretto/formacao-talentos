@@ -1,4 +1,5 @@
-﻿using Fatec.Treinamento.Data.Repositories;
+﻿using Fatec.Treinamento.Data;
+using Fatec.Treinamento.Data.Repositories;
 using Fatec.Treinamento.Model;
 using Fatec.Treinamento.Model.DTO;
 using Fatec.Treinamento.Web.Models;
@@ -54,7 +55,7 @@ namespace Fatec.Treinamento.Web.Controllers
 
         public ActionResult Populares()
         {
-            Console.WriteLine("Passou aqui1");
+
             IEnumerable<AssuntoCursoUsuario> listaPop = new List<AssuntoCursoUsuario>();
             using (CursoRepository repo = new CursoRepository())
             {
@@ -63,10 +64,10 @@ namespace Fatec.Treinamento.Web.Controllers
                 {
                     lista.QtdUsuariosVotosCurso = repo.ObterQtdVotos(lista.IdCurso);
                     lista.TotalDuracaoCurso = repo.SomarDuracaoCurso(lista.IdCurso);
-                    Console.WriteLine("Passou aqui2");
                 }
 
                 var model = repo.ListarPopulares();
+
                 return View(model);
             }
         }
@@ -104,6 +105,7 @@ namespace Fatec.Treinamento.Web.Controllers
         }
 
         [HttpGet]
+        //[Route("Curso/{IdCurso}/Usuario/{IdUsuario}", Name = "RotaComecarCurso")]
         public ActionResult Detalhe(int? id)
         {
             //int id = (int)Url.RequestContext.RouteData.Values["Id"];
@@ -113,8 +115,9 @@ namespace Fatec.Treinamento.Web.Controllers
             {
                 try
                 {
-                listaDetalhe = repoDetalhe.DetalheCurso(id);
-
+                    listaDetalhe = repoDetalhe.DetalheCurso(id);
+                    listaDetalhe.QtdUsuariosVotosCurso = repoDetalhe.ObterQtdVotos(id);
+                    listaDetalhe.TotalDuracaoCurso = repoDetalhe.SomarDuracaoCurso(id);
                 }
                 catch (Exception)
                 {
@@ -172,11 +175,32 @@ namespace Fatec.Treinamento.Web.Controllers
             return View(listaCursoAssunto);
         }
 
-
-
-        [HttpGet]
+        [HttpGet]        
         public ActionResult Assistir(int idCurso)
         {
+            int idUsuario = 0;
+            using (UsuarioRepository usuario = new UsuarioRepository())
+            {
+                var listaUsuario = usuario.ListarPorNome(User.Identity.Name);
+
+                foreach (var item in listaUsuario)
+                {
+                    idUsuario = item.Id;
+                }
+            } 
+
+            using (TreinamentoRepository repoTrei = new TreinamentoRepository())
+            {
+                var treinamento = repoTrei.ObterTreinamento(idUsuario, idCurso);
+                if (treinamento != null)
+                {
+                        repoTrei.AtualizarUltimoAcessoTreinamento(treinamento.Id);
+                }else
+                {
+                        repoTrei.ComecarTreinamento(idUsuario, idCurso);
+                }
+            }
+
             using (CursoRepository repo = new CursoRepository())
             {
                 var curso = repo.DetalheCurso(idCurso);
@@ -218,7 +242,146 @@ namespace Fatec.Treinamento.Web.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Prova(int id)
+        {
 
+            int idUsuario = 0;
+            using (UsuarioRepository usuario = new UsuarioRepository())
+            {
+                var listaUsuario = usuario.ListarPorNome(User.Identity.Name);
+
+                foreach (var item in listaUsuario)
+                {
+                    idUsuario = item.Id;
+                }
+            }
+
+            using (TreinamentoRepository repoTrei = new TreinamentoRepository())
+            {
+                var treinamento = repoTrei.ObterTreinamento(idUsuario, id);
+                if (treinamento.DataConclusao == null)
+                {
+                    if (treinamento != null)
+                    {
+                        repoTrei.AtualizarDataConclusaoTreinamento(treinamento.Id);
+                    }
+                }
+            }
+            
+            using (var repo = new CursoRepository())
+            {
+                var curso = repo.Obter(id);
+                curso.IdUsuario = idUsuario;
+                return View(curso);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Prova(AssuntoCursoUsuario acu)
+        {
+
+            var idCurso = acu.IdCurso;
+            var idUsuario = acu.IdUsuario;
+            var nota = acu.SelectedNota;
+            int notaInt = Int32.Parse(nota);
+
+
+
+            using (CursoRepository repo = new CursoRepository())
+            {
+                repo.InserirNota(idCurso, idUsuario, notaInt);
+            }
+
+            using (TreinamentoRepository repoTrei = new TreinamentoRepository())
+            {
+                var treinamento = repoTrei.ObterTreinamento(idUsuario, idCurso);
+                if (treinamento.DataConclusao.ToString() == "01/01/0001 00:00:00")
+                {
+                    if (treinamento != null)
+                    {
+                        repoTrei.AtualizarDataConclusaoTreinamento(treinamento.Id);
+                    }
+                }
+            }
+
+            //using (CursoRepository repo = new CursoRepository())
+            //{
+            //    int idUsuario = 0;
+            //    using (UsuarioRepository usuario = new UsuarioRepository())
+            //    {
+            //        var listaUsuario = usuario.ListarPorNome(User.Identity.Name);
+
+            //        foreach (var item in listaUsuario)
+            //        {
+            //            idUsuario = item.Id;
+            //        }
+            //    }
+
+            //    using (TreinamentoRepository repoTrei = new TreinamentoRepository())
+            //    {
+            //        var treinamento = repoTrei.ObterTreinamento(idUsuario, acu.IdCurso);
+            //        if (treinamento.DataConclusao != null)
+            //        {
+
+            //            if (treinamento != null)
+            //            {
+            //                repoTrei.AtualizarDataConclusaoTreinamento(treinamento.Id);
+            //            }
+            //            else
+            //            {
+
+            //            }
+            //        }
+            //    }
+            return RedirectToAction("Index", "Curso");
+            
+        }
+
+        //[HttpGet]
+        //public ActionResult FinalizarCurso(int idCurso)
+        //{
+        //    using (CursoRepository repo = new CursoRepository())
+        //    {
+        //        var curso = repo.Obter(idCurso);
+
+        //        return View(curso);
+        //    }
+        //}
+
+        [HttpPost]
+        public ActionResult FinalizarCurso(int id)
+        {
+
+            int idUsuario = 0;
+            using (UsuarioRepository usuario = new UsuarioRepository())
+            {
+                var listaUsuario = usuario.ListarPorNome(User.Identity.Name);
+
+                foreach (var item in listaUsuario)
+                {
+                    idUsuario = item.Id;
+                }
+            }
+
+            using (TreinamentoRepository repoTrei = new TreinamentoRepository())
+            {
+                var treinamento = repoTrei.ObterTreinamento(idUsuario, id);
+                if (treinamento.DataConclusao != null)
+                {
+
+                    if (treinamento != null)
+                    {
+                        repoTrei.AtualizarDataConclusaoTreinamento(treinamento.Id);
+                    }
+                    else
+                    {
+                    
+                    }
+                }
+            }
+            return new EmptyResult();
+        }
 
     }
 }
