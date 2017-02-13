@@ -51,26 +51,6 @@
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Trilhas", "Index", "Trilha")</li>
-                    @*<li>@Html.ActionLink("Trilhas", "Trilhas", "Cursos")</li>*@
-                    
-                
-                @if (Request.IsAuthenticated)
-                {
-                    //Valida se o usuário é administrador e exibe o menu de administração.
-
-                    if (this.User.IsInRole("Administrador"))
-                    {
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Cursos", "Index", "AdminCursos", null, new { style = "text-decoration: line-through" })</li>
-                                <li>@Html.ActionLink("Trilhas", "Index", "AdminTrilhas")</li>
-                                <li>@Html.ActionLink("Assuntos", "Index", "AdminAssuntos", null, new { style = "text-decoration: line-through" })</li>
-                                <li>@Html.ActionLink("Usuários", "Index", "AdminUsuarios", null, new { style = "text-decoration: line-through" })</li>
-                            </ul>
-                        </li>
-                    }
-                }
                 </ul>
 
                 @if (Request.IsAuthenticated)
@@ -95,8 +75,6 @@
                                 {
                                     <li>@Html.ActionLink("Meu Painel(Usuario)", "Index", "Painel", null)</li>
                                 }
-                                <li>@Html.ActionLink("Meus Treinamentos", "Index", "Treinamento", null, new { style = "text-decoration: line-through" })</li>
-                                <li>@Html.ActionLink("Meus Pontos", "MeusPontos", "Usuario", null, new { style = "text-decoration: line-through" })</li>
                                 <li role="separator" class="divider"></li>
                                 <li>@Html.ActionLink("Sair", "LogOff", "Usuario")</li>
                             </ul>
@@ -110,7 +88,6 @@
                         <li class="active">@Html.ActionLink("Cadastrar", "Registrar", "Usuario")</li>
                     </ul>
                 }
-
             </div>
         </div>
     </div>
@@ -118,7 +95,6 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-
     </div>
 
     <footer class="footer">
