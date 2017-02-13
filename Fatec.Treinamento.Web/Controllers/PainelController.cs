@@ -16,7 +16,6 @@ namespace Fatec.Treinamento.Web.Controllers
         // GET: Painel
         public ActionResult Index()
         {
-            //IEnumerable<AssuntoCursoUsuario> listaTodos = new List<AssuntoCursoUsuario>();
             UsuarioPainelViewModel listar = new UsuarioPainelViewModel();
 
             int idUsuario = 0;
@@ -88,9 +87,6 @@ namespace Fatec.Treinamento.Web.Controllers
                 }
      
             }
-
-
-
             return View(listar);
         }
     }

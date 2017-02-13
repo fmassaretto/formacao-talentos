@@ -64,15 +64,15 @@
                             <ul class="dropdown-menu">
                                 @if (this.User.IsInRole("Administrador"))
                                 {
-                                    <li>@Html.ActionLink("Meu Painel(Admin)", "Index", "Painel", null)</li>
+                                    <li>@Html.ActionLink("Meu Painel(Admin)", "Index", "Painel")</li>
                                 }
                                 else if (this.User.IsInRole("Instrutor"))
                                 {
-                                    <li>@Html.ActionLink("Meu Painel(Instrutor)", "Index", "Painel", null, new { style = "text-decoration: line-through" })</li>/**/
+                                    <li>@Html.ActionLink("Meu Painel(Instrutor)", "Index", "Painel")</li>/**/
                                 }
                                 else if (this.User.IsInRole("Usuario"))
                                 {
-                                    <li>@Html.ActionLink("Meu Painel(Usuario)", "Index", "Painel", null)</li>
+                                    <li>@Html.ActionLink("Meu Painel(Usuario)", "Index", "Painel")</li>
                                 }
                                 <li role="separator" class="divider"></li>
                                 <li>@Html.ActionLink("Sair", "LogOff", "Usuario")</li>

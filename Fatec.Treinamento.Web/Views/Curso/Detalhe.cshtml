@@ -1,13 +1,9 @@
 ﻿@model Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario
-@*@model IEnumerable<Fatec.Treinamento.Model.Detalhe>*@
-@*@model IEnumerable<Fatec.Treinamento.Web.Models.CursoCapVideoViewModel>*@
 
 @{
     ViewBag.Title = "Detalhe";
 }
 
-@*@foreach (var item in Model)
-{*@
     <div class="container-fluid">
         <div id="div-detalhe" class="full-width-div img-div">
             <div class="container">
@@ -23,16 +19,11 @@
         <main>
             <div class="rowDetalhe">
                 <div class="col-md-8">
-                    @*<div class="detalhe-descricao">
-                        <h3>Descrição do Curso</h3>
-                        <p>@Model.Descricao</p>
-                    </div>*@
                     <div class="panel panel-default" id="painel-info">
                         <!-- Default panel contents -->
                         <div class="panel-heading">Descrição do Curso</div>
                         <div class="panel-body">
                             <div class="word-wrap">
-
                                 <p>@Model.Descricao</p>
                             </div>
                         </div>
@@ -52,27 +43,13 @@
                         </ul>
                         </div>
                     </div>
-                        @*<div class="detalhe-capitulos">
-                            <h3>Capítulos do Curso</h3>
-                            <ul class="list-group active">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                        </div>*@
-                    </div>
+                </div>
                 <div class="col-md-4">
                     <div id="menu-detalhe">
                         <div class="list-group" id="list-content">
                             @if (Request.IsAuthenticated)
                             {
-                                //var idUsuario = Membership.GetUser().ProviderUserKey;
-                                @*<button type="button" id="btn-comecar" class="list-group-item">COMEÇAR CURSO</button>*@
-                                @*<a href="@Url.Action("Assistir", new RouteValueDictionary() { { "IdCurso", Model.IdCurso } })" class="btn btn-primary">COMEÇAR CURSO</a>*@
                                 <a href="@Url.Action("Assistir", new { idCurso = Model.IdCurso } )" id="btn-comecar" class="btn btn-primary list-group-item">COMEÇAR CURSO</a>
-                                @*@Html.RouteLink("Começar Curso", "RotaComecarCurso", new RouteValueDictionary() { { "IdCurso", Model.IdCurso }, { "IdUsuario", Model.Usuario.Id } })*@
                             }
                             else
                             {
@@ -83,14 +60,12 @@
                             <text class="list-group-item">Tempo total do curso: <span class="badge">@Html.DisplayFor(Model => Model.TotalDuracaoCursoFormatado)</span></text>
                             <div class="spacer"></div>
                             @Html.ActionLink("Voltar aos Cursos", "Index", "CursoController", new { @class = "list-group-item"})
-                            @*<text class="list-group-item"><span class="glyphicon glyphicon-triangle-left"></span> Voltar aos Cursos</text>*@
                         </div>
                     </div>
                 </div>
             </div>
         </main>   
     </div>
-@*}*@
 <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

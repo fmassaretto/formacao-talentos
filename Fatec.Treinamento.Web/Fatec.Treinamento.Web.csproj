@@ -162,10 +162,8 @@
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PainelController.cs" />
-    <Compile Include="Controllers\TreinamentoController.cs" />
     <Compile Include="Controllers\TrilhaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="Controllers\VoltarController.cs" />
     <Compile Include="Controllers\YouTubeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -277,7 +275,6 @@
     <Content Include="Views\AdminCursos\Criar.cshtml" />
     <Content Include="Views\Curso\Assistir.cshtml" />
     <Content Include="Views\Curso\Prova.cshtml" />
-    <Content Include="Views\Curso\FinalizarCurso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

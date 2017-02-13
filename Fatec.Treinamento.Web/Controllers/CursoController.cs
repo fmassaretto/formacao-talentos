@@ -14,7 +14,6 @@ namespace Fatec.Treinamento.Web.Controllers
     public class CursoController : Controller
     {
         // GET: Curso
-        
         public ActionResult Pesquisar(string txtPesquisaCurso)
         {
             IEnumerable<AssuntoCursoUsuario> listaPesquisa = new List<AssuntoCursoUsuario>();
@@ -24,7 +23,6 @@ namespace Fatec.Treinamento.Web.Controllers
                 listaPesquisa = repo.ListarCursosPorNome(txtPesquisaCurso);
                 foreach (var lista in listaPesquisa)
                 {
-                    //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
                     lista.QtdUsuariosVotosCurso = repo.ObterQtdVotos(lista.IdCurso);
                     lista.TotalDuracaoCurso = repo.SomarDuracaoCurso(lista.IdCurso);
                 }
@@ -36,20 +34,16 @@ namespace Fatec.Treinamento.Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<AssuntoCursoUsuario> listaTodos = new List<AssuntoCursoUsuario>();
-            //IEnumerable<Capitulo> capitulos = new List<Capitulo>();
 
             using (CursoRepository repoTodos = new CursoRepository())
             {
                 listaTodos = repoTodos.ListarTodosCursos();
                 foreach (var listaTodo in listaTodos)
                 {
-                    //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
                     listaTodo.QtdUsuariosVotosCurso = repoTodos.ObterQtdVotos(listaTodo.IdCurso);
                     listaTodo.TotalDuracaoCurso = repoTodos.SomarDuracaoCurso(listaTodo.IdCurso);
                 }
-
-            }
-            
+            }            
             return View(listaTodos);
         }
 
@@ -105,10 +99,8 @@ namespace Fatec.Treinamento.Web.Controllers
         }
 
         [HttpGet]
-        //[Route("Curso/{IdCurso}/Usuario/{IdUsuario}", Name = "RotaComecarCurso")]
         public ActionResult Detalhe(int? id)
         {
-            //int id = (int)Url.RequestContext.RouteData.Values["Id"];
             AssuntoCursoUsuario listaDetalhe = new AssuntoCursoUsuario();
 
             using (CursoRepository repoDetalhe = new CursoRepository())
@@ -121,15 +113,10 @@ namespace Fatec.Treinamento.Web.Controllers
                 }
                 catch (Exception)
                 {
-
                     return RedirectToAction("Index", "Curso");
                     throw;
                 }
             }
-
-            //if (listaDetalhe.IdCurso == null)
-            //{
-            //}
             return View(listaDetalhe);
         }
 
@@ -146,7 +133,6 @@ namespace Fatec.Treinamento.Web.Controllers
             {
                 foreach (var lista in listaCursoAssunto)
                 {
-                    //listaTodo.QtdUsuariosVotosCurso.Add(listaTodo.IdCurso);
                     lista.QtdUsuariosVotosCurso = repoCurso.ObterQtdVotos(lista.IdCurso);
                     lista.TotalDuracaoCurso = repoCurso.SomarDuracaoCurso(lista.IdCurso);
                 }
@@ -211,8 +197,6 @@ namespace Fatec.Treinamento.Web.Controllers
             }
         }
 
-
-
         [HttpGet]
         [Route("Curso/{IdCurso}/Assistir/Capitulo/{IdCapitulo}/Video/{IdVideo}", Name = "RotaAssistirVideo")]
         public ActionResult Assistir(int idCurso, int idCapitulo, int idVideo)
@@ -245,8 +229,8 @@ namespace Fatec.Treinamento.Web.Controllers
         [HttpGet]
         public ActionResult Prova(int id)
         {
-
             int idUsuario = 0;
+
             using (UsuarioRepository usuario = new UsuarioRepository())
             {
                 var listaUsuario = usuario.ListarPorNome(User.Identity.Name);
@@ -280,13 +264,10 @@ namespace Fatec.Treinamento.Web.Controllers
         [HttpPost]
         public ActionResult Prova(AssuntoCursoUsuario acu)
         {
-
             var idCurso = acu.IdCurso;
             var idUsuario = acu.IdUsuario;
             var nota = acu.SelectedNota;
             int notaInt = Int32.Parse(nota);
-
-
 
             using (CursoRepository repo = new CursoRepository())
             {
@@ -304,84 +285,7 @@ namespace Fatec.Treinamento.Web.Controllers
                     }
                 }
             }
-
-            //using (CursoRepository repo = new CursoRepository())
-            //{
-            //    int idUsuario = 0;
-            //    using (UsuarioRepository usuario = new UsuarioRepository())
-            //    {
-            //        var listaUsuario = usuario.ListarPorNome(User.Identity.Name);
-
-            //        foreach (var item in listaUsuario)
-            //        {
-            //            idUsuario = item.Id;
-            //        }
-            //    }
-
-            //    using (TreinamentoRepository repoTrei = new TreinamentoRepository())
-            //    {
-            //        var treinamento = repoTrei.ObterTreinamento(idUsuario, acu.IdCurso);
-            //        if (treinamento.DataConclusao != null)
-            //        {
-
-            //            if (treinamento != null)
-            //            {
-            //                repoTrei.AtualizarDataConclusaoTreinamento(treinamento.Id);
-            //            }
-            //            else
-            //            {
-
-            //            }
-            //        }
-            //    }
-            return RedirectToAction("Index", "Curso");
-            
+            return RedirectToAction("Index", "Curso");           
         }
-
-        //[HttpGet]
-        //public ActionResult FinalizarCurso(int idCurso)
-        //{
-        //    using (CursoRepository repo = new CursoRepository())
-        //    {
-        //        var curso = repo.Obter(idCurso);
-
-        //        return View(curso);
-        //    }
-        //}
-
-        [HttpPost]
-        public ActionResult FinalizarCurso(int id)
-        {
-
-            int idUsuario = 0;
-            using (UsuarioRepository usuario = new UsuarioRepository())
-            {
-                var listaUsuario = usuario.ListarPorNome(User.Identity.Name);
-
-                foreach (var item in listaUsuario)
-                {
-                    idUsuario = item.Id;
-                }
-            }
-
-            using (TreinamentoRepository repoTrei = new TreinamentoRepository())
-            {
-                var treinamento = repoTrei.ObterTreinamento(idUsuario, id);
-                if (treinamento.DataConclusao != null)
-                {
-
-                    if (treinamento != null)
-                    {
-                        repoTrei.AtualizarDataConclusaoTreinamento(treinamento.Id);
-                    }
-                    else
-                    {
-                    
-                    }
-                }
-            }
-            return new EmptyResult();
-        }
-
     }
 }

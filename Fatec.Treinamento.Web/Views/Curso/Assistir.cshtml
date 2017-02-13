@@ -4,55 +4,52 @@
 }
 
 <main>
-    <div class="main-video-content">
-        
-            <div class="row">
-                <div class="col-lg-8 col-md-8">
-                    <div class="embed-responsive embed-responsive-16by9 @ViewBag.ShowHideVideo">
-                        <iframe class="embed-responsive-item" src="//www.youtube.com/embed/@ViewBag.CodigoVideo?rel=0" allowfullscreen=""></iframe>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 capitulos-player">
-                    <div class="row assistir-curso-titulo">
-                        <div class="col-lg-11"><h4>@Model.Nome</h4></div>                        
-                    </div>
-                    @foreach (var capitulo in Model.Capitulos)
-                    {
-                        <div class="row capitulo">
-                            <div class="col-lg-9">
-                                <b>@capitulo.Nome</b>
-                            </div>
-                            <div class="col-lg-2 text-right">
-                                @capitulo.TempoTotal
-                            </div>
-                        </div>
-                        foreach (var video in capitulo.Videos)
-                        {
-                            var classe = "video";
-
-                            if (video.Id == ViewBag.IdVideo)
-                            {
-                                classe = "video selecionado";
-                            }
-
-                            <div class="row @classe">
-                                <div class="col-lg-9 video-link">
-                                    <span class="glyphicon glyphicon-play-circle"></span>
-                                    @Html.RouteLink(video.Nome, "RotaAssistirVideo", new RouteValueDictionary() { { "IdCurso", Model.IdCurso }, { "IdCapitulo", capitulo.Id }, { "IdVideo", video.Id } })
-                                </div>
-                                <div class="col-lg-2 text-right">
-                                    @video.DuracaoFormatada
-                                </div>
-                            </div>
-                        }
-                    }
-                    <div class="row btn-prova">
-                        @*<a href="@Html.ActionLink("Prova", "Curso")" class="btn btn-primary">Prova do Curso</a>*@
-                        @Html.ActionLink("Prova do Curso", "Prova", new { id = Model.IdCurso })
-                    </div>
+    <div class="main-video-content">       
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="embed-responsive embed-responsive-16by9 @ViewBag.ShowHideVideo">
+                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/@ViewBag.CodigoVideo?rel=0" allowfullscreen=""></iframe>
                 </div>
             </div>
-        
+            <div class="col-lg-4 col-md-4 capitulos-player">
+                <div class="row assistir-curso-titulo">
+                    <div class="col-lg-11"><h4>@Model.Nome</h4></div>                        
+                </div>
+                @foreach (var capitulo in Model.Capitulos)
+                {
+                    <div class="row capitulo">
+                        <div class="col-lg-9">
+                            <b>@capitulo.Nome</b>
+                        </div>
+                        <div class="col-lg-2 text-right">
+                            @capitulo.TempoTotal
+                        </div>
+                    </div>
+                    foreach (var video in capitulo.Videos)
+                    {
+                        var classe = "video";
+
+                        if (video.Id == ViewBag.IdVideo)
+                        {
+                            classe = "video selecionado";
+                        }
+
+                        <div class="row @classe">
+                            <div class="col-lg-9 video-link">
+                                <span class="glyphicon glyphicon-play-circle"></span>
+                                @Html.RouteLink(video.Nome, "RotaAssistirVideo", new RouteValueDictionary() { { "IdCurso", Model.IdCurso }, { "IdCapitulo", capitulo.Id }, { "IdVideo", video.Id } })
+                            </div>
+                            <div class="col-lg-2 text-right">
+                                @video.DuracaoFormatada
+                            </div>
+                        </div>
+                    }
+                }
+                <div class="row btn-prova">                        
+                    @Html.ActionLink("Prova do Curso", "Prova", new { id = Model.IdCurso })
+                </div>
+            </div>
+        </div>      
     </div>
 </main>
 

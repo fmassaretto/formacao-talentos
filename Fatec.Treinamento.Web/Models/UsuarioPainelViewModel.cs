@@ -20,8 +20,6 @@ namespace Fatec.Treinamento.Web.Models
             CursosFinalizado = new List<int>();
             CursosAndamento = new List<int>();
             CursosFavoritos = new List<int>();
-
         }
-
-}
+    }
 }

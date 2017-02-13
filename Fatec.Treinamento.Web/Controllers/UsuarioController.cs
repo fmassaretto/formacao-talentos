@@ -133,7 +133,6 @@ namespace Fatec.Treinamento.Web.Controllers
                 AssuntoCursoUsuario acu = new AssuntoCursoUsuario();
                 int user = usuario.Id;
                 acu.IdUsuario = usuario.Id;
-                //ViewData["IdUsuario"] = Int32.Parse(User.Identity.GetUserId());
                 ViewData["IdUsuario"] = user;
 
                 if (Url.IsLocalUrl(returnUrl))
@@ -141,14 +140,12 @@ namespace Fatec.Treinamento.Web.Controllers
                     return Redirect(returnUrl);
                 }
                 return RedirectToAction("Index", "Painel");
-
             }
             else
             {
                 ModelState.AddModelError("", "Credenciais Inválidas.");
                 return View(model);
             }
-
         }
 
         public ActionResult LogOff()

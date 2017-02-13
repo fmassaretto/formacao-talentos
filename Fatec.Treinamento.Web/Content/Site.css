@@ -525,7 +525,6 @@ body {
     display:inline-block;
 }
 
-
 .video .selecionado{
     color: #ff2f00;
     border-left: 2px solid #ff2f00;
@@ -656,11 +655,9 @@ textarea {
     margin-right: 10px;
 }
 
-
 .navbar-inverse .navbar-brand {
     color:#fff;
 }
-
 
 .home-search-form {
     margin-right: 10px;
@@ -695,10 +692,6 @@ textarea {
   padding-top: 20px;
 }
 
-
-.curso-concluido{
-}
-
 #detalhes-inicio div{
     text-align:center;
 }
@@ -709,7 +702,6 @@ textarea {
 }
 
 .aoxo{
-
     font-family: verdana;
 }
 
