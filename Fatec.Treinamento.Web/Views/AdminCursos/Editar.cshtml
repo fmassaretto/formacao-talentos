@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Editar";
+    ViewBag.Author = "Fabio Massaretto";
 }
 
 <h2>Editar</h2>
@@ -50,7 +51,7 @@
             @Html.LabelFor(model => model.NomeAutor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NomeAutor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.DropDownListFor(model => Model.ListaUsuarios, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.DropDownListFor(model => Model.ListaUsuarios, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.NomeAutor, "", new { @class = "text-danger" })
             </div>
         </div>

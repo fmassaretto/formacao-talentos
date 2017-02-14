@@ -176,6 +176,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 }
             } 
 
+            // If para atualizar data inicio se não começou o curso, se começou atualiza o ultimo acesso
             using (TreinamentoRepository repoTrei = new TreinamentoRepository())
             {
                 var treinamento = repoTrei.ObterTreinamento(idUsuario, idCurso);
@@ -275,6 +276,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 repo.InserirNota(idCurso, idUsuario, notaInt);
             }
 
+            //Se o usuario concluiu o curso então atualiza data de conclusão
             using (TreinamentoRepository repoTrei = new TreinamentoRepository())
             {
                 var treinamento = repoTrei.ObterTreinamento(idUsuario, idCurso);

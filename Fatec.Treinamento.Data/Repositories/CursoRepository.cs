@@ -129,7 +129,8 @@ namespace Fatec.Treinamento.Data.Repositories
             ).ToList();
 		}
 
-		public AssuntoCursoUsuario DetalheCurso(int? id)
+        //Lista os detalhes do curso para mostrar na view Detalhe
+        public AssuntoCursoUsuario DetalheCurso(int? id)
 		{
 			var curso = Connection.Query<AssuntoCursoUsuario>(
               @"SELECT
@@ -179,6 +180,7 @@ namespace Fatec.Treinamento.Data.Repositories
             return curso;
 		}
 
+
         public IEnumerable<DetalhesCurso> ListarCursosDetalhes()
         {
             return Connection.Query<DetalhesCurso>(
@@ -197,6 +199,7 @@ namespace Fatec.Treinamento.Data.Repositories
                   ).ToList();
         }
 
+        //Lista curso poulares ordenado por melhor classificação
         public IEnumerable<AssuntoCursoUsuario> ListarPopulares() {
             return Connection.Query<AssuntoCursoUsuario>(
                     @"SELECT
@@ -219,6 +222,7 @@ namespace Fatec.Treinamento.Data.Repositories
                   ).ToList();
         }
 
+        //Inseri curso
         public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario acu)
         {
             var id = Connection.ExecuteScalar<int>(
@@ -250,6 +254,7 @@ namespace Fatec.Treinamento.Data.Repositories
             return acu;
         }
 
+        //Atualiza a classificação/nota média do curso
         public void AtualizaClassificacao(int id)
         {
             Connection.Execute(
@@ -265,6 +270,7 @@ namespace Fatec.Treinamento.Data.Repositories
            );
         }
 
+        //Inseri a nota do curso depois de concluido o curso
         public void InserirNota(int idCurso, int idUsuario, int nota)
         {
             Connection.Execute(
@@ -279,6 +285,7 @@ namespace Fatec.Treinamento.Data.Repositories
            );
         }
 
+        //Obtem a quantidade de usuarios que votaram em um determinado curso
         public int ObterQtdVotos(int? id)
         {
             return Connection.Query<int>(
@@ -289,6 +296,7 @@ namespace Fatec.Treinamento.Data.Repositories
                ).FirstOrDefault();
         }
 
+        //Obtem a duração máxima de um curso
         public int SomarDuracaoCurso(int? id)
         {
             return Connection.ExecuteScalar<int>(

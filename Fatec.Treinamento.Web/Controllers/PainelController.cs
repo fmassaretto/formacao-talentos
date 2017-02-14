@@ -38,6 +38,7 @@ namespace Fatec.Treinamento.Web.Controllers
 
             using (TreinamentoRepository repoTrein = new TreinamentoRepository())
             {
+                //Recupera a qtde de pontos que o usuario tem
                 try
                 {
                     listar.PontosUsuario = repoTrein.PontosUsuario(idUsuario);

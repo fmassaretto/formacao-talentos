@@ -21,6 +21,11 @@ namespace Fatec.Treinamento.Web.Controllers
             }
         }
 
+        public PartialViewResult MenuTrilhas()
+        {
+            return PartialView("~/Views/Shared/ItensMenuTrilhas.cshtml");
+        }
+
         public ActionResult Carousel()
         {
             return PartialView("~/Views/Shared/_Carousel.cshtml");

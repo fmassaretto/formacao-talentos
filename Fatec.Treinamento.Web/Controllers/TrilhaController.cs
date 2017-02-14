@@ -12,7 +12,7 @@ namespace Fatec.Treinamento.Web.Controllers
     // acessadas quando o usuário estiver autorizado a utilizar.
     // Quando informo o parametro "Roles", indico que só quem tiver o perfil administrador poderá acessar.
 
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public class TrilhaController : Controller
     {
         [HttpGet]
