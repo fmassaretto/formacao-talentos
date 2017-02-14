@@ -270,7 +270,6 @@
     <Content Include="Views\Shared\_PainelAdmin.cshtml" />
     <Content Include="Views\Shared\_PainelInstrutor.cshtml" />
     <Content Include="Views\AdminCursos\Index.cshtml" />
-    <Content Include="Views\AdminCursos\Editar.cshtml" />
     <Content Include="Views\AdminCursos\Deletar.cshtml" />
     <Content Include="Views\AdminCursos\Criar.cshtml" />
     <Content Include="Views\Curso\Assistir.cshtml" />
