@@ -19,7 +19,7 @@ namespace Fatec.Treinamento.Web.Controllers
             switch (toPage)
             {
                 case "Usuarios":
-                    return RedirectToAction("Usuario", "Admin");
+                    return RedirectToAction("Index", "AdminUsuarios");
                 case "Cursos":
                     return RedirectToAction("Index", "AdminCursos");
                 case "Assuntos":

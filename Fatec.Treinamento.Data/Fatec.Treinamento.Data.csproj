@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AdminUsuarioRepository.cs" />
+    <Compile Include="Repositories\AdminCursoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAdminCursoRepository.cs" />
     <Compile Include="Repositories\TrilhaRepository.cs" />
     <Compile Include="Repositories\CursoRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICursoRepository.cs" />
@@ -58,7 +61,7 @@
     <Compile Include="Repositories\Interfaces\IPerfilRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUsuarioRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
-    <Compile Include="TreinamentoRepository.cs" />
+    <Compile Include="Repositories\TreinamentoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fatec.Treinamento.Model\Fatec.Treinamento.Model.csproj">

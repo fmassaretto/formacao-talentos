@@ -1,4 +1,4 @@
-﻿@model Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario
+﻿@model Fatec.Treinamento.Model.Usuario
 
 @{
     ViewBag.Title = "Deletar";
@@ -9,7 +9,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Deletar Curso - @Model.Nome</h4>
+    <h4>Deletar Usuario - @Model.Nome</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -21,26 +21,26 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NomeAutor)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NomeAutor)
+            @Html.DisplayFor(model => model.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.DisplayNameFor(model => model.Perfil)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Descricao)
+            @Html.DisplayFor(model => model.Perfil.Nome)
         </dd>
 
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(Model => Model.IdCurso)
+        @Html.HiddenFor(Model => Model.Id)
         <div class="form-actions no-color">
             <input type="submit" value="Deletar" class="btn btn-default" /> |
             @Html.ActionLink("Voltar", "Index")

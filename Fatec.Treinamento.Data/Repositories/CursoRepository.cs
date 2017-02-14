@@ -46,7 +46,9 @@ namespace Fatec.Treinamento.Data.Repositories
 			       u.Nome AS NomeAutor,
 			       a.Nome AS NomeAssunto,
 			       cd.Descricao,
-                   c.Nivel
+                   c.DataCriacao,
+                   c.Nivel,
+                   c.Img
 			   FROM Curso c
 			   INNER JOIN Usuario u ON c.IdAutor = u.Id
 			   INNER JOIN Assunto a ON c.IdAssunto = a.Id
@@ -222,7 +224,7 @@ namespace Fatec.Treinamento.Data.Repositories
                   ).ToList();
         }
 
-        //Inseri curso
+        //Inserir curso
         public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario acu)
         {
             var id = Connection.ExecuteScalar<int>(
@@ -232,8 +234,8 @@ namespace Fatec.Treinamento.Data.Repositories
                param: new
                {
                    Nome = acu.Nome,
-                   IdAutor = acu.UsuarioSelecionado,
-                   IdAssunto = acu.AssuntoSelecionado,
+                   //IdAutor = acu.UsuarioSelecionado,
+                   //IdAssunto = acu.AssuntoSelecionado,
                    Nivel = acu.Nivel
                }
            );

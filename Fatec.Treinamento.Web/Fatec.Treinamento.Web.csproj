@@ -159,6 +159,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminCursosController.cs" />
     <Compile Include="Controllers\AdminTrilhasController.cs" />
+    <Compile Include="Controllers\AdminUsuariosController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PainelController.cs" />
@@ -168,6 +169,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminUsuarioViewModel.cs" />
+    <Compile Include="Models\AdminCursoViewModel.cs" />
     <Compile Include="Models\AssuntoViewModel.cs" />
     <Compile Include="Models\CursoAssuntoUsuarioViewModel.cs" />
     <Compile Include="Models\UsuarioPainelViewModel.cs" />
@@ -275,6 +278,11 @@
     <Content Include="Views\Curso\Assistir.cshtml" />
     <Content Include="Views\Curso\Prova.cshtml" />
     <Content Include="Views\Shared\ItensMenuTrilhas.cshtml" />
+    <Content Include="Views\AdminCursos\Editar.cshtml" />
+    <Content Include="Views\AdminUsuarios\Criar.cshtml" />
+    <Content Include="Views\AdminUsuarios\Deletar.cshtml" />
+    <Content Include="Views\AdminUsuarios\Editar.cshtml" />
+    <Content Include="Views\AdminUsuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

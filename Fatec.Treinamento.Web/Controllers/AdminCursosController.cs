@@ -35,48 +35,40 @@ namespace Fatec.Treinamento.Web.Controllers
         [HttpGet]
         public ActionResult Criar()
         {
-            var model = new CursoAssuntoUsuarioViewModel();
+            var model = new AdminCursoViewModel();
 
-            using (var repo = new UsuarioRepository())
+            using (var repoUser = new AdminCursoRepository())
             {
-                var lista = repo.Listar();
-                foreach (var user in lista)
-                {
-                    var item = new SelectListItem
-                    {
-                        Text = user.Nome,
-                        Value = user.Id.ToString()
-                    };
-                    model.ListaUsuarios.Add(item);
-                }
+                var listaUsuario = repoUser.ListaUsuario();
+
+                model.ListaUsuarios = (from x in listaUsuario
+                                       select new SelectListItem
+                                       {
+                                           Text = x.Nome,
+                                           Value = x.Id.ToString()
+                                       });
             }
 
-            using (var repo = new AssuntoRepository())
+            using (var repoAssunto = new AdminCursoRepository())
             {
-                var lista = repo.Listar();
-                foreach (var assunto in lista)
-                {
-                    var item = new SelectListItem
-                    {
-                        Text = assunto.NomeAssunto,
-                        Value = assunto.IdAssunto.ToString()
-                    };
-                    model.ListaAssuntos.Add(item);
-                }
+                var listaAssunto = repoAssunto.ListaAssunto();
+
+                model.ListaAssunto = (from x in listaAssunto
+                                      select new SelectListItem
+                                      {
+                                          Text = x.Nome,
+                                          Value = x.Id.ToString()
+                                      });
             }
-
-
             return View(model);
-
-
         }
 
         [HttpPost]
-        public ActionResult Criar(CursoAssuntoUsuarioViewModel acu)
+        public ActionResult Criar(AssuntoCursoUsuario acu)
         {
-            using (var repo = new CursoRepository())
+            using (var repo = new AdminCursoRepository())
             {
-                var inserido = repo.Inserir(acu.Curso);
+                var inserido = repo.Inserir(acu);
 
                 if (inserido.IdCurso == 0)
                 {
@@ -89,6 +81,51 @@ namespace Fatec.Treinamento.Web.Controllers
         [HttpGet]
         public ActionResult Editar(int id)
         {
+            var model = new AdminCursoViewModel();
+
+            using (var repoUser = new AdminCursoRepository())
+            {
+                var listaUsuario = repoUser.ListaUsuario();
+
+                model.ListaUsuarios = (from x in listaUsuario select new SelectListItem {
+                    Text = x.Nome,
+                    Value = x.Id.ToString()
+                });
+            }
+
+            using (var repoAssunto = new AdminCursoRepository())
+            {
+                var listaAssunto = repoAssunto.ListaAssunto();
+
+                model.ListaAssunto = (from x in listaAssunto
+                                       select new SelectListItem
+                                       {
+                                           Text = x.Nome,
+                                           Value = x.Id.ToString()
+                                       });
+            }
+
+            using (var repo = new CursoRepository())
+            {
+                model.Acu = repo.Obter(id);
+            }
+                return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(AssuntoCursoUsuario acu)
+        {
+            using (var repo = new AdminCursoRepository())
+            {
+                repo.Atualizar(acu);
+
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Deletar(int id)
+        {
             using (var repo = new CursoRepository())
             {
                 var curso = repo.Obter(id);
@@ -98,14 +135,14 @@ namespace Fatec.Treinamento.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Editar(AssuntoCursoUsuario acu)
+        public ActionResult Deletar(AssuntoCursoUsuario acu)
         {
-            using (var repo = new CursoRepository())
+            using (var repo = new AdminCursoRepository())
             {
-                var curso = repo.Atualizar(acu);
-
-                return RedirectToAction("Index");
+                repo.Excluir(acu);
             }
+            return RedirectToAction("Index");
         }
+
     }
 }

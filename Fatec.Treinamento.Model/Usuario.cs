@@ -21,6 +21,8 @@ namespace Fatec.Treinamento.Model
 
         public bool Ativo { get; set; }
 
+        public int PerfilSelecionado { get; set; }
+
         /// <summary>
         /// Retorna a senha criptografada.
         /// OBS: a propriedade SENHA deve ter sido informada.
