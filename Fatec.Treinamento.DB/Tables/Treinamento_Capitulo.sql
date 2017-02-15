@@ -4,8 +4,10 @@
     [IdCapitulo]    INT      NOT NULL,
     [Pontos]        INT      NOT NULL,
     [DataConclusao] DATETIME NULL,
-    CONSTRAINT [PK_Treinamento_Capitulo] PRIMARY KEY CLUSTERED ([IdUsuario] ASC, [IdCurso] ASC, [IdCapitulo] ASC),
-    CONSTRAINT [FK_Treinamento_Capitulo_Capitulo] FOREIGN KEY ([IdCapitulo]) REFERENCES [dbo].[Capitulo] ([Id]),
-    CONSTRAINT [FK_Treinamento_Capitulo_Treinamento] FOREIGN KEY ([IdUsuario], [IdCurso]) REFERENCES [dbo].[Treinamento] ([IdUsuario], [IdCurso])
+    [Id] INT NOT NULL IDENTITY, 
+    CONSTRAINT [PK_Treinamento_Capitulo] PRIMARY KEY CLUSTERED ([Id]), 
+    CONSTRAINT [FK_Treinamento_Capitulo_Usuario] FOREIGN KEY ([IdUsuario]) REFERENCES [Usuario]([Id]), 
+    CONSTRAINT [FK_Treinamento_Capitulo_Curso] FOREIGN KEY ([IdCurso]) REFERENCES [Curso]([Id]), 
+    CONSTRAINT [FK_Treinamento_Capitulo_Capitulo] FOREIGN KEY ([IdCapitulo]) REFERENCES [Capitulo]([Id])
 );
 
