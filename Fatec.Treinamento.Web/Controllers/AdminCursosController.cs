@@ -36,7 +36,7 @@ namespace Fatec.Treinamento.Web.Controllers
         public ActionResult Criar()
         {
             var model = new AdminCursoViewModel();
-
+            //Salvo os usuarios a guardo na variavel listaUsuario
             using (var repoUser = new AdminCursoRepository())
             {
                 var listaUsuario = repoUser.ListaUsuario();
@@ -49,6 +49,7 @@ namespace Fatec.Treinamento.Web.Controllers
                                        });
             }
 
+            //Salvo os assuntos a guardo na variavel listaAssunto
             using (var repoAssunto = new AdminCursoRepository())
             {
                 var listaAssunto = repoAssunto.ListaAssunto();

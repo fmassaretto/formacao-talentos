@@ -14,6 +14,7 @@ namespace Fatec.Treinamento.Web.Controllers
             return View();
         }
 
+        // Teste não implementado
         public string RecuperarThumb(string codigoVideo)
         {
             //string[] result = enderecoVideo.Split('=');

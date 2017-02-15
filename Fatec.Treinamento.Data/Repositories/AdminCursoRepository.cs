@@ -12,7 +12,7 @@ namespace Fatec.Treinamento.Data.Repositories
 {
     public class AdminCursoRepository : RepositoryBase
     {
-
+        //Atuliza tabela Curso para depois atualizar a tabela Curso_Descricao
         public AssuntoCursoUsuario Atualizar(AssuntoCursoUsuario acu)
         {
             Connection.Execute(
@@ -47,6 +47,7 @@ namespace Fatec.Treinamento.Data.Repositories
                return acu;
         }
 
+        //Insere informações do curso na tabela Curso e Curso_Descricao
         public AssuntoCursoUsuario Inserir(AssuntoCursoUsuario acu)
         {
             var id = Connection.ExecuteScalar<int>(
@@ -77,6 +78,7 @@ namespace Fatec.Treinamento.Data.Repositories
             return acu;
         }
 
+        //Deleta os dados da tabela Curso_Descricao e depois da Curso
         public void Excluir(AssuntoCursoUsuario acu)
         {
             Connection.Execute(
@@ -95,6 +97,7 @@ namespace Fatec.Treinamento.Data.Repositories
             );
         }
 
+        //Lista todos usuarios da tabela Usuario
         public IEnumerable<Usuario> ListaUsuario()
         {
             return Connection.Query<Usuario>(
@@ -102,6 +105,7 @@ namespace Fatec.Treinamento.Data.Repositories
                 ).ToList();
         }
 
+        //Lista todos assuntos da tabela Assunto
         public IEnumerable<Assunto> ListaAssunto()
         {
             return Connection.Query<Assunto>(

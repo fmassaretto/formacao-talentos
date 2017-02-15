@@ -48,6 +48,7 @@ namespace Fatec.Treinamento.Model.DTO
 
         public string SelectedNota { get; set; }
 
+        [DisplayName("Imagem")]
         public string Img { get; set; }
 
         public IList<Capitulo> Capitulos { get; set; }
@@ -56,11 +57,11 @@ namespace Fatec.Treinamento.Model.DTO
 
         public IList<Capitulo> Pontos { get; set; }
 
-        //public IList<int> QtdUsuariosVotosCurso { get; set; }
         public int QtdUsuariosVotosCurso { get; set; }
 
         public int TotalDuracaoCurso { get; set; }
 
+        // Formata a variavel TotalDuracaoCurso 
         public string TotalDuracaoCursoFormatado
         {
             get
@@ -70,6 +71,7 @@ namespace Fatec.Treinamento.Model.DTO
             }
         }
 
+        //Soma os ponto do usuario
         public int TotalPontos {
             get
             {

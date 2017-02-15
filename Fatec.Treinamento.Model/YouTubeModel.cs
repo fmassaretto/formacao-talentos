@@ -8,6 +8,7 @@ namespace Fatec.Treinamento.Model
 {
     public class YouTubeModel
     {
+        // Teste não implementado
         public string EndImagem { get; set; }
         public string EndVideo { get; set; }
     }

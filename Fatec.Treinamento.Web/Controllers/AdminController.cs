@@ -14,6 +14,8 @@ namespace Fatec.Treinamento.Web.Controllers
             return View();
         }
 
+        /* Controller para redirecionar para respectiva pagina quando clica em um 
+        link na pagina painel do administrador */
         public ActionResult Redirecionador(string toPage)
         {
             switch (toPage)

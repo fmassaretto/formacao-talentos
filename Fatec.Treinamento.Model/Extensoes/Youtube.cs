@@ -8,6 +8,7 @@ namespace Fatec.Treinamento.Model.Extensoes
 {
     public class Youtube
     {
+        //Teste não implementado
         public string RecuperarThumb(string codigoVideo)
         {
             return string.Format("http://img.youtube.com/vi/{0}/default.jpg", codigoVideo);

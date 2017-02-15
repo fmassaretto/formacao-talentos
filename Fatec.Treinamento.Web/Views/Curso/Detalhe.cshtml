@@ -48,6 +48,8 @@
                 <div class="col-md-4">
                     <div id="menu-detalhe">
                         <div class="list-group" id="list-content">
+                            @* Verifica se o usuario está logado se sim permite acessar o curso senão 
+                                mostra o modal para cadastrar ou logar *@
                             @if (Request.IsAuthenticated)
                             {
                                 <a href="@Url.Action("Assistir", new { idCurso = Model.IdCurso } )" id="btn-comecar" class="btn btn-primary list-group-item">COMEÇAR CURSO</a>
@@ -60,7 +62,7 @@
                             <text class="list-group-item">Pontos adquiridos nesse curso: <span class="badge">@Model.TotalPontos</span></text>
                             <text class="list-group-item">Tempo total do curso: <span class="badge">@Html.DisplayFor(Model => Model.TotalDuracaoCursoFormatado)</span></text>
                             <div class="spacer"></div>
-                            @Html.ActionLink("Voltar aos Cursos", "Index", "CursoController", new { @class = "list-group-item"})
+                            @Html.ActionLink("Voltar aos Cursos", "Index", "Curso", new { @class = "list-group-item"})
                         </div>
                     </div>
                 </div>

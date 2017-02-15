@@ -17,6 +17,7 @@ namespace Fatec.Treinamento.Model
 
         public IEnumerable<Video> Videos { get; set; }
 
+        //Soma as durações de cada video
         public string TempoTotal {
             get
             {

@@ -67,7 +67,8 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="glyphicon glyphicon-user"></span> &nbsp;&nbsp; @User.Identity.GetUserName() <span class="caret"></span>
                             </a>
-
+                            @* Mostra respectivo link do painel para Usuario, Administrador ou Instrutor 
+                                dependendo de quem está logado*@
                             <ul class="dropdown-menu">
                                 @if (this.User.IsInRole("Administrador"))
                                 {
