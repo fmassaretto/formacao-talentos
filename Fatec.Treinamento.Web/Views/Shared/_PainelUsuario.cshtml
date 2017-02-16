@@ -63,7 +63,8 @@
                                 if (item.Equals(model.IdCurso))
                                 {
                                     <div class="item-curso-box">
-                                        <a href="@Url.Action("Detalhe", "Curso", new { id = model.IdCurso })" @*class="thumbnail"*@>@Html.DisplayFor(modelItem => model.Nome)</a>
+                                        <a href="@Url.Action("Detalhe", "Curso", new { id = model.IdCurso })" @*class="thumbnail"*@>@Html.DisplayFor(modelItem => model.Nome)</a> |
+                                        <a href="#">Certificado</a>
                                     </div>
                                 }
                             }
