@@ -278,6 +278,10 @@ body {
 }
 /* FIM css do painel*/
 
+.table-color{
+    color: #fff;
+}
+
 #btn-comecar{
     background-color:#15a589;
     text-align: center;
@@ -523,6 +527,11 @@ body {
 
 .video-hide{
     display:none;
+}
+
+#ok-video{
+    /*display: none;*/
+    text-align: right;
 }
 
 #help-content > .media{
