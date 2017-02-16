@@ -474,7 +474,6 @@ body {
 
 .main-content{
     width: 100%;
-
     display:block;
     padding-top: 70px;
 }
@@ -526,8 +525,10 @@ body {
     display:none;
 }
 
-.video-show{
-
+#help-content > .media{
+    margin: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 .video-link {
