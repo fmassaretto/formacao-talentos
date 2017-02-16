@@ -18,12 +18,39 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Cursos" })" class="menu-item">Gerenciar Cursos</a></li>
                     <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Assuntos" })" class="menu-item">Gerenciar Assuntos</a></li>
-                    <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Trilhas" })" class="menu-item">Gerenciar Trilhas</a></li>
                     <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Capitulos" })" class="menu-item">Gerenciar Capitulos</a></li>
                     <li role="presentation"><a href="@Url.Action("Redirecionador", "Admin", new { toPage = "Videos" })" class="menu-item">Gerenciar Videos</a></li>
                 </ul>
             </div>
             <div class="gerenciar-container-item">
+                <div class="alert alert-success" role="alert">
+                    <a href="#" class="alert-link"><b>Nova Mensagem! </b></a>
+                    Você tem 1 nova mensagem!
+                </div>
+                <div class="gerenciar-content-title">
+                    <h3>Mensagens</h3>
+                    <hr />
+                    <table class="table table-condensed table-color">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Curso</th>
+                                <th>Video</th>
+                                <th>Mensagem</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Fabi Corsi</td>
+                                <td>Introdução ao SQL Server</td>
+                                <td>3 - T-SQL - CREATE DATABASE - Criar Banco de Dados</td>
+                                <td>Olá! Estou com duvida de como fazer um Insert no SQL</td>
+                                <td><a href="#" name="responder"> Responder </a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="gerenciar-content-title">
                     <h3>Visão Geral</h3>
                     <hr />
@@ -46,16 +73,6 @@
                             <p>Você Criou:</p>
                             <div class="item-admin-content">
                                 <h6>Total de Assuntos: 3</h6>
-                                <h6></h6>
-                                <h6></h6>
-                            </div>
-                        </div>
-                        <div class="item-admin-box">
-                            <h3>Trilhas</h3>
-                            <hr />
-                            <p>Você Criou:</p>
-                            <div class="item-admin-content">
-                                <h6>Total de Trilhas: 10</h6>
                                 <h6></h6>
                                 <h6></h6>
                             </div>
