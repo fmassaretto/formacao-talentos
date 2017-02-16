@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Assistir";
     ViewBag.Author = "Fabio Massaretto";
+    ViewData["NomeProva"] = "Prova de " + Model.Nome;
 }
 
 <main>
@@ -9,8 +10,10 @@
         <div class="row">
             <div class="col-lg-8 col-md-8">
                 <div class="embed-responsive embed-responsive-16by9 @ViewBag.ShowHideVideo">
-                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/@ViewBag.CodigoVideo?rel=0" allowfullscreen=""></iframe>
+                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/@ViewBag.CodigoVideo?rel=0&autoplay=1" allowfullscreen=""></iframe>
                 </div>
+                <a href="@Url.Action("Assistir", new { idCurso = Model.IdCurso } )" class="btn btn-primary @ViewBag.ShowHideVideo">Material de Apoio</a> |
+                <a href="@Url.Action("Assistir", new { idCurso = Model.IdCurso } )" class="btn btn-primary @ViewBag.ShowHideVideo">Chat</a>
             </div>
             <div class="col-lg-4 col-md-4 capitulos-player">
                 <div class="row assistir-curso-titulo">
@@ -39,6 +42,8 @@
                             <div class="col-lg-9 video-link">
                                 <span class="glyphicon glyphicon-play-circle"></span>
                                 @Html.RouteLink(video.Nome, "RotaAssistirVideo", new RouteValueDictionary() { { "IdCurso", Model.IdCurso }, { "IdCapitulo", capitulo.Id }, { "IdVideo", video.Id } })
+                                <span class="glyphicon glyphicon-ok" id="ok-video"></span>
+                                
                             </div>
                             <div class="col-lg-2 text-right">
                                 @video.DuracaoFormatada
@@ -46,8 +51,15 @@
                         </div>
                     }
                 }
-                <div class="row btn-prova">                        
-                    @Html.ActionLink("Prova do Curso", "Prova", new { id = Model.IdCurso })
+                <div class="row capitulo">
+                    <div class="col-lg-9">
+                        <b>Prova do Curso</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9 video-link">
+                        @Html.ActionLink(ViewData["NomeProva"].ToString(), "Prova", new { id = Model.IdCurso })   
+                    </div>
                 </div>
             </div>
         </div>      
