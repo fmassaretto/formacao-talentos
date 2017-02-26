@@ -25,6 +25,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 {
                     lista.QtdUsuariosVotosCurso = repo.ObterQtdVotos(lista.IdCurso);
                     lista.TotalDuracaoCurso = repo.SomarDuracaoCurso(lista.IdCurso);
+                    repo.AtualizaClassificacao(lista.IdCurso);
                 }
             }
             
@@ -42,6 +43,7 @@ namespace Fatec.Treinamento.Web.Controllers
                 {
                     listaTodo.QtdUsuariosVotosCurso = repoTodos.ObterQtdVotos(listaTodo.IdCurso);
                     listaTodo.TotalDuracaoCurso = repoTodos.SomarDuracaoCurso(listaTodo.IdCurso);
+                    repoTodos.AtualizaClassificacao(listaTodo.IdCurso);
                 }
             }            
             return View(listaTodos);
@@ -50,18 +52,21 @@ namespace Fatec.Treinamento.Web.Controllers
         [HttpGet]
         public ActionResult Populares()
         {
+            AssuntoCursoUsuario acu = new AssuntoCursoUsuario();
 
             IEnumerable<AssuntoCursoUsuario> listaPop = new List<AssuntoCursoUsuario>();
-            using (CursoRepository repo = new CursoRepository())
+            using (CursoRepository repoDestaque = new CursoRepository())
             {
-                listaPop = repo.ListarTodosCursos();
+                //listaPop = repoDestaque.ListarTodosCursos();
+                listaPop = repoDestaque.ListarPopulares();
                 foreach (var lista in listaPop)
                 {
-                    lista.QtdUsuariosVotosCurso = repo.ObterQtdVotos(lista.IdCurso);
-                    lista.TotalDuracaoCurso = repo.SomarDuracaoCurso(lista.IdCurso);
+                    lista.QtdUsuariosVotosCurso = repoDestaque.ObterQtdVotos(lista.IdCurso);
+                    lista.TotalDuracaoCurso = repoDestaque.SomarDuracaoCurso(lista.IdCurso);
+                    repoDestaque.AtualizaClassificacao(lista.IdCurso);
+                    acu = lista;
                 }
 
-                listaPop = repo.ListarPopulares();
 
                 return View(listaPop);
             }
