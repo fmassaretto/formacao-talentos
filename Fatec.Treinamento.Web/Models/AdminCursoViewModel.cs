@@ -16,19 +16,6 @@ namespace Fatec.Treinamento.Web.Models
 
         public HttpPostedFileBase Img { get; set; }
 
-        public IList<SelectListItem> Niveis { get; set; }
-
-        public AdminCursoViewModel()
-        {
-            var data = new[]{
-                 new SelectListItem{ Value="Iniciante",Text="Iniciante"},
-                 new SelectListItem{ Value="Intermediário",Text="Intermediário"},
-                 new SelectListItem{ Value="Avançado",Text="Avançado"}
-             };
-
-            Niveis = data.ToList();
-        }
-
         //public List<HttpPostedFileBase> Files { get; set; }
 
         //public AdminCursoViewModel(){
