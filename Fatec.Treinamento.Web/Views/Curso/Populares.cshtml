@@ -1,4 +1,4 @@
-﻿@model IEnumerable < Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario>
+﻿@model IEnumerable <Fatec.Treinamento.Model.DTO.AssuntoCursoUsuario>
 
 @{
     ViewBag.Title = "Populares";
@@ -13,14 +13,13 @@
 <main>
     <div class="main-content">
         <h2>Veja os cursos que estão em destaque:</h2>
-        <p></p>
         <div class="row">
             @foreach (var item in Model)
             {
-            @Html.HiddenFor(Model => item.IdCurso);
+            //@Html.HiddenFor(Model => item.IdCurso);
                 <div class="col-sm-4 col-md-4">
                     <div class="thumbnail">
-                        <img data-src="holder.js/300x200" alt="300x200" src="@item.Img" class="img-responsive">
+                        <img data-src="holder.js/300x200" alt="300x200" src="~/Content/Img/Cursos/@item.Nome/@item.Img" class="img-responsive">
                         <div class="caption">
                             <h4><a href="@Url.Action("Detalhe", new { id = item.IdCurso })">@Html.DisplayFor(modelItem => item.Nome)</a></h4>
                             <p>

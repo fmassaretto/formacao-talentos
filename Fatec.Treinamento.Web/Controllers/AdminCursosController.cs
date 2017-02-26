@@ -66,11 +66,12 @@ namespace Fatec.Treinamento.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Criar(AssuntoCursoUsuario acu)
+        public ActionResult Criar(AdminCursoViewModel model)
         {
             using (var repo = new AdminCursoRepository())
             {
-                var inserido = repo.Inserir(acu);
+                model.Acu.Img = model.Img.FileName.ToString();
+                var inserido = repo.Inserir(model.Acu);
 
 
                 if (inserido.IdCurso == 0)
@@ -78,20 +79,25 @@ namespace Fatec.Treinamento.Web.Controllers
                     ModelState.AddModelError("", "Erro");
                 }
 
+
                 if (Request.Files.Count > 0)
                 {
-                    var file = Request.Files[0];
-                    if (file != null && file.ContentLength > 0)
+                    //var file = Request.Files[0];
+                    if (ModelState.IsValid)
                     {
-                        //acu.Img = file.FileName.ToString();
-                        var filename = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(Server.MapPath("/Content/Img/" + acu.Nome), filename);
-                        var directory = Directory.CreateDirectory(Server.MapPath("/Content/Img/" + acu.Nome));
+                       //model.Acu.Img = model.Img.FileName.ToString();
+                        var filename = Path.GetFileName(model.Img.FileName);
+                        var shortPath = "/Content/Img/Cursos/" + model.Acu.Nome;
+                        var path = Path.Combine(Server.MapPath(shortPath), filename);
 
-                        file.SaveAs(path);
-                    }
+                        //Verifica se não existe o diretorio então cria o diretorio
+                        if (!Directory.Exists(Server.MapPath(shortPath)))
+                        {
+                            var directory = Directory.CreateDirectory(Server.MapPath(shortPath));
+                        }
 
-                
+                        model.Img.SaveAs(path);
+                    }               
                 }
             }
             return RedirectToAction("Index");
@@ -132,13 +138,42 @@ namespace Fatec.Treinamento.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Editar(AssuntoCursoUsuario acu)
+        public ActionResult Editar(AdminCursoViewModel model)
         {
             using (var repo = new AdminCursoRepository())
             {
-                repo.Atualizar(acu);
+                var fileNameOld = repo.Obter(model.Acu.IdCurso);
 
-                return RedirectToAction("Index");
+                var shortPathOld = "/Content/Img/Cursos/" + fileNameOld.Nome;
+
+
+                model.Acu.Img = model.Img.FileName.ToString();
+                repo.Atualizar(model.Acu);
+
+                if (Request.Files.Count > 0)
+                {
+                    //var file = Request.Files[0];
+                    if (ModelState.IsValid)
+                    {
+                        var filename = Path.GetFileName(model.Img.FileName);
+                        var shortPath = "/Content/Img/Cursos/" + model.Acu.Nome;
+                        var path = Path.Combine(Server.MapPath(shortPath), filename);
+
+                        if (Directory.Exists(Server.MapPath(shortPathOld)))
+                        {
+                            Directory.Move(Server.MapPath(shortPathOld), Server.MapPath(shortPath));
+                        }else
+                        {
+                            Directory.CreateDirectory(Server.MapPath(shortPath));
+                        }
+
+                        model.Img.SaveAs(path);
+                        //Verifica se não existe o diretorio então cria o diretorio
+                       
+
+                    }
+                }
+                    return RedirectToAction("Index");
             }
         }
 
