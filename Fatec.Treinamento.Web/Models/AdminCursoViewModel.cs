@@ -14,5 +14,11 @@ namespace Fatec.Treinamento.Web.Models
         public IEnumerable<SelectListItem> ListaUsuarios { get; set; }
         public IEnumerable<SelectListItem> ListaAssunto { get; set; }
 
+        //public List<HttpPostedFileBase> Files { get; set; }
+
+        //public AdminCursoViewModel(){
+        //    Files = new List<HttpPostedFileBase>();    
+        //}
+
     }
 }
