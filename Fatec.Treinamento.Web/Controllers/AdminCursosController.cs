@@ -110,30 +110,33 @@ namespace Fatec.Treinamento.Web.Controllers
 
             using (var repoUser = new AdminCursoRepository())
             {
+                model.Acu = repoUser.Obter(id);
                 var listaUsuario = repoUser.ListaUsuario();
+                model.Acu.UsuarioSelecionado = model.Acu.IdAutor;
 
                 model.ListaUsuarios = (from x in listaUsuario select new SelectListItem {
                     Text = x.Nome,
-                    Value = x.Id.ToString()
+                    Value = x.Id.ToString(),
+                    Selected = model.Acu.NomeAutor == x.Nome
                 });
             }
 
+
             using (var repoAssunto = new AdminCursoRepository())
             {
+                model.Acu.AssuntoSelecionado = model.Acu.IdAssunto;
+
                 var listaAssunto = repoAssunto.ListaAssunto();
 
                 model.ListaAssunto = (from x in listaAssunto
                                        select new SelectListItem
                                        {
                                            Text = x.Nome,
-                                           Value = x.Id.ToString()
+                                           Value = x.Id.ToString(),
+                                           Selected = model.Acu.NomeAssunto == x.Nome
                                        });
             }
 
-            using (var repo = new CursoRepository())
-            {
-                model.Acu = repo.Obter(id);
-            }
                 return View(model);
         }
 
@@ -161,7 +164,8 @@ namespace Fatec.Treinamento.Web.Controllers
 
                         if (Directory.Exists(Server.MapPath(shortPathOld)))
                         {
-                            Directory.Move(Server.MapPath(shortPathOld), Server.MapPath(shortPath));
+                            if(shortPathOld != shortPath)
+                                Directory.Move(Server.MapPath(shortPathOld), Server.MapPath(shortPath));
                         }else
                         {
                             Directory.CreateDirectory(Server.MapPath(shortPath));
