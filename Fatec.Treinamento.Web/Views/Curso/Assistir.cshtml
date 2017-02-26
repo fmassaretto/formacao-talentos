@@ -56,9 +56,9 @@
                         <b>Prova do Curso</b>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row @ViewBag.DisabledProva">
                     <div class="col-lg-9 video-link">
-                        @Html.ActionLink(ViewData["NomeProva"].ToString(), "Prova", new { id = Model.IdCurso })   
+                        @Html.ActionLink(ViewData["NomeProva"].ToString(), "Prova", new { id = Model.IdCurso }, new { @class = ViewBag.DisabledProva })   
                     </div>
                 </div>
             </div>

@@ -66,8 +66,6 @@ namespace Fatec.Treinamento.Web.Controllers
                     repoDestaque.AtualizaClassificacao(lista.IdCurso);
                     acu = lista;
                 }
-
-
                 return View(listaPop);
             }
         }
@@ -187,10 +185,18 @@ namespace Fatec.Treinamento.Web.Controllers
                 var treinamento = repoTrei.ObterTreinamento(idUsuario, idCurso);
                 if (treinamento != null)
                 {
+                    if (treinamento.DataConclusao == null)
+                    {
                         repoTrei.AtualizarUltimoAcessoTreinamento(treinamento.Id);
+
+                    }else
+                    {
+                        repoTrei.AtualizarUltimoAcessoTreinamento(treinamento.Id);
+                        ViewBag.DisabledProva = "disabledProva";
+                    }
                 }else
                 {
-                        repoTrei.ComecarTreinamento(idUsuario, idCurso);
+                    repoTrei.ComecarTreinamento(idUsuario, idCurso);
                 }
             }
 

@@ -638,6 +638,10 @@ body {
 .item-admin-content h6:last-child{
     padding-top: 10px;
 }
+
+.disabledProva{
+    display: none;
+}
 /* Override the default bootstrap behavior where horizontal description lists
    will truncate terms that are too long to fit in the left column
 */
