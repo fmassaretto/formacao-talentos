@@ -264,8 +264,7 @@ namespace Fatec.Treinamento.Data.Repositories
 			   @"UPDATE Curso 
 					SET Classificacao = (SELECT (T.Nota/T.QtdUsuarios) AS Media 
 											FROM (SELECT COUNT(cc.IdUsuario) As QtdUsuarios, SUM(cc.Nota) AS Nota 
-											FROM Curso_Classificacao cc WHERE IdCurso = @IdCurso) T) 
-											WHERE Id = @IdCurso",
+											FROM Curso_Classificacao cc WHERE IdCurso = @IdCurso) T) WHERE Id = @IdCurso",
 			   param: new
 			   {
 				   IdCurso = id
